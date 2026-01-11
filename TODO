@@ -1,0 +1,1 @@
+- Avoid hardcoding the system to get the 'pkgs' instance for from 'perSystem' for the 'mkHmConfig' function in 'lib.nix'

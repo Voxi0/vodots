@@ -10,6 +10,9 @@
       pkgs,
       ...
     }: {
+      # Use the configured pkgs from perSystem
+      nixpkgs.pkgs = withSystem config.nixpkgs.hostPlatform.system ({pkgs, ...}: pkgs);
+
       # Nix
       nix = {
         optimise.automatic = true;
@@ -19,12 +22,6 @@
           auto-optimise-store = true;
         };
       };
-
-      # Use the configured pkgs from perSystem
-      nixpkgs.pkgs = withSystem config.nixpkgs.hostPlatform.system ({pkgs, ...}: pkgs);
-
-      # Hardware configuration
-      hardware.facter.reportPath = ./hosts/${self.hostname}/facter.json;
 
       # Boot
       console = {
@@ -70,8 +67,7 @@
 
       # Networking
       networking = {
-        hostName = self.hostname;
-        firewall.enable = true;
+        nftables.enable = true;
         networkmanager = {
           enable = true;
           wifi.backend = "iwd";

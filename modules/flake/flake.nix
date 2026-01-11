@@ -15,14 +15,13 @@ in {
   # Flake
   flake = {
     # Globals
-    hostname = "desktop";
     username = "voxi0";
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
 
     # NixOS and Home Manager
-    nixosConfigurations = lib.genAttrs hostnames self.lib.mkNixosHost;
-    homeConfigurations = lib.genAttrs hostnames self.lib.mkHmConfig;
-    # homeModules = lib.genAttrs hostnames hmModules;
+    nixosConfigurations = lib.genAttrs hostnames (hostname: self.lib.mkNixosHost hostname);
+    homeConfigurations = lib.genAttrs hostnames (hostname: self.lib.mkHmConfig hostname);
+    homeModules = lib.genAttrs hostnames (hostname: self.lib.hmModules hostname);
   };
 }
