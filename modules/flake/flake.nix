@@ -3,8 +3,7 @@
   inputs,
   ...
 }: let
-  inherit (self.inputs.nixpkgs) lib;
-  hostnames = lib.attrNames (builtins.readDir ../hosts);
+  hostnames = inputs.nixpkgs.lib.attrNames (builtins.readDir ../hosts);
 in {
   # Import flake-parts stuff
   imports = with inputs; [
@@ -19,8 +18,7 @@ in {
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
 
-    # Home Manager
-    homeConfigurations = lib.genAttrs hostnames (hostname: self.lib.mkHmConfig hostname);
-    homeModules = lib.genAttrs hostnames (hostname: self.lib.hmModules hostname);
+    # Export all our custom Home Manager modules
+    homeModules = builtins.removeAttrs self.modules.homeManager hostnames;
   };
 }
