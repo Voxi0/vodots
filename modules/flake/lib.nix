@@ -14,7 +14,10 @@
         ++ (with hm; [general]);
 
     # Create a new NixOS configuration/host
-    mkNixosHost = hostname:
+    mkNixosHost = {
+      hostname,
+      modules,
+    }:
       self.inputs.nixpkgs.lib.nixosSystem {
         modules =
           [
@@ -40,9 +43,7 @@
             disko.nixosModules.disko
             home-manager.nixosModules.home-manager
           ])
-          ++ (with self.modules.nixos; [
-            general
-          ]);
+          ++ modules;
       };
 
     # Create a new Home Manager config

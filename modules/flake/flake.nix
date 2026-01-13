@@ -19,8 +19,7 @@ in {
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
 
-    # NixOS and Home Manager
-    nixosConfigurations = lib.genAttrs hostnames (hostname: self.lib.mkNixosHost hostname);
+    # Home Manager
     homeConfigurations = lib.genAttrs hostnames (hostname: self.lib.mkHmConfig hostname);
     homeModules = lib.genAttrs hostnames (hostname: self.lib.hmModules hostname);
   };
