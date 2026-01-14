@@ -2,10 +2,17 @@
   hostname = "desktop";
   modules = with self.modules.nixos; [
     general
+
+    # Services
     audio
     tailscale
     ssh
     yubikey
+
+    # Gaming
+    gaming
+    steam
+    roblox
   ];
   hmModules = with self.modules.homeManager; [general];
 in {

@@ -1,5 +1,13 @@
-{
+{self}: {
   flake.modules.nixos = {
+    # Xorg/X11
+    xserver = {
+      services.xserver = {
+        enable = true;
+        xkb.layout = self.kbLayout;
+      };
+    };
+
     # Pipewire for audio
     audio = {
       services.pipewire = {
