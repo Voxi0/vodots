@@ -1,1 +1,2 @@
 - Avoid hardcoding the system to get the 'pkgs' instance for from 'perSystem' for the 'mkHmConfig' function in 'lib.nix'
+- Put stuff inside of `flake.modules.nixos.gaming` somewhere else so whenever `flake.modules.nixos.steam` or `flake.modules.nixos.roblox` is included, everything inside of `flake.modules.nixos.gaming` is applied to without the user having to manually ensure they're including it or whatever

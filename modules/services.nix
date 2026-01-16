@@ -1,4 +1,4 @@
-{self}: {
+{self, ...}: {
   flake.modules.nixos = {
     # Xorg/X11
     xserver = {

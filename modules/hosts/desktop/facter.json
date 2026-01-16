@@ -2,6 +2,10 @@
   "version": 1,
   "system": "x86_64-linux",
   "virtualisation": "none",
+  "uefi": {
+    "supported": true,
+    "platform_size": 64
+  },
   "hardware": {
     "bios": {
       "apm_info": {
@@ -1971,70 +1975,7 @@
     ],
     "network_interface": [
       {
-        "index": 37,
-        "attached_to": 20,
-        "class_list": [
-          "network_interface"
-        ],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0001",
-          "name": "Ethernet",
-          "value": 1
-        },
-        "model": "Ethernet network interface",
-        "sysfs_id": "/class/net/enp0s31f6",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:1f.6",
-        "unix_device_names": [
-          "enp0s31f6"
-        ],
-        "resources": [
-          {
-            "type": "hwaddr",
-            "address": 54
-          },
-          {
-            "type": "phwaddr",
-            "address": 54
-          }
-        ],
-        "driver": "e1000e",
-        "driver_module": "e1000e",
-        "drivers": [
-          "e1000e"
-        ],
-        "driver_modules": [
-          "e1000e"
-        ]
-      },
-      {
-        "index": 39,
-        "attached_to": 0,
-        "class_list": [
-          "network_interface"
-        ],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Loopback",
-          "value": 0
-        },
-        "model": "Loopback network interface",
-        "sysfs_id": "/class/net/lo",
-        "unix_device_names": [
-          "lo"
-        ]
-      },
-      {
-        "index": 40,
+        "index": 38,
         "attached_to": 11,
         "class_list": [
           "network_interface"
@@ -2072,6 +2013,69 @@
         ],
         "driver_modules": [
           "mt7921e"
+        ]
+      },
+      {
+        "index": 39,
+        "attached_to": 0,
+        "class_list": [
+          "network_interface"
+        ],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Loopback",
+          "value": 0
+        },
+        "model": "Loopback network interface",
+        "sysfs_id": "/class/net/lo",
+        "unix_device_names": [
+          "lo"
+        ]
+      },
+      {
+        "index": 40,
+        "attached_to": 20,
+        "class_list": [
+          "network_interface"
+        ],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0001",
+          "name": "Ethernet",
+          "value": 1
+        },
+        "model": "Ethernet network interface",
+        "sysfs_id": "/class/net/enp0s31f6",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:1f.6",
+        "unix_device_names": [
+          "enp0s31f6"
+        ],
+        "resources": [
+          {
+            "type": "hwaddr",
+            "address": 54
+          },
+          {
+            "type": "phwaddr",
+            "address": 54
+          }
+        ],
+        "driver": "e1000e",
+        "driver_module": "e1000e",
+        "drivers": [
+          "e1000e"
+        ],
+        "driver_modules": [
+          "e1000e"
         ]
       }
     ],

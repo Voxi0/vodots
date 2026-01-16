@@ -5,6 +5,7 @@
   # Dependencies
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,6 +24,12 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Declaratively configure Vencord
+    nixcord.url = "github:kaylorben/nixcord";
+
+    # Tool to customize the official Spotify client
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     # My personal Neovim configuration
     NixNvim = {

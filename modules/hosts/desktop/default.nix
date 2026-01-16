@@ -12,15 +12,24 @@
     # Gaming
     gaming
     steam
-    roblox
   ];
-  hmModules = with self.modules.homeManager; [general];
+  hmModules = with self.modules.homeManager;
+    [general roblox]
+    ++ (with self.inputs; [nix-flatpak.homeManagerModules.nix-flatpak]);
 in {
   flake = {
     nixosConfigurations.${hostname} = self.lib.mkNixosHost {inherit hostname modules hmModules;};
     modules = {
       nixos.${hostname} = {};
-      homeManager.${hostname} = {};
+      homeManager.${hostname} = {pkgs, ...}: {
+        home.packages = with pkgs; [
+          kitty
+          halloy
+          (pkgs.prismlauncher.override {
+            jdks = [pkgs.graalvmPackages.graalvm-ce];
+          })
+        ];
+      };
     };
   };
 }
