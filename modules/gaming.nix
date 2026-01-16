@@ -28,11 +28,12 @@
 
     # Home Manager specific
     homeManager = {
-      # Sober is the Roblox player client or whatever, only available as a Flatpak for now
+      # Sober is a Roblox player client only available as a Flatpak for now
+      # It's basically a port of the Android client and claims to be more performant than a Windows Roblox client and all
       roblox = {
         services.flatpak = {
           enable = true;
-          update.auto.enable = false;
+          update.onActivation = true;
           packages = [
             {
               appId = "org.vinegarhq.Sober";

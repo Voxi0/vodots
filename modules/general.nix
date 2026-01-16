@@ -23,11 +23,6 @@
     };
 
     # Boot
-    console = {
-      earlySetup = true;
-      useXkbConfig = true;
-      font = "Lat2-Terminus16";
-    };
     boot = {
       kernelPackages = pkgs.linuxPackages_latest;
       loader = {
@@ -38,31 +33,6 @@
 
     # Internationalisation properties
     i18n.defaultLocale = self.locale;
-
-    # Security
-    security = {
-      rtkit.enable = true;
-      polkit = {
-        enable = true;
-
-        # Some extra stuff to allow unprivileged users to reboot/poweroff
-        extraConfig = ''
-          polkit.addRule(function (action, subject) {
-            if (
-              subject.isInGroup("users") &&
-              [
-                "org.freedesktop.login1.reboot",
-                "org.freedesktop.login1.reboot-multiple-sessions",
-                "org.freedesktop.login1.power-off",
-                "org.freedesktop.login1.power-off-multiple-sessions",
-              ].indexOf(action.id) !== -1
-            ) {
-              return polkit.Result.YES;
-            }
-          });
-        '';
-      };
-    };
 
     # Networking
     networking = {
@@ -80,8 +50,18 @@
       extraGroups = ["networkmanager" "wheel" "input"];
     };
 
-    # Fonts
-    fonts.packages = [pkgs.nerd-fonts.jetbrains-mono];
+    # Programs
+    programs = {
+      # Nix CLI helper
+      nh.enable = true;
+
+      # SUID wrapper
+      mtr.enable = true;
+      gnupg.agent = {
+        enable = true;
+        enableSSHSupport = true;
+      };
+    };
 
     # The first version of NixOS that was installed on this particular machine
     # It's used to maintain compatibility with app data (e.g. databases) created on older NixOS versions
@@ -91,31 +71,18 @@
   };
 
   # Home Manager specific
-  flake.modules.homeManager.general = {pkgs, ...}: {
+  flake.modules.homeManager.general = {
     programs.home-manager.enable = true;
     home = {
       inherit (self) username;
       homeDirectory = "/home/${self.username}";
       stateVersion = "26.05";
-      packages = with pkgs;
-        [
-          obsidian
-          slack
-          helix
-        ]
-        ++ [self.inputs.NixNvim.packages.${pkgs.stdenv.system}.default];
     };
 
     # Automatically create XDG user directories e.g. 'Home', 'Downloads', 'Videos'
     xdg.userDirs = {
       enable = true;
       createDirectories = true;
-    };
-
-    # Move my wallpapers to installed system
-    home.file."Pictures/Wallpapers" = {
-      source = ../wallpapers;
-      recursive = true;
     };
   };
 }
