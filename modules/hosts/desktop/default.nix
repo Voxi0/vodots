@@ -12,6 +12,9 @@
     # Gaming
     gaming
     steam
+
+    # Window managers / Desktop environments
+    niri
   ];
   hmModules = with self.modules.homeManager;
     [general roblox]
