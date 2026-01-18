@@ -1,4 +1,5 @@
-{
+{self, ...}: {
+  # Discord (Vencord) configured declaratively using Nix
   flake.modules.homeManager.discord = {
     programs.nixcord = {
       enable = true;
@@ -10,10 +11,6 @@
         # Styles/Themes
         frameless = false;
         useQuickCss = false;
-        enabledThemes = [];
-        themeLinks = [
-          "https://raw.githubusercontent.com/refact0r/midnight-discord/refs/heads/master/flavors/midnight-catppuccin-mocha.theme.css"
-        ];
 
         # Plugins
         plugins = {
@@ -33,7 +30,7 @@
           LastFMRichPresence = {
             enable = true;
             hideWithSpotify = false;
-            username = "voxi0";
+            username = self.lastFmUsername;
             shareUsername = true;
             useListeningStatus = true;
           };

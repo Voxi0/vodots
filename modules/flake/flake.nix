@@ -18,6 +18,9 @@ in {
     locale = "en_GB.UTF-8";
     kbLayout = "gb";
 
+    # This is used by a LastFM rich presence plugin for Discord (Vencord)
+    lastFmUsername = "voxi0";
+
     # Export all our custom Home Manager modules
     homeModules = builtins.removeAttrs self.modules.homeManager hostnames;
   };
