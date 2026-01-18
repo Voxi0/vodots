@@ -4,13 +4,6 @@
   ...
 }: {
   flake.lib = {
-    # Get all Home Manager modules
-    hmModules = {
-      hostname,
-      modules ? [],
-    }:
-      [self.modules.homeManager.${hostname}] ++ modules;
-
     # Create a new NixOS configuration/host
     mkNixosHost = {
       hostname,
@@ -34,10 +27,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = false;
                 backupFileExtension = "bak";
-                users.${self.username}.imports = self.lib.hmModules {
-                  inherit hostname;
-                  modules = hmModules;
-                };
+                users.${self.username}.imports = [self.modules.homeManager.${hostname}] ++ hmModules;
               };
             }
           ]
@@ -55,7 +45,8 @@
     }:
       self.inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = withSystem "x86_64-linux" ({pkgs, ...}: pkgs);
-        modules = self.lib.hmModules {inherit hostname modules;};
+        modules = [self.modules.homeManager.${hostname}] ++ modules;
+        backupFileExtension = "bak";
       };
   };
 }
