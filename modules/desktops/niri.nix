@@ -1,3 +1,6 @@
 {
-  flake.modules.nixos.niri = {};
+  flake.modules = {
+    nixos.niri = {};
+    homeManager.niri = {};
+  };
 }

@@ -1,13 +1,19 @@
 root = true
 
+[Makefile]
+charset = utf-8
+indent_style = tab
+indent_size = 4
+trim_trailing_whitespace = true
+
 [*.nix]
 charset = utf-8
 indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
 
-[Makefile]
+[*.mjs]
 charset = utf-8
-indent_style = tab
-indent_size = 2
+indent_style = space
+indent_size = 4
 trim_trailing_whitespace = true
