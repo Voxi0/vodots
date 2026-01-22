@@ -74,9 +74,16 @@
   flake.modules.homeManager.general = {
     programs.home-manager.enable = true;
     home = {
+      # Home Manager
       inherit (self) username;
       homeDirectory = "/home/${self.username}";
       stateVersion = "26.05";
+
+      # Keyboard
+      keyboard.layout = self.kbLayout;
+
+      # Globally enable shell integration for all supported shells
+      shell.enableShellIntegration = true;
     };
 
     # Automatically create XDG user directories e.g. 'Home', 'Downloads', 'Videos'
