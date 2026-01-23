@@ -7,19 +7,7 @@
       };
     in {
       # Base packages
-      environment.systemPackages = with pkgs; [
-        ############
-        ### BASE ###
-        ############
-        niri
-        xwayland-satellite
-
-        ###############
-        ### THEMING ###
-        ###############
-        sddmTheme
-        kdePackages.qtmultimedia
-      ];
+      environment.systemPackages = [sddmTheme];
 
       # Useful services
       services = {
@@ -82,6 +70,25 @@
     };
 
     # Home Manager specific
-    homeManager.niri = {};
+    homeManager.niri = {pkgs, ...}: {
+      # Base packages
+      home.packages = with pkgs; [
+        ############
+        ### BASE ###
+        ############
+        niri
+        xwayland-satellite
+
+        ###############
+        ### THEMING ###
+        ###############
+        matugen
+        bibata-cursors
+        papirus-icon-theme
+      ];
+
+      # Frontend for udisks2 which allows you to manage removable drives easily
+      services.udiskie.enable = true;
+    };
   };
 }

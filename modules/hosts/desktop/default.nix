@@ -87,22 +87,35 @@ in {
       # Home Manager specific
       homeManager.${hostname} = {pkgs, ...}: {
         # Some extra apps/games for me
-        home.packages = with pkgs;
-          [
-            kitty
-            obsidian
-            slack
-            halloy
-            (pkgs.prismlauncher.override {
-              jdks = [pkgs.graalvmPackages.graalvm-ce];
-            })
-          ]
-          ++ [self.inputs.NixNvim.packages.${pkgs.stdenv.system}.default];
+        home = {
+          # Environment variables to be set at login
+          sessionVariables = {
+            TERMINAL = "kitty";
+            EDITOR = "nvim";
+          };
 
-        # Move my wallpapers to installed system
-        home.file."Pictures/Wallpapers" = {
-          source = ../../../wallpapers;
-          recursive = true;
+          # Some apps and all only for this host
+          packages = with pkgs;
+            [
+              kitty
+              git
+              lazygit
+              thunar
+              mpv
+              obsidian
+              slack
+              halloy
+              (pkgs.prismlauncher.override {
+                jdks = [pkgs.graalvmPackages.graalvm-ce];
+              })
+            ]
+            ++ [self.inputs.NixNvim.packages.${pkgs.stdenv.system}.default];
+
+          # Move my wallpapers to installed system
+          file."Pictures/Wallpapers" = {
+            source = ../../../wallpapers;
+            recursive = true;
+          };
         };
       };
     };
