@@ -1,14 +1,7 @@
 {
+  # Useful CLI utils
   flake.modules.homeManager.cli = {pkgs, ...}: {
-    home = {
-      # Globally enable shell integration for all supported shells
-      shell.enableShellIntegration = true;
-
-      # Useful CLI utils
-      packages = with pkgs; [wget tldr cava];
-    };
-
-    # Useful CLI utils
+    home.packages = with pkgs; [wget tldr cava];
     programs = {
       # Modern `cd` and `ls` replacement
       zoxide.enable = true;
@@ -24,6 +17,9 @@
         # Fish shell specific
         enableTransience = true;
         enableInteractive = true;
+
+        # Don't put a newline before the prompt
+        settings.add_newline = false;
       };
     };
   };

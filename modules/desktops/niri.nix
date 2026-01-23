@@ -14,6 +14,9 @@
         # For automounting drives and all
         udisks2.enable = true;
 
+        # Allows changing system behavior based on user-selected power profiles
+        power-profiles-daemon.enable = true;
+
         # Display manager / Login screen
         displayManager.sddm = {
           enable = true;
@@ -46,10 +49,11 @@
 
       # Enable things instead of just installing whenever possible
       programs = {
+        niri.enable = true;
+
         # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
         dank-material-shell = {
           enable = true;
-          systemd.enable = true;
           quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
           dgop.package = pkgs.dgop;
           enableSystemMonitoring = true;
@@ -61,7 +65,6 @@
           plugins = {
             dankBatteryAlerts.enable = true;
             easyEffects.enable = true;
-            displaySettings.enable = true;
             nixMonitor.enable = true;
             tailscale.enable = true;
           };
@@ -76,13 +79,15 @@
         ############
         ### BASE ###
         ############
-        niri
         xwayland-satellite
+        wl-clipboard
 
         ###############
         ### THEMING ###
         ###############
         matugen
+        pywalfox-native
+        adw-gtk3
         bibata-cursors
         papirus-icon-theme
       ];

@@ -16,10 +16,12 @@
       # Gaming
       gaming
       steam
+      roblox
     ]
     ++ (with self.inputs; [
       dms.nixosModules.dank-material-shell
       dms-plugin-registry.modules.default
+      nix-flatpak.nixosModules.nix-flatpak
     ]);
   hmModules = with self.modules.homeManager;
     [
@@ -29,19 +31,16 @@
 
       # Apps
       cli
+      fish
       fastfetch
       yazi
       firefox
+      vscode
       spotify
       discord
       obs-studio
-
-      # Gaming
-      roblox
     ]
     ++ (with self.inputs; [
-      dms.homeModules.dank-material-shell
-      nix-flatpak.homeManagerModules.nix-flatpak
       spicetify-nix.homeManagerModules.spicetify
       nixcord.homeModules.nixcord
     ]);
