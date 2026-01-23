@@ -5,6 +5,7 @@
       # Base
       general
       niri
+      fish
 
       # Services
       audio
@@ -28,6 +29,8 @@
 
       # Apps
       cli
+      fastfetch
+      yazi
       firefox
       spotify
       discord
