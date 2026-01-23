@@ -25,11 +25,33 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Toolkit for making widgets using QML
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Declaratively configure Vencord
     nixcord.url = "github:kaylorben/nixcord";
 
     # Tool to customize the official Spotify client
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
+    # Firefox extensions/plugins
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # My personal Neovim configuration
     NixNvim = {

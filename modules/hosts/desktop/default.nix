@@ -1,24 +1,47 @@
 {self, ...}: let
   hostname = "desktop";
-  modules = with self.modules.nixos; [
-    general
+  modules = with self.modules.nixos;
+    [
+      # Base
+      general
+      niri
 
-    # Services
-    audio
-    tailscale
-    ssh
-    yubikey
+      # Services
+      audio
+      tailscale
+      ssh
+      yubikey
 
-    # Gaming
-    gaming
-    steam
-
-    # Window managers / Desktop environments
-    niri
-  ];
+      # Gaming
+      gaming
+      steam
+    ]
+    ++ (with self.inputs; [
+      dms.nixosModules.dank-material-shell
+      dms-plugin-registry.modules.default
+    ]);
   hmModules = with self.modules.homeManager;
-    [general roblox]
-    ++ (with self.inputs; [nix-flatpak.homeManagerModules.nix-flatpak]);
+    [
+      # Base
+      general
+      niri
+
+      # Apps
+      cli
+      firefox
+      spotify
+      discord
+      obs-studio
+
+      # Gaming
+      roblox
+    ]
+    ++ (with self.inputs; [
+      dms.homeModules.dank-material-shell
+      nix-flatpak.homeManagerModules.nix-flatpak
+      spicetify-nix.homeManagerModules.spicetify
+      nixcord.homeModules.nixcord
+    ]);
 in {
   flake = {
     nixosConfigurations.${hostname} = self.lib.mkNixosHost {inherit hostname modules hmModules;};

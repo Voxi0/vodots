@@ -1,7 +1,7 @@
 {inputs, ...}: {
   flake.modules.homeManager.spotify = {pkgs, ...}: {
     # Tool to customize the Spotify client
-    spicetify = {
+    programs.spicetify = {
       enable = true;
       wayland = true;
       enabledExtensions = with inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system}.extensions; [

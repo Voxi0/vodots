@@ -81,15 +81,18 @@
 
       # Keyboard
       keyboard.layout = self.kbLayout;
-
-      # Globally enable shell integration for all supported shells
-      shell.enableShellIntegration = true;
     };
 
     # Automatically create XDG user directories e.g. 'Home', 'Downloads', 'Videos'
     xdg.userDirs = {
       enable = true;
       createDirectories = true;
+    };
+
+    # Better support Linux distros other than NixOS
+    targets.genericLinux = {
+      enable = true;
+      nixGL.vulkan.enable = true;
     };
   };
 }

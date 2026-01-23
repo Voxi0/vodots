@@ -1,4 +1,4 @@
-{
+{inputs, ...}: {
   flake.modules = {
     # NixOS specific
     nixos.niri = {pkgs, ...}: let
@@ -55,28 +55,33 @@
           gnome-keyring
         ];
       };
-    };
 
-    # Home Manager specific
-    homeManager.niri = {pkgs, ...}: {
-      # Authentication agent - Just provides a GUI for authentication
-      systemd.user.services.polkit-gnome-authentication-agent-1 = {
-        Unit = {
-          Description = "polkit-gnome-authentication-agent-1";
-          Wants = ["graphical-session.target"];
-          After = ["graphical-session.target"];
-        };
-        Install = {
-          WantedBy = ["graphical-session.target"];
-        };
-        Service = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
+      # Enable things instead of just installing whenever possible
+      programs = {
+        # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
+        dank-material-shell = {
+          enable = true;
+          systemd.enable = true;
+          quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
+          dgop.package = pkgs.dgop;
+          enableSystemMonitoring = true;
+          enableDynamicTheming = true;
+          enableClipboardPaste = true;
+          enableAudioWavelength = true;
+          enableVPN = true;
+          enableCalendarEvents = false;
+          plugins = {
+            dankBatteryAlerts.enable = true;
+            easyEffects.enable = true;
+            displaySettings.enable = true;
+            nixMonitor.enable = true;
+            tailscale.enable = true;
+          };
         };
       };
     };
+
+    # Home Manager specific
+    homeManager.niri = {};
   };
 }

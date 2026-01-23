@@ -1,7 +1,17 @@
 {
-  flake.modules.homemanager.cli = {
+  flake.modules.homeManager.cli = {pkgs, ...}: {
+    home = {
+      # Globally enable shell integration for all supported shells
+      shell.enableShellIntegration = true;
+
+      # Useful CLI utils
+      packages = with pkgs; [tldr];
+    };
+
+    # Useful CLI utils
     programs = {
-      # Modern `ls` replacement
+      # Modern `cd` and `ls` replacement
+      zoxide.enable = true;
       eza.enable = true;
 
       # Use your preferred shell in all Nix shells
