@@ -54,8 +54,8 @@
     };
 
     # My personal Neovim configuration
-    NixNvim = {
-      url = "git+https://tangled.org/voxi0.tngl.sh/NixNvim";
+    nvdots = {
+      url = "git+https://tangled.org/voxi0.tngl.sh/nvdots";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

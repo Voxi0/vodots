@@ -41,6 +41,7 @@
       obs-studio
     ]
     ++ (with self.inputs; [
+      nvdots.homeModule
       spicetify-nix.homeManagerModules.spicetify
       nixcord.homeModules.nixcord
     ]);
@@ -97,26 +98,40 @@ in {
           };
 
           # Some apps and all only for this host
-          packages = with pkgs;
-            [
-              kitty
-              git
-              lazygit
-              thunar
-              mpv
-              obsidian
-              slack
-              halloy
-              (pkgs.prismlauncher.override {
-                jdks = [pkgs.graalvmPackages.graalvm-ce];
-              })
-            ]
-            ++ [self.inputs.NixNvim.packages.${pkgs.stdenv.system}.default];
+          packages = with pkgs; [
+            kitty
+            git
+            lazygit
+            thunar
+            mpv
+            obsidian
+            slack
+            halloy
+            (pkgs.prismlauncher.override {
+              jdks = [pkgs.graalvmPackages.graalvm-ce];
+            })
+          ];
 
           # Move my wallpapers to installed system
           file."Pictures/Wallpapers" = {
             source = ../../../wallpapers;
             recursive = true;
+          };
+        };
+
+        # Add extra plugins and Lua configuration to my Neovim config
+        nvdots-unstable = {
+          enable = true;
+          packageNames = ["nvdots-unstable"];
+          categoryDefinitions.merge = {...}: {
+            optionalPlugins = {
+              general.misc = [pkgs.vimPlugins.vim-wakatime];
+            };
+            optionalLuaAdditions = {
+              general = [
+                "vim.cmd.packadd('vim-wakatime')"
+              ];
+            };
           };
         };
       };
