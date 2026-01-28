@@ -1,0 +1,23 @@
+// Dank Material Shell
+include "dms.kdl"
+include "input.kdl"
+include "output.kdl"
+
+// Autostart
+spawn-at-startup "dms" "run"
+
+// Environment variables
+environment {
+	XDG_CURRENT_DESKTOP "niri"
+	QT_QPA_PLATFORM "wayland"
+	ELECTRON_OZONE_PLATFORM_HINT "auto"
+	QT_QPA_PLATFORMTHEME "qt6ct"
+	QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
+	TERMINAL "kitty"
+}
+
+// Looks/Appearance
+layout {
+	gaps 5
+	background-color "transparent"
+}

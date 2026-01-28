@@ -120,18 +120,16 @@ in {
         };
 
         # Add extra plugins and Lua configuration to my Neovim config
-        nvdots-unstable = {
+        nvdots = {
           enable = true;
-          packageNames = ["nvdots-unstable"];
+          packageNames = ["nvdots"];
           categoryDefinitions.merge = {...}: {
-            optionalPlugins = {
-              general.misc = [pkgs.vimPlugins.vim-wakatime];
-            };
-            optionalLuaAdditions = {
-              general = [
-                "vim.cmd.packadd('vim-wakatime')"
-              ];
-            };
+            # Add Wakatime plugin
+            lspsAndRuntimeDeps.general.deps = [pkgs.wakatime-cli];
+            optionalPlugins.general.misc = [pkgs.vimPlugins.vim-wakatime];
+            optionalLuaAdditions.general = [
+              "vim.cmd.packadd('vim-wakatime')"
+            ];
           };
         };
       };
