@@ -32,6 +32,7 @@
       # Apps
       cli
       fish
+      neovim
       fastfetch
       yazi
       firefox
@@ -95,6 +96,7 @@ in {
           sessionVariables = {
             TERMINAL = "kitty";
             EDITOR = "nvim";
+            MANPAGER = "nvim -c 'Man!' -o -"
           };
 
           # Some apps and all only for this host
@@ -116,20 +118,6 @@ in {
           file."Pictures/Wallpapers" = {
             source = ../../../wallpapers;
             recursive = true;
-          };
-        };
-
-        # Add extra plugins and Lua configuration to my Neovim config
-        nvdots = {
-          enable = true;
-          packageNames = ["nvdots"];
-          categoryDefinitions.merge = {...}: {
-            # Add Wakatime plugin
-            lspsAndRuntimeDeps.general.deps = [pkgs.wakatime-cli];
-            optionalPlugins.general.misc = [pkgs.vimPlugins.vim-wakatime];
-            optionalLuaAdditions.general = [
-              "vim.cmd.packadd('vim-wakatime')"
-            ];
           };
         };
       };
