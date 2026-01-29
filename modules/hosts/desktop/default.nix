@@ -16,6 +16,7 @@
       # Gaming
       gaming
       steam
+      roblox
     ]
     ++ (with self.inputs; [
       dms.nixosModules.dank-material-shell
@@ -35,9 +36,6 @@
       spotify
       discord
       obs-studio
-
-      # Gaming
-      roblox
     ]
     ++ (with self.inputs; [
       dms.homeModules.dank-material-shell
