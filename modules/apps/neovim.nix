@@ -16,9 +16,7 @@
         # Add Wakatime plugin
         lspsAndRuntimeDeps.general.deps = [pkgs.wakatime-cli];
         optionalPlugins.general.misc = [pkgs.vimPlugins.vim-wakatime];
-        optionalLuaAdditions.general = [
-          "vim.cmd.packadd('vim-wakatime')"
-        ];
+        optionalLuaAdditions.general = [''vim.cmd.packadd("vim-wakatime")''];
       };
     };
   };

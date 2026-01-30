@@ -49,11 +49,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769649148,
-        "narHash": "sha256-I93ZSe27qOEqKTqqYROZjnzPwyYvT46EZ+5g6u0vfzU=",
+        "lastModified": 1769708416,
+        "narHash": "sha256-35++vkohwYJbX8X5PcFZuK6VJyAQieJ7/ripGtt7sY8=",
         "owner": "AvengeMedia",
         "repo": "dms-plugin-registry",
-        "rev": "5cb1ef20b2e4281656e2f2cbfd54aea38bc866be",
+        "rev": "a8b048f2616bb05526b4046fa7a8cc1d0718533f",
         "type": "github"
       },
       "original": {
@@ -183,11 +183,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769638001,
-        "narHash": "sha256-hGwdJ/+oo+IRo2TiWV/V8BWWptQihcdFV/olTONaHqg=",
+        "lastModified": 1769723138,
+        "narHash": "sha256-kgkwjs33YfJasADIrHjHcTIDs3wNX0xzJhnUP+oldEw=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "bd9f031efc634be4b80c5090b9171cc3a9f8e49c",
+        "rev": "175532b6275b34598a0ceb1aef4b9b4006dd4073",
         "type": "github"
       },
       "original": {
@@ -287,13 +287,13 @@
       "locked": {
         "lastModified": 1769645019,
         "narHash": "sha256-I+fHCbonN4ZhmDghkNaixCAQrtjwyWmIkAnb0/tdfHU=",
-        "owner": "kaylorben",
+        "owner": "FlameFlag",
         "repo": "nixcord",
         "rev": "6a7eb2c93423d724254d5475f47a452f35a3fa4f",
         "type": "github"
       },
       "original": {
-        "owner": "kaylorben",
+        "owner": "FlameFlag",
         "repo": "nixcord",
         "type": "github"
       }

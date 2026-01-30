@@ -42,7 +42,7 @@
     };
 
     # Declaratively configure Vencord
-    nixcord.url = "github:kaylorben/nixcord";
+    nixcord.url = "github:FlameFlag/nixcord";
 
     # Tool to customize the official Spotify client
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";

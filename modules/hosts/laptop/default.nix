@@ -44,7 +44,6 @@
     ++ (with self.inputs; [
       nvdots.homeModule
       spicetify-nix.homeManagerModules.spicetify
-      nixcord.homeModules.nixcord
     ]);
 in {
   flake = {
@@ -96,7 +95,7 @@ in {
           sessionVariables = {
             TERMINAL = "kitty";
             EDITOR = "nvim";
-            MANPAGER = "nvim -c 'Man!' -o -"
+            MANPAGER = "nvim +Man!";
           };
 
           # Some apps and all only for this host

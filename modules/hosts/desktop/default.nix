@@ -21,6 +21,7 @@
     ++ (with self.inputs; [
       dms.nixosModules.dank-material-shell
       dms-plugin-registry.modules.default
+      nix-flatpak.nixosModules.nix-flatpak
     ]);
   hmModules = with self.modules.homeManager;
     [
@@ -40,11 +41,8 @@
       obs-studio
     ]
     ++ (with self.inputs; [
-      dms.homeModules.dank-material-shell
-      nix-flatpak.homeManagerModules.nix-flatpak
       nvdots.homeModule
       spicetify-nix.homeManagerModules.spicetify
-      nixcord.homeModules.nixcord
     ]);
 in {
   flake = {

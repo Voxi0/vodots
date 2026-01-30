@@ -1,10 +1,15 @@
-{self, ...}: {
+{self, inputs, ...}: {
   # Discord (Vencord) configured declaratively using Nix
   flake.modules.homeManager.discord = {
+    imports = [inputs.nixcord.homeModules.nixcord];
     programs.nixcord = {
       enable = true;
-      vesktop.enable = true;
-      discord.openASAR.enable = true;
+      equibop.enable = true;
+      discord = {
+        enable = false;
+        equicord.enable = true;
+        openASAR.enable = false;
+      };
 
       # Styling and plugins
       config = {
@@ -14,49 +19,41 @@
 
         # Plugins
         plugins = {
-          # Essentials
+          # Fakin' Nitro
           fakeNitro.enable = true;
-          PinDMs.enable = true;
-          plainFolderIcon.enable = true;
+          USRBG.enable = true;
+          UserPFP.enable = true;
+
+          # Fun
+          fontLoader.enable = true;
+          gitHubRepos.enable = true;
+
+          # Useful
           readAllNotificationsButton.enable = true;
-          youtubeAdblock.enable = true;
-
-          # Spotify
-          spotifyCrack.enable = true;
-          spotifyControls.enable = true;
-          spotifyShareCommands.enable = true;
-
-          # LastFM
-          LastFMRichPresence = {
-            enable = true;
-            hideWithSpotify = false;
-            username = self.lastFmUsername;
-            shareUsername = true;
-            useListeningStatus = true;
-          };
-
-          # Cool
-          noTypingAnimation.enable = true;
-          alwaysTrust.enable = true;
-          OnePingPerDM.enable = true;
           messageLogger.enable = true;
-          friendsSince.enable = true;
+          messageTranslate.enable = true;
+          timezones.enable = true;
           relationshipNotifier.enable = true;
+          alwaysTrust.enable = true;
+          PinDMs.enable = true;
+          CustomRPC.enable = true;
+          BlurNSFW.enable = true;
+          spotifyCrack.enable = true;
+          youtubeAdblock.enable = true;
+          ClearURLs.enable = true;
           customIdle = {
             enable = true;
-            remainInIdle = true;
             idleTimeout = 0.0;
           };
 
-          # More stuff
-          petpet.enable = true;
-          webKeybinds.enable = true;
-          ClearURLs.enable = true;
-
-          # Fixes
-          fixSpotifyEmbeds.enable = true;
-          fixImagesQuality.enable = true;
-          webScreenShareFixes.enable = true;
+          # LastFM - Music scrobbler
+          LastFMRichPresence = {
+            enable = true;
+            shareUsername = true;
+            statusName = "moozic";
+            useListeningStatus = true;
+            username = self.lastFmUsername;
+          };
         };
       };
     };
