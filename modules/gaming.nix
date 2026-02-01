@@ -1,4 +1,4 @@
-{
+{inputs, ...}: {
   flake.modules.nixos = {
     # General gaming stuff that you probably want for the best experience and performance and all
     gaming = {
@@ -26,6 +26,7 @@
     # Sober is a Roblox player client only available as a Flatpak for now
     # It's a port of the Android client and claims to be more performant than a Windows Roblox client and all
     roblox = {
+      imports = [inputs.nix-flatpak.nixosModules.nix-flatpak];
       services.flatpak = {
         enable = true;
         update.onActivation = true;

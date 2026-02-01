@@ -6,6 +6,11 @@
         embeddedTheme = "purple_leaves";
       };
     in {
+      imports = with inputs; [
+        dms.nixosModules.dank-material-shell
+        dms-plugin-registry.modules.default
+      ];
+
       # Base packages
       environment.systemPackages = [sddmTheme];
 

@@ -1,5 +1,7 @@
 {inputs, ...}: {
   flake.modules.homeManager.spotify = {pkgs, ...}: {
+    imports = [inputs.spicetify-nix.homeManagerModules.spicetify];
+
     # Tool to customize the Spotify client
     programs.spicetify = {
       enable = true;
