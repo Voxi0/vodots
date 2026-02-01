@@ -42,7 +42,6 @@
       obs-studio
     ]
     ++ (with self.inputs; [
-      nvdots.homeModule
       spicetify-nix.homeManagerModules.spicetify
     ]);
 in {

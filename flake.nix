@@ -4,7 +4,7 @@
 
   # Dependencies
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -55,7 +55,7 @@
 
     # My personal Neovim configuration
     nvdots = {
-      url = "git+https://tangled.org/voxi0.tngl.sh/nvdots";
+      url = "github:Voxi0/nvdots";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

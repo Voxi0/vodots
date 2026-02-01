@@ -1,4 +1,8 @@
-{self, inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   # Discord (Vencord) configured declaratively using Nix
   flake.modules.homeManager.discord = {
     imports = [inputs.nixcord.homeModules.nixcord];
