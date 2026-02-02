@@ -4,7 +4,7 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
         integrations: [
                 starlight({
-                        title: "NixDots",
+                        title: "Vodots",
                         favicon: "/favicon.svg",
                         logo: {src: "./public/favicon.svg", replacesTitle: false},
                         social: [{ icon: "github", label: "GitHub", href: "https://github.com/voxi0/vodots" }],

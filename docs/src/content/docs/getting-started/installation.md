@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: Installing vodots on your system
+description: How to intall vodots
 sidebar:
   order: 2
 ---
