@@ -9,25 +9,51 @@
 
       # Install my personal Neovim configuration with some customizations or whatever
       packages = [
-        (inputs.nvdots.packages.${pkgs.stdenv.hostPlatform.system}.neovim.wrap ({pkgs, ...}: {
+        (pkgs.neovim.wrap ({pkgs, ...}: {
           extraPackages = with pkgs; [
             # Language servers
-            clang-tools # C/C++
-            nil # Nix
             lua-language-server # Lua
+            nil # Nix
+            clang-tools # C/C++
             astro-language-server # AstroJS - Webdev framework
+
+            # Formatters
+            stylua # Lua
+            alejandra # Nix
 
             # For the Wakatime plugin
             wakatime-cli
           ];
           specs.general = {
-            data = [pkgs.vimPlugins.vim-wakatime];
+            # Extra plugins
+            data = with pkgs.vimPlugins; [
+              vim-wakatime
+              hardtime-nvim
+            ];
+
+            # Extra Lua configuration
             config = ''
-              -- Load Wakatime plugin
+              -- Load plugins
               vim.cmd.packadd("vim-wakatime")
 
               -- Enable LSP configurations for whatever languages I want
               vim.lsp.enable({ "lua_ls", "nil_ls", "clangd", "zls", "astro" })
+
+              -- Set up formatters for various filetypes
+              vim.cmd.packadd("conform.nvim")
+              require("conform").setup({
+                formatters_by_ft = {
+                  lua = { "stylua" },
+                  nix = { "alejandra" },
+                  c = { "clang-format" },
+                  cpp = { "clang-format" },
+                  zig = { "zigfmt" },
+                },
+              })
+
+              -- Force you to get better at Vim/Neovim motions
+              vim.cmd.packadd("hardtime.nvim")
+              require("hardtime").setup()
             '';
           };
         }))

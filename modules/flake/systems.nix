@@ -1,14 +1,15 @@
-{self, ...}: {
-  systems = import self.inputs.systems;
+{inputs, ...}: {
+  systems = import inputs.systems;
   perSystem = {
     system,
     pkgs,
     ...
   }: {
     # Configure a pkgs instance
-    _module.args.pkgs = import self.inputs.nixpkgs {
+    _module.args.pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      overlays = [inputs.nvdots.overlays.default];
     };
 
     # Helpful for developing the dotfiles

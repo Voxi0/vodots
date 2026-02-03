@@ -1,4 +1,10 @@
 {
+  # Binary cache to avoid compiling everything for Neovim nightly
+  nixConfig = {
+    extra-substituters = ["https://nix-community.cachix.org"];
+    extra-trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
+  };
+
   # Import all Nix modules
   outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
 
