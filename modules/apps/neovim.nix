@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{
   flake.modules.homeManager.neovim = {pkgs, ...}: {
     home = {
       # I prefer Neovim over Vi and Vim
@@ -11,10 +11,12 @@
       packages = [
         (pkgs.neovim.wrap ({pkgs, ...}: {
           extraPackages = with pkgs; [
+            # Language server + Formatter
+            clang-tools # C/C++
+
             # Language servers
             lua-language-server # Lua
             nil # Nix
-            clang-tools # C/C++
             astro-language-server # AstroJS - Webdev framework
 
             # Formatters
@@ -27,33 +29,53 @@
           specs.general = {
             # Extra plugins
             data = with pkgs.vimPlugins; [
+              conform-nvim
               vim-wakatime
-              hardtime-nvim
             ];
 
             # Extra Lua configuration
             config = ''
-              -- Load plugins
-              vim.cmd.packadd("vim-wakatime")
-
-              -- Enable LSP configurations for whatever languages I want
+              -- Enable whatever LSPs I want
               vim.lsp.enable({ "lua_ls", "nil_ls", "clangd", "zls", "astro" })
 
-              -- Set up formatters for various filetypes
-              vim.cmd.packadd("conform.nvim")
-              require("conform").setup({
-                formatters_by_ft = {
-                  lua = { "stylua" },
-                  nix = { "alejandra" },
-                  c = { "clang-format" },
-                  cpp = { "clang-format" },
-                  zig = { "zigfmt" },
+              -- Load/Configure plugins
+              require("lze").load({
+                -- Set up formatters for various filetypes
+                {
+                  "conform.nvim",
+                  keys = {
+                    {
+                      "<leader>mp",
+                      mode = "n",
+                      desc = "Format current buffer",
+                      function()
+                        require("conform").format({
+                          lsp_fallback = false,
+                          async = true,
+                          timeout_ms = 500,
+                        })
+                      end,
+                    },
+                  },
+                  after = function()
+                    require("conform").setup({
+                      default_format_opts = {
+                        lsp_format = "fallback",
+                      },
+                      formatters_by_ft = {
+                        lua = { "stylua" },
+                        nix = { "alejandra" },
+                        c = { "clang-format" },
+                        cpp = { "clang-format" },
+                        zig = { "zigfmt" },
+                      },
+                    })
+                  end,
                 },
-              })
 
-              -- Force you to get better at Vim/Neovim motions
-              vim.cmd.packadd("hardtime.nvim")
-              require("hardtime").setup()
+                -- Wakatime
+                { "vim-wakatime", lazy = false },
+              })
             '';
           };
         }))

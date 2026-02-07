@@ -92,6 +92,7 @@ in {
             git
             lazygit
             thunar
+            xfce.tumbler
             mpv
             obsidian
             slack
