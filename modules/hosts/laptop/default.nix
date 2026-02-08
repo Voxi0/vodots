@@ -92,7 +92,7 @@ in {
             git
             lazygit
             thunar
-            xfce.tumbler
+            tumbler
             mpv
             obsidian
             slack

@@ -231,7 +231,7 @@
         "module_alias": "usb:v13D3p3610d0100dcEFdsc02dp01icE0isc01ip01in02"
       },
       {
-        "index": 34,
+        "index": 33,
         "attached_to": 32,
         "class_list": [
           "usb",
@@ -1036,7 +1036,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.18.4 xhci-hcd",
+          "name": "Linux 6.18.8 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1050,7 +1050,7 @@
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.18.4 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.18.8 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-0:1.0",
         "sysfs_bus_id": "1-0:1.0",
         "resources": [
@@ -1123,7 +1123,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.18.4 xhci-hcd",
+          "name": "Linux 6.18.8 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1137,7 +1137,7 @@
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.18.4 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.18.8 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb2/2-0:1.0",
         "sysfs_bus_id": "2-0:1.0",
         "detail": {
@@ -1179,108 +1179,6 @@
       }
     ],
     "keyboard": [
-      {
-        "index": 29,
-        "attached_to": 32,
-        "class_list": [
-          "keyboard",
-          "usb"
-        ],
-        "bus_type": {
-          "hex": "0086",
-          "name": "USB",
-          "value": 134
-        },
-        "slot": {
-          "bus": 0,
-          "number": 0
-        },
-        "base_class": {
-          "hex": "0108",
-          "name": "Keyboard",
-          "value": 264
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Keyboard",
-          "value": 0
-        },
-        "vendor": {
-          "hex": "24ae",
-          "name": "SINO WEALTH",
-          "value": 9390
-        },
-        "device": {
-          "hex": "4035",
-          "name": "Rapoo Gaming Keyboard",
-          "value": 16437
-        },
-        "revision": {
-          "hex": "0000",
-          "name": "50.26",
-          "value": 0
-        },
-        "model": "SINO WEALTH Rapoo Gaming Keyboard",
-        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-6/1-6:1.0",
-        "sysfs_bus_id": "1-6:1.0",
-        "unix_device_names": [
-          "/dev/input/by-id/usb-SINO_WEALTH_Rapoo_Gaming_Keyboard-event-kbd",
-          "/dev/input/by-path/pci-0000:00:14.0-usb-0:6:1.0-event-kbd",
-          "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:6:1.0-event-kbd",
-          "/dev/input/event0"
-        ],
-        "resources": [
-          {
-            "type": "baud",
-            "speed": 12000000,
-            "bits": 0,
-            "stop_bits": 0,
-            "parity": 0,
-            "handshake": 0
-          }
-        ],
-        "detail": {
-          "device_class": {
-            "hex": "0000",
-            "name": "per_interface",
-            "value": 0
-          },
-          "device_subclass": {
-            "hex": "0000",
-            "name": "per_interface",
-            "value": 0
-          },
-          "device_protocol": 0,
-          "interface_class": {
-            "hex": "0003",
-            "name": "hid",
-            "value": 3
-          },
-          "interface_subclass": {
-            "hex": "0001",
-            "name": "audio",
-            "value": 1
-          },
-          "interface_protocol": 1,
-          "interface_number": 0,
-          "interface_alternate_setting": 0
-        },
-        "hotplug": "usb",
-        "driver": "usbhid",
-        "driver_module": "usbhid",
-        "drivers": [
-          "usbhid"
-        ],
-        "driver_modules": [
-          "usbhid"
-        ],
-        "driver_info": {
-          "type": "keyboard",
-          "xkb_rules": "xfree86",
-          "xkb_model": "pc104"
-        },
-        "module_alias": "usb:v24AEp4035d5026dc00dsc00dp00ic03isc01ip01in00"
-      },
       {
         "index": 30,
         "attached_to": 32,
@@ -1382,6 +1280,108 @@
           "xkb_model": "pc104"
         },
         "module_alias": "usb:v046DpC547d0402dc00dsc00dp00ic03isc01ip01in01"
+      },
+      {
+        "index": 34,
+        "attached_to": 32,
+        "class_list": [
+          "keyboard",
+          "usb"
+        ],
+        "bus_type": {
+          "hex": "0086",
+          "name": "USB",
+          "value": 134
+        },
+        "slot": {
+          "bus": 0,
+          "number": 0
+        },
+        "base_class": {
+          "hex": "0108",
+          "name": "Keyboard",
+          "value": 264
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Keyboard",
+          "value": 0
+        },
+        "vendor": {
+          "hex": "24ae",
+          "name": "SINO WEALTH",
+          "value": 9390
+        },
+        "device": {
+          "hex": "4035",
+          "name": "Rapoo Gaming Keyboard",
+          "value": 16437
+        },
+        "revision": {
+          "hex": "0000",
+          "name": "50.26",
+          "value": 0
+        },
+        "model": "SINO WEALTH Rapoo Gaming Keyboard",
+        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0",
+        "sysfs_bus_id": "1-8:1.0",
+        "unix_device_names": [
+          "/dev/input/by-id/usb-SINO_WEALTH_Rapoo_Gaming_Keyboard-event-kbd",
+          "/dev/input/by-path/pci-0000:00:14.0-usb-0:8:1.0-event-kbd",
+          "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:8:1.0-event-kbd",
+          "/dev/input/event0"
+        ],
+        "resources": [
+          {
+            "type": "baud",
+            "speed": 12000000,
+            "bits": 0,
+            "stop_bits": 0,
+            "parity": 0,
+            "handshake": 0
+          }
+        ],
+        "detail": {
+          "device_class": {
+            "hex": "0000",
+            "name": "per_interface",
+            "value": 0
+          },
+          "device_subclass": {
+            "hex": "0000",
+            "name": "per_interface",
+            "value": 0
+          },
+          "device_protocol": 0,
+          "interface_class": {
+            "hex": "0003",
+            "name": "hid",
+            "value": 3
+          },
+          "interface_subclass": {
+            "hex": "0001",
+            "name": "audio",
+            "value": 1
+          },
+          "interface_protocol": 1,
+          "interface_number": 0,
+          "interface_alternate_setting": 0
+        },
+        "hotplug": "usb",
+        "driver": "usbhid",
+        "driver_module": "usbhid",
+        "drivers": [
+          "usbhid"
+        ],
+        "driver_modules": [
+          "usbhid"
+        ],
+        "driver_info": {
+          "type": "keyboard",
+          "xkb_rules": "xfree86",
+          "xkb_model": "pc104"
+        },
+        "module_alias": "usb:v24AEp4035d5026dc00dsc00dp00ic03isc01ip01in00"
       }
     ],
     "memory": [
@@ -1807,7 +1807,6 @@
               "11",
               "12",
               "13",
-              "14",
               "36",
               "40",
               "44",
@@ -1825,7 +1824,8 @@
               "124",
               "128",
               "132",
-              "136"
+              "136",
+              "140"
             ],
             "frequencies": [
               "2.412",
@@ -1841,7 +1841,6 @@
               "2.462",
               "2.467",
               "2.472",
-              "2.484",
               "5.18",
               "5.2",
               "5.22",
@@ -1859,7 +1858,8 @@
               "5.62",
               "5.64",
               "5.66",
-              "5.68"
+              "5.68",
+              "5.7"
             ],
             "auth_modes": [
               "open",
@@ -1975,7 +1975,29 @@
     ],
     "network_interface": [
       {
-        "index": 38,
+        "index": 37,
+        "attached_to": 0,
+        "class_list": [
+          "network_interface"
+        ],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Loopback",
+          "value": 0
+        },
+        "model": "Loopback network interface",
+        "sysfs_id": "/class/net/lo",
+        "unix_device_names": [
+          "lo"
+        ]
+      },
+      {
+        "index": 39,
         "attached_to": 11,
         "class_list": [
           "network_interface"
@@ -2013,28 +2035,6 @@
         ],
         "driver_modules": [
           "mt7921e"
-        ]
-      },
-      {
-        "index": 39,
-        "attached_to": 0,
-        "class_list": [
-          "network_interface"
-        ],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Loopback",
-          "value": 0
-        },
-        "model": "Loopback network interface",
-        "sysfs_id": "/class/net/lo",
-        "unix_device_names": [
-          "lo"
         ]
       },
       {
@@ -2620,7 +2620,7 @@
     ],
     "usb": [
       {
-        "index": 33,
+        "index": 29,
         "attached_to": 32,
         "class_list": [
           "usb",
@@ -2661,8 +2661,8 @@
           "value": 0
         },
         "model": "SINO WEALTH Rapoo Gaming Keyboard",
-        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-6/1-6:1.1",
-        "sysfs_bus_id": "1-6:1.1",
+        "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.1",
+        "sysfs_bus_id": "1-8:1.1",
         "unix_device_names": [
           "/dev/input/event3"
         ],

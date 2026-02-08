@@ -72,7 +72,7 @@ in {
         };
 
         # Fonts
-        fonts.packages = [pkgs.nerd-fonts.jetbrains-mono];
+        fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono iosevka];
       };
 
       # Home Manager specific
@@ -91,7 +91,7 @@ in {
             git
             lazygit
             thunar
-            xfce.tumbler
+            tumbler
             mpv
             obsidian
             slack
