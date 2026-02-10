@@ -47,7 +47,7 @@
     users.users.${self.username} = {
       isNormalUser = true;
       initialPassword = "nixos";
-      extraGroups = ["networkmanager" "wheel" "input"];
+      extraGroups = ["networkmanager" "wheel" "input" "cdrom"];
     };
 
     # Programs
@@ -61,6 +61,9 @@
         enable = true;
         enableSSHSupport = true;
       };
+
+      # Disk burner
+      k3b.enable = true;
     };
 
     # The first version of NixOS that was installed on this particular machine

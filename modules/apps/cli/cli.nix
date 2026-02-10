@@ -1,11 +1,22 @@
 {
   # Useful CLI utils
   flake.modules.homeManager.cli = {pkgs, ...}: {
-    home.packages = with pkgs; [wget tldr cava];
+    home = {
+      packages = with pkgs; [unzip wget tldr cava];
+      shellAliases = {
+        "l" = "eza -alh";
+        "ls" = "eza";
+        "la" = "eza -a";
+        "lla" = "eza -lla";
+      };
+    };
     programs = {
       # Modern `cd` and `ls` replacement
       zoxide.enable = true;
-      eza.enable = true;
+      eza = {
+        enable = true;
+        extraOptions = ["--icons=always"];
+      };
 
       # Use your preferred shell in all Nix shells
       nix-your-shell.enable = true;
