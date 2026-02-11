@@ -1,5 +1,10 @@
 {self, ...}: {
   flake.modules.nixos = {
+    # Firmware update manager
+    fwupd = {
+      services.fwupd.enable = true;
+    };
+
     # Xorg/X11
     xserver = {
       services.xserver = {
@@ -21,7 +26,7 @@
       services.tailscale.enable = true;
     };
 
-    # Secure Shell (SSH)
+    # Secure Shell utilities (SSH)
     ssh = {
       services.openssh.enable = true;
     };

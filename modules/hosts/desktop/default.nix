@@ -7,6 +7,7 @@
     fish
 
     # Services
+    fwupd
     audio
     tailscale
     ssh
