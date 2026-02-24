@@ -11,6 +11,7 @@
       equibop.enable = true;
       discord = {
         enable = false;
+        vencord.enable = false;
         equicord.enable = true;
         openASAR.enable = false;
       };
@@ -35,7 +36,6 @@
           # Useful
           readAllNotificationsButton.enable = true;
           messageLogger.enable = true;
-          messageTranslate.enable = true;
           timezones.enable = true;
           relationshipNotifier.enable = true;
           alwaysTrust.enable = true;
