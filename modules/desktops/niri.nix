@@ -26,7 +26,7 @@
         displayManager.sddm = {
           enable = true;
           wayland.enable = true;
-          extraPackages = with pkgs; [sddmTheme];
+          extraPackages = [sddmTheme];
           theme = "sddm-astronaut-theme";
           settings = {
             Theme = {
@@ -67,12 +67,6 @@
           enableAudioWavelength = true;
           enableVPN = true;
           enableCalendarEvents = false;
-          plugins = {
-            dankBatteryAlerts.enable = true;
-            easyEffects.enable = true;
-            nixMonitor.enable = true;
-            tailscale.enable = true;
-          };
         };
       };
     };
@@ -95,6 +89,14 @@
         adw-gtk3
         bibata-cursors
         papirus-icon-theme
+
+				###########
+				### QT6 ###
+				###########
+				kdePackages.qtsvg # For loading SVG images (bundled with most packages)
+				kdePackages.qtimageformats # For WEBP images as well as some less common ones
+				kdePackages.qtmultimedia # For playing videos, audio, etc
+				kdePackages.qt5compat # Extra visual effects e.g. gaussian blur. MultiEffect is usually preferable
       ];
 
       # Frontend for udisks2 which allows you to manage removable drives easily
