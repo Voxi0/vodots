@@ -25,16 +25,10 @@
           # Fakin' Nitro
           fakeNitro.enable = true;
           USRBG.enable = true;
-          UserPFP.enable = true;
-
-          # Fun
-          fontLoader.enable = true;
-          gitHubRepos.enable = true;
 
           # Useful
           readAllNotificationsButton.enable = true;
           messageLogger.enable = true;
-          timezones.enable = true;
           relationshipNotifier.enable = true;
           alwaysTrust.enable = true;
           PinDMs.enable = true;
