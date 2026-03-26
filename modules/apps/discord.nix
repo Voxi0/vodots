@@ -8,12 +8,10 @@
     imports = [inputs.nixcord.homeModules.nixcord];
     programs.nixcord = {
       enable = true;
-      equibop.enable = true;
+      vesktop.enable = true;
       discord = {
         enable = false;
-        vencord.enable = false;
-        equicord.enable = true;
-        openASAR.enable = false;
+        openASAR.enable = true;
       };
 
       # Styling and plugins

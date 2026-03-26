@@ -33,6 +33,9 @@
     spotify
     discord
     obs-studio
+
+    # Gaming
+    lutris
   ];
 in {
   flake = {

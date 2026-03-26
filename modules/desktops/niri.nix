@@ -90,13 +90,13 @@
         bibata-cursors
         papirus-icon-theme
 
-				###########
-				### QT6 ###
-				###########
-				kdePackages.qtsvg # For loading SVG images (bundled with most packages)
-				kdePackages.qtimageformats # For WEBP images as well as some less common ones
-				kdePackages.qtmultimedia # For playing videos, audio, etc
-				kdePackages.qt5compat # Extra visual effects e.g. gaussian blur. MultiEffect is usually preferable
+        ###########
+        ### QT6 ###
+        ###########
+        kdePackages.qtsvg # For loading SVG images (bundled with most packages)
+        kdePackages.qtimageformats # For WEBP images as well as some less common ones
+        kdePackages.qtmultimedia # For playing videos, audio, etc
+        kdePackages.qt5compat # Extra visual effects e.g. gaussian blur. MultiEffect is usually preferable
       ];
 
       # Frontend for udisks2 which allows you to manage removable drives easily
