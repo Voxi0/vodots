@@ -59,7 +59,7 @@
         # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
         dank-material-shell = {
           enable = true;
-          quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
+          quickshell.package = pkgs.quickshell;
           dgop.package = pkgs.dgop;
           enableSystemMonitoring = true;
           enableDynamicTheming = true;

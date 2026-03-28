@@ -31,12 +31,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Toolkit for making widgets using QML
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
@@ -64,5 +58,8 @@
       url = "github:Voxi0/nvdots";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # For setting up Minecraft servers
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 }

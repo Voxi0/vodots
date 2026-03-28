@@ -9,7 +9,10 @@
     _module.args.pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      overlays = [inputs.nvdots.overlays.default];
+      overlays = with inputs; [
+        nvdots.overlays.default
+        nix-minecraft.overlay
+      ];
     };
 
     # Helpful for developing the dotfiles
