@@ -1,5 +1,6 @@
 {
   self,
+  inputs,
   withSystem,
   ...
 }: {
@@ -10,10 +11,14 @@
       modules ? [],
       hmModules ? [],
     }:
-      self.inputs.nixpkgs.lib.nixosSystem {
+      inputs.nixpkgs.lib.nixosSystem {
         modules =
+          # NixOS modules
           [
+            # Disko for managing disk layouts and stuff
+            inputs.disko.nixosModules.disko
             ../hosts/${hostname}/_disko.nix
+
             self.modules.nixos.${hostname}
             {
               # Hardware configuration
@@ -21,21 +26,25 @@
 
               # Set system hostname
               networking.hostName = hostname;
-
-              # Home Manager
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = false;
-                backupFileExtension = "bak";
-                users.${self.username}.imports = [self.modules.homeManager.${hostname}] ++ hmModules;
-              };
             }
           ]
-          ++ (with self.inputs; [
-            disko.nixosModules.disko
-            home-manager.nixosModules.home-manager
-          ])
-          ++ modules;
+          ++ modules
+          # Import/Include/Use Home Manager only if atleast one Home Manager module is being used
+          ++ (
+            if hmModules != []
+            then [
+              inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = false;
+                  backupFileExtension = "bak";
+                  users.${self.username}.imports = [self.modules.homeManager.${hostname}] ++ hmModules;
+                };
+              }
+            ]
+            else []
+          );
       };
 
     # Create a new Home Manager config
@@ -43,7 +52,7 @@
       hostname,
       modules ? [],
     }:
-      self.inputs.home-manager.lib.homeManagerConfiguration {
+      inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = withSystem "x86_64-linux" ({pkgs, ...}: pkgs);
         modules = [self.modules.homeManager.${hostname}] ++ modules;
         backupFileExtension = "bak";
