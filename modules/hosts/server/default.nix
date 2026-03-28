@@ -23,12 +23,12 @@ in {
 
       # Stop laptops from suspending when lid is closed
       boot.kernelParams = ["video=LVDS-1:d"];
-      systemd.sleep.extraConfig = ''
-        AllowSuspend=no
-        AllowHibernation=no
-        AllowHybridSleep=no
-        AllowSuspendThenHibernate=no
-      '';
+      systemd.sleep.settings.sleep = {
+        AllowSuspend = false;
+        AllowHibernation = false;
+        AllowHybridSleep = false;
+        AllowSuspendThenHibernate = false;
+      };
     };
   };
 }
