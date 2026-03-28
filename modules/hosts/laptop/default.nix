@@ -42,8 +42,6 @@ in {
     modules = {
       # NixOS specific
       nixos.${hostname} = {pkgs, ...}: {
-        fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono iosevka];
-
         # Boot
         console = {
           earlySetup = true;
@@ -75,6 +73,12 @@ in {
             '';
           };
         };
+
+        # Fonts
+        fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono iosevka];
+
+        # Disk burner
+        programs.k3b.enable = true;
       };
 
       # Home Manager specific

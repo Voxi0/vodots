@@ -37,6 +37,7 @@
     # Networking
     networking = {
       nftables.enable = true;
+      firewall.enable = true;
       networkmanager = {
         enable = true;
         wifi.backend = "iwd";
@@ -61,9 +62,6 @@
         enable = true;
         enableSSHSupport = true;
       };
-
-      # Disk burner
-      k3b.enable = true;
     };
 
     # The first version of NixOS that was installed on this particular machine
