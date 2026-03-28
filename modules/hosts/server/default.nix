@@ -7,11 +7,15 @@
     # Services
     fwupd
     tailscale
+    cloudflared
+    immich
+    navidrome
+    minecraft-server
     ssh
   ];
 in {
   flake = {
-    self.username = "server";
+    username = "server";
     nixosConfigurations.${hostname} = self.lib.mkNixosHost {inherit hostname modules;};
     modules.nixos.${hostname} = {pkgs, ...}: {
       # Boot
@@ -23,7 +27,7 @@ in {
 
       # Stop laptops from suspending when lid is closed
       boot.kernelParams = ["video=LVDS-1:d"];
-      systemd.sleep.settings.sleep = {
+      systemd.sleep.settings.Sleep = {
         AllowSuspend = false;
         AllowHibernation = false;
         AllowHybridSleep = false;
