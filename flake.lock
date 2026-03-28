@@ -49,11 +49,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774488301,
-        "narHash": "sha256-QPxn5cQZj6qd4xZF0lC1RAtOtpRA3ys2veUKi8Hz9N8=",
+        "lastModified": 1774660693,
+        "narHash": "sha256-RzbO0XHJNONt7JpMFDM+oIXfkOh02h35e/NSUIBCY0Q=",
         "owner": "AvengeMedia",
         "repo": "dms-plugin-registry",
-        "rev": "9bb83ca2dfb910619f34ead22d586e16f3a38610",
+        "rev": "6f2f3fefade05059695eccf730c5df64771e8b1e",
         "type": "github"
       },
       "original": {
@@ -70,11 +70,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1774497795,
-        "narHash": "sha256-tzgxKaCEMcU6XT0fjV/vEqDCM9yij6wBgPPBKiK8Dfk=",
+        "lastModified": 1774690660,
+        "narHash": "sha256-oMALw/szOKhCXVX00pmITjcHorWPWu2jLRYiV1sWHnI=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "11af6f465a038233b8123022dcb7e293f3229f11",
+        "rev": "f4fc55e8011f82a9e0d66c610c1bec5274751b10",
         "type": "gitlab"
       },
       "original": {
@@ -164,11 +164,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774550169,
-        "narHash": "sha256-cLcm8jXyhEDRHTCN1fym6+5L6Z264kj2QBpL+/yT3WI=",
+        "lastModified": 1774647770,
+        "narHash": "sha256-UNNi14XiqRWWjO8ykbFwA5wRwx7EscsC+GItOVpuGjc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7622882af88598b882436416bd74154826fcf742",
+        "rev": "02371c05a04a2876cf92e2d67a259e8f87399068",
         "type": "github"
       },
       "original": {
@@ -205,11 +205,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774483626,
-        "narHash": "sha256-8VAX9GXNfv4eBj0qBEf/Rc2/E6G0SBEpuo2A5plw34I=",
+        "lastModified": 1774656308,
+        "narHash": "sha256-k+L2Q5DtNGkPy+JgfhpTxpngdxy+FVz269iNfCYVy5E=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "5deaa19e80e1c0695f7fa8a16e13a704fd08f96e",
+        "rev": "114911d841b928b2b147511bec7121af310d7a23",
         "type": "github"
       },
       "original": {
@@ -221,11 +221,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1774472446,
-        "narHash": "sha256-Hp4A0llEmBvvNuw5uKOz+BA86X7TmXZ1vUK0StiMdVs=",
+        "lastModified": 1774652330,
+        "narHash": "sha256-dqlsjRaLgD87D8YaC8842bhYziuRQ2qvTDgQDKL1ttQ=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "c9e961994b16ed841be43541ef550bf3d3f043ec",
+        "rev": "f027f41e2cfba7be8c4841cb1a036827375bbd73",
         "type": "github"
       },
       "original": {
@@ -258,11 +258,11 @@
         "nixpkgs-nixcord": "nixpkgs-nixcord"
       },
       "locked": {
-        "lastModified": 1774542254,
-        "narHash": "sha256-/y48dfuiZECFqVzoCGwJvbpF+rk/aKiAuZ23gKYf83s=",
+        "lastModified": 1774714432,
+        "narHash": "sha256-MQhm3HEVv9xHWQNIx/xp++q2+SUeH8hLohKZFIO7DZM=",
         "owner": "FlameFlag",
         "repo": "nixcord",
-        "rev": "6ba8404eedc4a080a0b4ecb615e094abe70ef530",
+        "rev": "056e58f4274f1af1d7bc18c4c3b3e7506399d8d1",
         "type": "github"
       },
       "original": {
@@ -358,11 +358,11 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1774555154,
-        "narHash": "sha256-LSBCwd6Aejtzs1bqvlxqSCAksXJN9ZKePwyvBPaHoHU=",
+        "lastModified": 1774715231,
+        "narHash": "sha256-Y0h+fkAVBCsFDqJZArVIZc/8IElP8XK1h4W8FBauKCg=",
         "owner": "Voxi0",
         "repo": "nvdots",
-        "rev": "07aa67bc3dd536ff6b881c43874214e05e3992d0",
+        "rev": "8e9d6954fc201227f689b883f60ee7986afe1e7c",
         "type": "github"
       },
       "original": {
@@ -503,11 +503,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774538285,
-        "narHash": "sha256-KRDNQDEWjB2O5SRH/oUTzi34cNxlIT8sab0FK2uqZ2g=",
+        "lastModified": 1774622331,
+        "narHash": "sha256-73C9XYuBrgo8unDbmqEFq4pNwQaSGXrTnBckqkOXmBk=",
         "owner": "BirdeeHub",
         "repo": "nix-wrapper-modules",
-        "rev": "15d740b2bfc545189a569147da7718457c12758e",
+        "rev": "364e0007179fc2c910a6588e8826fd3fd7a45c14",
         "type": "github"
       },
       "original": {
