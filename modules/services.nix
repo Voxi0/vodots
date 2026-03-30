@@ -41,22 +41,25 @@
       networking.firewall.trustedInterfaces = ["tailscale0"];
     };
 
-    # Cloudflare tunnels for easily securely exposing server services e.g. Immich to the wider internet without port forwarding
-    cloudflared = {
-      services.cloudflared.enable = true;
-    };
-
     # Self-hosted photo and video management solution - Best self-hosted alternative to something like Google Photos
-    immich = {
+    immich = {pkgs, ...}: {
       # Required for Immich to be able to display videos and stuff
       users.users.immich.extraGroups = ["video" "render"];
 
-      services.immich = {
-        enable = true;
-        openFirewall = true;
-        host = "0.0.0.0";
-        port = 2283;
-        accelerationDevices = null;
+      services = {
+        # Immich uses Postgresql for the database
+        postgresql = {
+          package = pkgs.postgresql_18;
+          extraPlugins = ps: with ps; [vectorchord pgvector];
+        };
+
+        immich = {
+          enable = true;
+          openFirewall = true;
+          host = "0.0.0.0";
+          port = 2283;
+          accelerationDevices = null;
+        };
       };
     };
 
@@ -69,6 +72,7 @@
           Port = 4533;
           Address = "0.0.0.0";
           MusicFolder = navidromeMusicFolder;
+          EnableSharing = true;
         };
       };
     };

@@ -6,11 +6,11 @@
 
     # Services
     fwupd
+    ssh
     tailscale
     immich
     navidrome
     minecraft-server
-    ssh
   ];
 in {
   flake = {
@@ -33,10 +33,11 @@ in {
         AllowSuspendThenHibernate = false;
       };
 
-      services.postgresql = {
-        package = pkgs.postgresql_18;
-        extraPlugins = ps: with ps; [vectorchord pgvector];
-      };
+      # Some extra packages just for this host
+      environment.systemPackages = with pkgs; [
+        # Cloudflare daemon - I use tunnels to easily and securely expose server services e.g. Immich to the wider internet without port forwarding
+        cloudflared
+      ];
     };
   };
 }
