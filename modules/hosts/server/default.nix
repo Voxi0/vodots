@@ -14,7 +14,6 @@
   ];
 in {
   flake = {
-    username = "server";
     nixosConfigurations.${hostname} = self.lib.mkNixosHost {inherit hostname modules;};
     modules.nixos.${hostname} = {pkgs, ...}: {
       # Boot

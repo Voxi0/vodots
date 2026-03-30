@@ -14,23 +14,14 @@ in {
   # Flake
   flake = {
     # Options
-    options = {
-      username = inputs.nixpkgs.lib.mkOption {
-        type = inputs.nixpkgs.lib.types.str;
-        default = "voxi0";
-      };
-    };
+    username = "voxi0";
+    locale = "en_GB.UTF-8";
+    kbLayout = "gb";
 
-    # Configuration
-    config = {
-      locale = "en_GB.UTF-8";
-      kbLayout = "gb";
+    # This is used by a LastFM rich presence plugin for Discord (Vencord)
+    lastFmUsername = "voxi0";
 
-      # This is used by a LastFM rich presence plugin for Discord (Vencord)
-      lastFmUsername = "voxi0";
-
-      # Export all our custom Home Manager modules
-      homeModules = builtins.removeAttrs self.modules.homeManager hostnames;
-    };
+    # Export all our custom Home Manager modules
+    homeModules = builtins.removeAttrs self.modules.homeManager hostnames;
   };
 }
