@@ -7,7 +7,6 @@
     # Services
     fwupd
     tailscale
-    cloudflared
     immich
     navidrome
     minecraft-server
@@ -32,6 +31,11 @@ in {
         AllowHibernation = false;
         AllowHybridSleep = false;
         AllowSuspendThenHibernate = false;
+      };
+
+      services.postgresql = {
+        package = pkgs.postgresql_18;
+        extraPlugins = ps: with ps; [vectorchord pgvector];
       };
     };
   };

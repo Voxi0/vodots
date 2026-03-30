@@ -13,12 +13,10 @@ in {
 
   # Flake
   flake = {
-    # Flake options
-    options = let
-      lib = inputs.nixpkgs.lib;
-    in {
-      username = lib.mkOption {
-        type = lib.types.str;
+    # Options
+    options = {
+      username = inputs.nixpkgs.lib.mkOption {
+        type = inputs.nixpkgs.lib.types.str;
         default = "voxi0";
       };
     };
