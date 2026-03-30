@@ -94,15 +94,31 @@ in {
 
           # Some apps and all only for this host
           packages = with pkgs; [
+            # Terminal emulator
             kitty
+
+            # Version control system
             git
             lazygit
+
+            # File explorer
             thunar
-            tumbler
-            mpv
+            tumbler # Required for thumbnails
+
+            # Media players
+            mpv # Videos
+            feishin # Audio
+
+            # Note taking
             obsidian
+
+            # Just for Hackclub
             slack
+
+            # IRC client
             halloy
+
+            # Minecraft launcher
             (pkgs.prismlauncher.override {
               jdks = [pkgs.graalvmPackages.graalvm-ce];
             })
