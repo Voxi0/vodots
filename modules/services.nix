@@ -42,15 +42,20 @@
     };
 
     # Self-hosted photo and video management solution - Best self-hosted alternative to something like Google Photos
-    immich = {pkgs, ...}: {
+    immich = {
+      config,
+      pkgs,
+      ...
+    }: {
       # Required for Immich to be able to display videos and stuff
       users.users.immich.extraGroups = ["video" "render"];
 
       services = {
-        # Immich uses Postgresql for the database
+        # Immich uses Postgresql for the database - Stores user data, album data, etc.
         postgresql = {
           package = pkgs.postgresql_18;
           extraPlugins = ps: with ps; [vectorchord pgvector];
+          dataDir = "/mnt/immich-drive/postgresql/${config.services.postgresql.package.psqlSchema}";
         };
 
         immich = {
@@ -59,6 +64,7 @@
           host = "0.0.0.0";
           port = 2283;
           accelerationDevices = null;
+          mediaLocation = "/mnt/immich-drive/immich/";
         };
       };
     };
