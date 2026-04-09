@@ -32,6 +32,16 @@ in {
         AllowSuspendThenHibernate = false;
       };
 
+      # Immich drive
+      fileSystems."/mnt/immich-drive" = {
+        device = "/dev/disk/by-label/immich-drive";
+        fsType = "ext4";
+        options = ["defaults" "nofail"];
+      };
+
+      # For hardware acceleration using VAAPI
+      hardware.graphics.extraPackages = [pkgs.intel-media-driver];
+
       # Some extra packages just for this host
       environment.systemPackages = with pkgs; [
         # Cloudflare daemon - I use tunnels to easily and securely expose server services e.g. Immich to the wider internet without port forwarding

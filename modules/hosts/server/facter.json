@@ -27,8 +27,8 @@
     },
     "bluetooth": [
       {
-        "index": 28,
-        "attached_to": 30,
+        "index": 29,
+        "attached_to": 32,
         "class_list": [
           "usb",
           "bluetooth"
@@ -111,8 +111,8 @@
         "module_alias": "usb:v8087p0A2Ad0001dcE0dsc01dp01icE0isc01ip01in00"
       },
       {
-        "index": 31,
-        "attached_to": 30,
+        "index": 33,
+        "attached_to": 32,
         "class_list": [
           "usb",
           "bluetooth"
@@ -613,8 +613,8 @@
     ],
     "camera": [
       {
-        "index": 29,
-        "attached_to": 30,
+        "index": 31,
+        "attached_to": 32,
         "class_list": [
           "camera",
           "usb"
@@ -714,8 +714,8 @@
         "module_alias": "usb:v04F2pB413d6923dcEFdsc02dp01ic0Eisc01ip00in00"
       },
       {
-        "index": 32,
-        "attached_to": 30,
+        "index": 34,
+        "attached_to": 32,
         "class_list": [
           "camera",
           "usb"
@@ -817,7 +817,7 @@
     ],
     "cdrom": [
       {
-        "index": 26,
+        "index": 27,
         "attached_to": 9,
         "class_list": [
           "cdrom",
@@ -1054,7 +1054,91 @@
     ],
     "disk": [
       {
-        "index": 27,
+        "index": 26,
+        "attached_to": 23,
+        "class_list": [
+          "disk",
+          "usb",
+          "scsi",
+          "block_device"
+        ],
+        "bus_type": {
+          "hex": "0084",
+          "name": "SCSI",
+          "value": 132
+        },
+        "slot": {
+          "bus": 2,
+          "number": 0
+        },
+        "base_class": {
+          "hex": "0106",
+          "name": "Mass Storage Device",
+          "value": 262
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Disk",
+          "value": 0
+        },
+        "vendor": {
+          "hex": "174c",
+          "name": "CT240BX5",
+          "value": 5964
+        },
+        "device": {
+          "hex": "225c",
+          "name": "00SSD1",
+          "value": 8796
+        },
+        "revision": {
+          "hex": "0000",
+          "name": "0",
+          "value": 0
+        },
+        "serial": "C1A33C71BBF2",
+        "model": "CT240BX5 00SSD1",
+        "sysfs_id": "/class/block/sdb",
+        "sysfs_bus_id": "2:0:0:0",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:14.0/usb2/2-2/2-2:1.0/host2/target2:0:0/2:0:0:0",
+        "unix_device_names": [
+          "/dev/disk/by-id/ata-CT240BX500SSD1_2026E403825E",
+          "/dev/disk/by-id/usb-CT240BX5_00SSD1_2FBB17C33A1C-0:0",
+          "/dev/disk/by-path/pci-0000:00:14.0-usb-0:2:1.0-scsi-0:0:0:0",
+          "/dev/disk/by-path/pci-0000:00:14.0-usbv3-0:2:1.0-scsi-0:0:0:0",
+          "/dev/sdb"
+        ],
+        "unix_device_name2": "/dev/sg2",
+        "resources": [
+          {
+            "type": "disk_geo",
+            "cylinders": 29185,
+            "heads": 255,
+            "sectors": 63,
+            "size": "0x0",
+            "geo_type": "logical"
+          },
+          {
+            "type": "size",
+            "unit": "sectors",
+            "value_1": 468862128,
+            "value_2": 512
+          }
+        ],
+        "driver": "uas",
+        "driver_module": "uas",
+        "drivers": [
+          "sd",
+          "uas"
+        ],
+        "driver_modules": [
+          "sd_mod",
+          "uas"
+        ],
+        "module_alias": "usb:v174Cp225Cd0100dc00dsc00dp00ic08isc06ip62in00"
+      },
+      {
+        "index": 28,
         "attached_to": 9,
         "class_list": [
           "disk",
@@ -1101,7 +1185,6 @@
           "/dev/disk/by-path/pci-0000:00:17.0-ata-1.0",
           "/dev/sda"
         ],
-        "rom_id": "0x80",
         "resources": [
           {
             "type": "disk_geo",
@@ -1215,7 +1298,7 @@
     ],
     "hub": [
       {
-        "index": 30,
+        "index": 32,
         "attached_to": 23,
         "class_list": [
           "usb",
@@ -1237,7 +1320,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.19.9 xhci-hcd",
+          "name": "Linux 6.19.11 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1251,7 +1334,7 @@
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.19.9 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.19.11 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-0:1.0",
         "sysfs_bus_id": "1-0:1.0",
         "resources": [
@@ -1302,7 +1385,7 @@
         "module_alias": "usb:v1D6Bp0002d0619dc09dsc00dp01ic09isc00ip00in00"
       },
       {
-        "index": 33,
+        "index": 35,
         "attached_to": 23,
         "class_list": [
           "usb",
@@ -1324,7 +1407,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 6.19.9 xhci-hcd",
+          "name": "Linux 6.19.11 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1338,7 +1421,7 @@
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 6.19.9 xhci-hcd xHCI Host Controller",
+        "model": "Linux 6.19.11 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb2/2-0:1.0",
         "sysfs_bus_id": "2-0:1.0",
         "detail": {
@@ -1485,7 +1568,7 @@
     ],
     "mouse": [
       {
-        "index": 38,
+        "index": 40,
         "attached_to": 0,
         "bus_type": {
           "hex": "0080",
@@ -1772,69 +1855,6 @@
     ],
     "network_interface": [
       {
-        "index": 34,
-        "attached_to": 0,
-        "class_list": [
-          "network_interface"
-        ],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0000",
-          "name": "Loopback",
-          "value": 0
-        },
-        "model": "Loopback network interface",
-        "sysfs_id": "/class/net/lo",
-        "unix_device_names": [
-          "lo"
-        ]
-      },
-      {
-        "index": 35,
-        "attached_to": 8,
-        "class_list": [
-          "network_interface"
-        ],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0001",
-          "name": "Ethernet",
-          "value": 1
-        },
-        "model": "Ethernet network interface",
-        "sysfs_id": "/class/net/enp3s0",
-        "sysfs_device_link": "/devices/pci0000:00/0000:00:1c.5/0000:03:00.0",
-        "unix_device_names": [
-          "enp3s0"
-        ],
-        "resources": [
-          {
-            "type": "hwaddr",
-            "address": 51
-          },
-          {
-            "type": "phwaddr",
-            "address": 51
-          }
-        ],
-        "driver": "r8169",
-        "driver_module": "r8169",
-        "drivers": [
-          "r8169"
-        ],
-        "driver_modules": [
-          "r8169"
-        ]
-      },
-      {
         "index": 36,
         "attached_to": 14,
         "class_list": [
@@ -1873,6 +1893,69 @@
         ],
         "driver_modules": [
           "iwlwifi"
+        ]
+      },
+      {
+        "index": 37,
+        "attached_to": 0,
+        "class_list": [
+          "network_interface"
+        ],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0000",
+          "name": "Loopback",
+          "value": 0
+        },
+        "model": "Loopback network interface",
+        "sysfs_id": "/class/net/lo",
+        "unix_device_names": [
+          "lo"
+        ]
+      },
+      {
+        "index": 38,
+        "attached_to": 8,
+        "class_list": [
+          "network_interface"
+        ],
+        "base_class": {
+          "hex": "0107",
+          "name": "Network Interface",
+          "value": 263
+        },
+        "sub_class": {
+          "hex": "0001",
+          "name": "Ethernet",
+          "value": 1
+        },
+        "model": "Ethernet network interface",
+        "sysfs_id": "/class/net/enp3s0",
+        "sysfs_device_link": "/devices/pci0000:00/0000:00:1c.5/0000:03:00.0",
+        "unix_device_names": [
+          "enp3s0"
+        ],
+        "resources": [
+          {
+            "type": "hwaddr",
+            "address": 51
+          },
+          {
+            "type": "phwaddr",
+            "address": 51
+          }
+        ],
+        "driver": "r8169",
+        "driver_module": "r8169",
+        "drivers": [
+          "r8169"
+        ],
+        "driver_modules": [
+          "r8169"
         ]
       }
     ],
@@ -2419,7 +2502,7 @@
         "sysfs_bus_id": "0000:00:14.0",
         "detail": {
           "function": 0,
-          "command": 1026,
+          "command": 1030,
           "header_type": 0,
           "secondary_bus": 0,
           "prog_if": 48
