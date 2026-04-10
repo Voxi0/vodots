@@ -31,6 +31,7 @@
         settings = {
           PermitRootLogin = "no";
           PasswordAuthentication = true;
+          LogLevel = "VERBOSE";
         };
       };
     };
@@ -39,6 +40,24 @@
     tailscale = {
       services.tailscale.enable = true;
       networking.firewall.trustedInterfaces = ["tailscale0"];
+    };
+
+    # Server dashboard
+    glance = {
+      services.glance = {
+        enable = true;
+        settings.server.host = "0.0.0.0";
+      };
+    };
+
+    # Intrusion prevention software framework that protects Linux servers from brute-force attacks by monitoring log files for malicious patterns
+    # For example, multiple failed login attempts
+    # It works by updating firewall rules (using iptables or firewalld) to temporarily or permanently ban suspicious IP addresses
+    fail2ban = {
+      services.fail2ban = {
+        enable = true;
+        maxretry = 3;
+      };
     };
 
     # Self-hosted photo and video management solution - Best self-hosted alternative to something like Google Photos

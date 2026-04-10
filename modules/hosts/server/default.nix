@@ -8,6 +8,8 @@
     fwupd
     ssh
     tailscale
+    glance
+    fail2ban
     immich
     navidrome
     minecraft-server
