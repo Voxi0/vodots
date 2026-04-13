@@ -1,26 +1,49 @@
 ---
 title: Installation
-description: How to intall vodots
+description: How to install vodots
 sidebar:
   order: 2
 ---
 ## Fresh-Install
-- First, fetch vodots `nix-shell -p git --run "git clone https://github.com/Voxi0/vodots"`.
-- Open up `modules/flake/flake.nix` inside of the freshly cloned vodots to change some settings e.g. username>
-- Choose a host. Look into `modules/hosts` inside of vodots to see available hosts and pick the one you want. You could also write your own one if you're up for it but that's slightly more complicated and will require more time and effort.
-- Now `cd` into vodots to find a Makefile. Run `nix-shell -p gnumake` to install the Make utility of course.
-- Run `make help` to see available instructions. I'm sure you can figure everything out from that.
+```bash
+# Launch a shell with Git (to fetch vodots) and the GNU Make utility (to use the Makefile provided by vodots)
+nix-shell -p git gnumake
+
+# Fetch vodots
+git clone https://github.com/Voxi0/vodots && cd vodots
+
+# Change some global/common stuff e.g. username
+nano "modules/flake/flake.nix"
+
+# Hosts are defined in `modules/hosts` with each host being for a different installation/machine for example
+# Just choose whichever one you want
+# Look at the following files and adjust them to your liking
+
+# The host configuration e.g. what apps are installed for said host
+nano "modules/hosts/<hostname>/default.nix"
+
+# The disk layout defined for said host
+nano "modules/hosts/<hostname>/_disko.nix"
+
+# You're ready to install NixOS with vodots!
+# Run the following to see available Makefile targets
+# I'm sure you can figure everything out from here on out
+make help
+```
 - Go through [Post-Installation](/getting-started/post-installation).
 
 ## On An Existing Install
 On a system that already has NixOS installed, the installation is far more straightforward.
-- Fetch vodots `nix-shell -p git --run "git clone https://github.com/Voxi0/vodots"`.
-- `cd` into vodots.
-- Update the flake if you want with `nix flake update`.
-- Run the following rebuild command
 ```bash
+# Fetch vodots
+nix-shell -p git --run "git clone https://github.com/Voxi0/vodots" && cd vodots
+
+# Update the flake if you want to have the latest and greatest software
+nix flake update
+
+# Rebuild your system using vodots
 sudo nixos-rebuild boot \
-	--flake ./#<the name of a host folder inside './modules/hosts/'>
+	--flake ./#<the name of a host folder inside "./modules/hosts/">
 	--extra-trusted-public-keys nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= \
     --extra-substituters https://nix-community.cachix.org
     --experimental-features "nix-command flakes"
