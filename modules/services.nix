@@ -74,7 +74,7 @@
         postgresql = {
           package = pkgs.postgresql_18;
           extraPlugins = ps: with ps; [vectorchord pgvector];
-          dataDir = "/mnt/immich-drive/postgresql/${config.services.postgresql.package.psqlSchema}";
+          dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
         };
 
         immich = {
@@ -83,7 +83,7 @@
           host = "0.0.0.0";
           port = 2283;
           accelerationDevices = null;
-          mediaLocation = "/mnt/immich-drive/immich/";
+          mediaLocation = "/var/lib/immich";
         };
       };
     };
