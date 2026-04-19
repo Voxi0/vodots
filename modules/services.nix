@@ -30,7 +30,8 @@
         openFirewall = false;
         settings = {
           PermitRootLogin = "no";
-          PasswordAuthentication = true;
+          PasswordAuthentication = false;
+          KbdInteractiveAuthentication = false;
           LogLevel = "VERBOSE";
         };
       };
@@ -50,14 +51,23 @@
       };
     };
 
-    # Intrusion prevention software framework that protects Linux servers from brute-force attacks by monitoring log files for malicious patterns
+    # Intrusion prevention software framework that protects servers from brute-force attacks by monitoring log files for malicious patterns
     # For example, multiple failed login attempts
     # It works by updating firewall rules (using iptables or firewalld) to temporarily or permanently ban suspicious IP addresses
     fail2ban = {
       services.fail2ban = {
         enable = true;
         maxretry = 3;
+        ignoreIP = [
+          # All devices in your tailnet (Tailscale network)
+          "100.64.0.0/10"
+        ];
       };
+    };
+
+    # AppArmor - Linux kernel security module - Application security system
+    apparmor = {
+      security.apparmor.enable = true;
     };
 
     # Self-hosted photo and video management solution - Best self-hosted alternative to something like Google Photos

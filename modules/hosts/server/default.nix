@@ -10,6 +10,7 @@
     tailscale
     glance
     fail2ban
+    apparmor
     immich
     navidrome
     minecraft-server
@@ -34,11 +35,10 @@ in {
         AllowSuspendThenHibernate = false;
       };
 
-      # Immich drive
-      fileSystems."/mnt/immich-drive" = {
-        device = "/dev/disk/by-label/immich-drive";
-        fsType = "ext4";
-        options = ["defaults" "nofail"];
+      # Automatic system updates
+      system.autoUpgrade = {
+        enable = true;
+        allowReboot = false;
       };
 
       # For hardware acceleration using VAAPI
