@@ -45,6 +45,9 @@
           "sidebar.verticalTabs" = true;
           "sidebar.main.tools" = "syncedtabs,history,bookmarks";
 
+          # Stop the alt key from toggling some menu
+          "ui.key.menuAccessKeyFocuses" = false;
+
           # Disable irritating first-run stuff
           "browser.disableResetPrompt" = true;
           "browser.download.panel.shown" = true;
