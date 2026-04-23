@@ -1,8 +1,15 @@
 {
+  flake.modules.nixos.cli = {pkgs, ...}: {
+    programs = {
+      # Modern `cd` replacement
+      zoxide.enable = true;
+    };
+  };
+
   # Useful CLI utils
   flake.modules.homeManager.cli = {pkgs, ...}: {
     home = {
-      packages = with pkgs; [unzip wget tldr cava];
+      packages = with pkgs; [unzip wget nurl tldr cava];
       shellAliases = {
         "l" = "eza -alh";
         "ls" = "eza";
@@ -20,6 +27,11 @@
 
       # Use your preferred shell in all Nix shells
       nix-your-shell.enable = true;
+
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
 
       # Shell prompt
       starship = {

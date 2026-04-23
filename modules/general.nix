@@ -1,6 +1,7 @@
 {
   self,
   withSystem,
+  inputs,
   ...
 }: {
   # NixOS specific
@@ -73,7 +74,9 @@
 
   # Home Manager specific
   flake.modules.homeManager.general = {
-    programs.home-manager.enable = true;
+    imports = [inputs.nix-index-database.homeModules.default];
+
+    # Set user information
     home = {
       # Home Manager
       inherit (self) username;
@@ -84,10 +87,27 @@
       keyboard.layout = self.kbLayout;
     };
 
+    # Programs
+    programs = {
+      # Let Home Manager install and manage itself
+      home-manager.enable = true;
+
+      # Replace ccommand-not-found with nix-index for shell
+      command-not-found.enable = false;
+      nix-index.enable = true;
+
+      # Lets you add a `,` before any command to automatically install required packages for the command
+      # It's just a far more convenient version of plain old `nix-shell`
+      nix-index-database.comma.enable = true;
+    };
+
     # Automatically create XDG user directories e.g. 'Home', 'Downloads', 'Videos'
-    xdg.userDirs = {
+    xdg = {
       enable = true;
-      createDirectories = true;
+      userDirs = {
+        enable = true;
+        createDirectories = true;
+      };
     };
 
     # Better support Linux distros other than NixOS

@@ -18,9 +18,6 @@
     gaming
     steam
     roblox
-
-    # Virtualisation
-    virtualbox
   ];
   hmModules = with self.modules.homeManager; [
     # Base

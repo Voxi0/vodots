@@ -5,7 +5,7 @@
     pkgs,
     ...
   }: {
-    # Configure a pkgs instance
+    # Nixpkgs instance
     _module.args.pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -15,7 +15,7 @@
       ];
     };
 
-    # Helpful for developing the dotfiles
+    # Formatter and basic dev environment for vodots
     formatter = pkgs.alejandra;
     devShells.default = pkgs.mkShellNoCC {
       nativeBuildInputs = with pkgs; [deadnix statix];
