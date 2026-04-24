@@ -22,6 +22,7 @@
   hmModules = with self.modules.homeManager; [
     # Base
     general
+    easyeffects
     niri
 
     # Apps
