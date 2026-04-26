@@ -24,7 +24,6 @@
         plugins = {
           # Fakin' Nitro
           fakeNitro.enable = true;
-          USRBG.enable = true;
 
           # Useful
           readAllNotificationsButton.enable = true;

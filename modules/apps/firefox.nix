@@ -20,8 +20,8 @@
       };
 
       # Default profile
-      profiles."NixDots" = {
-        name = "NixDots";
+      profiles."vodots" = {
+        name = "vodots";
         isDefault = true;
 
         # Search engines
