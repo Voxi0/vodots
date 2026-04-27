@@ -34,7 +34,7 @@
     neovim
     fastfetch
     yazi
-    firefox
+    helium-browser
     vscode
     spotify
     discord

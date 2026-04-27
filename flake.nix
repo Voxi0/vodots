@@ -40,6 +40,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Ungoogled chromium browser
+    helium = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Declaratively configure Vencord
     nixcord.url = "github:FlameFlag/nixcord";
 
