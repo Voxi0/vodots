@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.cli = {pkgs, ...}: {
+  flake.modules.nixos.cli = _: {
     programs = {
       # Modern `cd` replacement
       zoxide.enable = true;

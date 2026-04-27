@@ -18,6 +18,9 @@
     gaming
     steam
     roblox
+
+    # Virtualisation
+    virt-manager
   ];
   hmModules = with self.modules.homeManager; [
     # Base
