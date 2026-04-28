@@ -35,6 +35,7 @@
     fastfetch
     yazi
     helium-browser
+    zen-browser
     vscode
     spotify
     discord
