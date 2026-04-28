@@ -36,7 +36,7 @@
     obs-studio
 
     # Gaming
-    lutris
+    # lutris
   ];
 in {
   flake = {
