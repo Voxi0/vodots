@@ -24,6 +24,9 @@
         name = "vodots";
         isDefault = true;
 
+        # Use Betterfox
+        extraConfig = "${builtins.readFile ./user.js}";
+
         # Search engines
         search = {
           force = true;

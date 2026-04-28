@@ -30,7 +30,7 @@
     neovim
     fastfetch
     yazi
-    firefox
+    floorp
     spotify
     discord
     obs-studio

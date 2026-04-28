@@ -10,12 +10,14 @@
         profiles."vodots" = {
           isDefault = true;
           search.default = "ddg";
+
+          # Use Betterfox
+          preConfig = "${builtins.readFile ./user.js}";
+
+          # Extensions
           extensions = {
             packages = with inputs.firefox-addons.packages.${pkgs.stdenv.system}; [
-              ublock-origin
-              darkreader
-              disconnect
-              gesturefy
+              ublock-origin # Very efficient ad-blocker
             ];
           };
         };
