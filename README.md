@@ -1,17 +1,25 @@
 <h1 align="center">vodots</h1>
 
-This is my personal [NixOS][1] + [Home Manager][2] configuration redesigned and
-rewritten from scratch using everything I learned from all the other times I
-rewrote my configs and everything I saw in other NixOS dotfile repos.
+<div align="center">
 
-I'm not arrogant enough to claim that I found the best design pattern to or
-anything like that but I am pretty happy with the structure and all.
+![GitHub License](https://img.shields.io/github/license/Voxi0/vodots?style=for-the-badge&labelColor=black&color=white)
+![GitHub repo size](https://img.shields.io/github/repo-size/Voxi0/vodots?style=for-the-badge&labelColor=black&color=white)
+![GitHub Repo stars](https://img.shields.io/github/stars/Voxi0/vodots?style=for-the-badge&labelColor=black&color=white)
 
-I'm making use of the Dendritic Nix design pattern which is very interesting and
-makes organization and modularization far more simpler and straightforward
-making the entire project structure far cleaner overall.
+</div>
+
+My personal [NixOS][1] configuration using the popular Dendritic Nix design pattern redesigned and
+rewritten from scratch using everything I learned from previous iterations of my configuration and
+reading through several other configuration repos to discover cool new things and such.
+
+<div align="center">
+	<h2>Contributors</h2>
+	<a href="https://github.com/voxi0/vodots/graphs/contributors">
+		<img src="https://contrib.rocks/image?repo=voxi0/vodots"/>
+	</a>
+	<p>Made with <a href="https://contrib.rocks">contrib.rocks</a></p>
+</div>
 
 <!-- Reference links -->
 
 [1]: https://nixos.org/ "NixOS"
-[2]: https://github.com/nix-community/home-manager "Home Manager"
