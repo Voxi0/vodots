@@ -38,6 +38,11 @@
         };
       };
 
+      # A DBus daemon that allows one to change the system behaviour based on user-selected power profiles
+      power-profiles-daemon = {
+        services.power-profiles-daemon.enable = true;
+      };
+
       # AppArmor - Linux kernel security module - Application security system
       apparmor = {
         security.apparmor.enable = true;

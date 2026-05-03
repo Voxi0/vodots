@@ -9,6 +9,7 @@
 
     # Services
     fwupd
+    power-profiles-daemon
     audio
     tailscale
     ssh
@@ -35,6 +36,7 @@
     fastfetch
     yazi
     floorp
+    helium
     vscode
     spotify
     discord
