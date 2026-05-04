@@ -39,12 +39,8 @@
     nix-wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 
     # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    dms-plugin-registry = {
-      url = "github:AvengeMedia/dms-plugin-registry";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

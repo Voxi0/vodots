@@ -6,10 +6,7 @@
         embeddedTheme = "purple_leaves";
       };
     in {
-      imports = with inputs; [
-        dms.nixosModules.dank-material-shell
-        dms-plugin-registry.modules.default
-      ];
+      imports = [inputs.noctalia.nixosModules.default];
 
       # Base packages
       environment.systemPackages = [sddmTheme];
@@ -34,6 +31,12 @@
             };
           };
         };
+
+        # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
+        noctalia-shell = {
+          enable = true;
+          package = self.packages.${pkgs.stdenv.hostPlatform.system}.voctalia-shell;
+        };
       };
 
       # XDG desktop portals allows apps to securely access resources outside it's sandbox
@@ -52,36 +55,23 @@
         ];
       };
 
-      # Enable things instead of just installing whenever possible
-      programs = {
-        niri = {
-          enable = true;
-          package = self.packages.${pkgs.stdenv.hostPlatform.system}.voniri;
-        };
-
-        # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
-        dank-material-shell = {
-          enable = true;
-          quickshell.package = pkgs.quickshell;
-          dgop.package = pkgs.dgop;
-          enableSystemMonitoring = true;
-          enableDynamicTheming = true;
-          enableClipboardPaste = true;
-          enableAudioWavelength = true;
-          enableVPN = true;
-          enableCalendarEvents = false;
-        };
+      # Scrolling Wayland compositor
+      programs.niri = {
+        enable = true;
+        package = self.packages.${pkgs.stdenv.hostPlatform.system}.voniri;
       };
     };
 
     # Home Manager specific
     homeManager.niri = {pkgs, ...}: {
+      # Frontend for udisks2 which allows you to manage removable drives easily
+      services.udiskie.enable = true;
+
       # Base packages
       home.packages = with pkgs; [
         ############
         ### BASE ###
         ############
-        xwayland-satellite
         wl-clipboard
 
         ###############
@@ -101,31 +91,39 @@
         kdePackages.qtmultimedia # For playing videos, audio, etc
         kdePackages.qt5compat # Extra visual effects e.g. gaussian blur. MultiEffect is usually preferable
       ];
-
-      # Frontend for udisks2 which allows you to manage removable drives easily
-      services.udiskie.enable = true;
     };
   };
 
-  flake.wrappers.voniri = {wlib, ...}: let
-    niriConfigDir = ../../config/niri;
-  in {
-    imports = [ wlib.wrapperModules.niri ];
-    "config.kdl".content = ''
-      // General configuration - Environment variables and stuff
-      ${builtins.readFile (niriConfigDir + "/config.kdl")}
+  flake.wrappers = {
+    # Niri Wayland compositor
+    voniri = {wlib, lib, pkgs, ...}: let
+      niriConfigDir = ../../config/niri;
+    in {
+      imports = [ wlib.wrapperModules.niri ];
+      "config.kdl".content = ''
+        // General config - Environment variables and stuff
+        ${builtins.readFile (niriConfigDir + "/config.kdl")}
 
-      // Keybindings and stuff
-      include "${niriConfigDir}/input.kdl"
+        // Keybindings and stuff
+        include "${niriConfigDir}/input.kdl"
+      '';
+      settings = {
+        input.keyboard = {
+          xkb.layout = "gb";
+        };
 
-      // Dank Material Shell
-      include "${niriConfigDir}/dms.kdl"
-      include "${niriConfigDir}/dms/alttab.kdl"
-      include "${niriConfigDir}/dms/colors.kdl"
-      include "${niriConfigDir}/dms/cursor.kdl"
-      include "${niriConfigDir}/dms/layout.kdl"
-      include "${niriConfigDir}/dms/outputs.kdl"
-      include "${niriConfigDir}/dms/wpblur.kdl"
-    '';
+        xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
+
+        binds = {
+          "Mod+Return".spawn-sh = lib.getExe pkgs.kitty;
+        };
+      };
+    };
+
+    # Noctalia shell
+    voctalia-shell = {wlib, ...}: {
+      imports = [ wlib.wrapperModules.noctalia-shell ];
+      settings = (builtins.fromJSON (builtins.readFile ./noctalia.json)).settings;
+    };
   };
 }

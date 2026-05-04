@@ -3,9 +3,6 @@
 // include "input.kdl"
 // include "output.kdl"
 
-// Autostart
-spawn-at-startup "dms" "run"
-
 // Environment variables
 environment {
 	XDG_CURRENT_DESKTOP "niri"
@@ -20,4 +17,23 @@ environment {
 layout {
 	gaps 5
 	background-color "transparent"
+}
+
+window-rule {
+  // Rounded corners for a modern look.
+  geometry-corner-radius 20
+
+  // Clips window contents to the rounded corner boundaries.
+  clip-to-geometry true
+}
+
+// Set the overview wallpaper on the backdrop
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
 }
