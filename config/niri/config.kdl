@@ -1,7 +1,7 @@
 // Dank Material Shell
-include "dms.kdl"
-include "input.kdl"
-include "output.kdl"
+// include "dms.kdl"
+// include "input.kdl"
+// include "output.kdl"
 
 // Autostart
 spawn-at-startup "dms" "run"

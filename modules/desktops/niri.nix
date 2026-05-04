@@ -103,4 +103,28 @@
       services.udiskie.enable = true;
     };
   };
+
+  perSystem = {pkgs, ...}: {
+    packages.voniri = inputs.wrapper-modules.wrappers.niri.wrap (let
+      niriConfigDir = ../../config/niri;
+    in {
+      inherit pkgs;
+      "config.kdl".content = ''
+        # General configuration - Environment variables and stuff
+        ${builtins.readFile (niriConfigDir + "/config.kdl")}
+
+        # Keybindings and stuff
+        include "${niriConfigDir}/input.kdl"
+
+        # Dank Material Shell
+        include "${niriConfigDir}/dms.kdl"
+        include "${niriConfigDir}/dms/alttab.kdl"
+        include "${niriConfigDir}/dms/colors.kdl"
+        include "${niriConfigDir}/dms/cursor.kdl"
+        include "${niriConfigDir}/dms/layout.kdl"
+        include "${niriConfigDir}/dms/outputs.kdl"
+        include "${niriConfigDir}/dms/wpblur.kdl"
+      '';
+    });
+  };
 }

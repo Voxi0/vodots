@@ -4,13 +4,6 @@
 
   # Dependencies
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Flake
     import-tree.url = "github:vic/import-tree";
     systems.url = "github:nix-systems/default";
@@ -18,6 +11,10 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+
+    # Software repositories
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     # For configuring disk layouts and all using Nix
     disko = {
@@ -30,6 +27,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Manages user specific stuff
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # For wrapping programs with custom configuration without using Nix
+    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+
     # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
@@ -40,13 +46,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Firefox extensions/plugins
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Ungoogled chromium browser
     helium = {
       url = "github:schembriaiden/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Awesome and popular Firefox based browser
+    # Popular Firefox based browser
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,12 +69,6 @@
 
     # Tool to customize the official Spotify client
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
-    # Firefox extensions/plugins
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # My personal Neovim configuration
     nvdots = {
