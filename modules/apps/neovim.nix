@@ -1,4 +1,4 @@
-{
+{self, ...}: {
   flake.modules.homeManager.neovim = {pkgs, ...}: {
     home = {
       # I prefer Neovim over Vi and Vim
@@ -9,7 +9,7 @@
 
       # Install my personal Neovim configuration with some customizations or whatever
       packages = [
-        (pkgs.neovim.wrap ({pkgs, ...}: {
+        (self.packages.${pkgs.stdenv.hostPlatform.system}.vonvim.wrap ({pkgs, ...}: {
           extraPackages = with pkgs; [
             # Language server + Formatter
             clang-tools # C/C++

@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{self, inputs, ...}: {
   flake.modules = {
     # NixOS specific
     nixos.niri = {pkgs, ...}: let
@@ -54,7 +54,10 @@
 
       # Enable things instead of just installing whenever possible
       programs = {
-        niri.enable = true;
+        niri = {
+          enable = true;
+          package = self.packages.${pkgs.stdenv.hostPlatform.system}.voniri;
+        };
 
         # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
         dank-material-shell = {
@@ -104,27 +107,25 @@
     };
   };
 
-  perSystem = {pkgs, ...}: {
-    packages.voniri = inputs.wrapper-modules.wrappers.niri.wrap (let
-      niriConfigDir = ../../config/niri;
-    in {
-      inherit pkgs;
-      "config.kdl".content = ''
-        # General configuration - Environment variables and stuff
-        ${builtins.readFile (niriConfigDir + "/config.kdl")}
+  flake.wrappers.voniri = {wlib, ...}: let
+    niriConfigDir = ../../config/niri;
+  in {
+    imports = [ wlib.wrapperModules.niri ];
+    "config.kdl".content = ''
+      // General configuration - Environment variables and stuff
+      ${builtins.readFile (niriConfigDir + "/config.kdl")}
 
-        # Keybindings and stuff
-        include "${niriConfigDir}/input.kdl"
+      // Keybindings and stuff
+      include "${niriConfigDir}/input.kdl"
 
-        # Dank Material Shell
-        include "${niriConfigDir}/dms.kdl"
-        include "${niriConfigDir}/dms/alttab.kdl"
-        include "${niriConfigDir}/dms/colors.kdl"
-        include "${niriConfigDir}/dms/cursor.kdl"
-        include "${niriConfigDir}/dms/layout.kdl"
-        include "${niriConfigDir}/dms/outputs.kdl"
-        include "${niriConfigDir}/dms/wpblur.kdl"
-      '';
-    });
+      // Dank Material Shell
+      include "${niriConfigDir}/dms.kdl"
+      include "${niriConfigDir}/dms/alttab.kdl"
+      include "${niriConfigDir}/dms/colors.kdl"
+      include "${niriConfigDir}/dms/cursor.kdl"
+      include "${niriConfigDir}/dms/layout.kdl"
+      include "${niriConfigDir}/dms/outputs.kdl"
+      include "${niriConfigDir}/dms/wpblur.kdl"
+    '';
   };
 }

@@ -8,6 +8,7 @@ in {
   # Import flake-parts stuff
   imports = with inputs; [
     flake-parts.flakeModules.modules
+    nix-wrapper-modules.flakeModules.wrappers
     home-manager.flakeModules.home-manager
   ];
 

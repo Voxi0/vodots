@@ -4,7 +4,7 @@
 
   # Dependencies
   inputs = {
-    # Flake
+    # Flake infrastructure
     import-tree.url = "github:vic/import-tree";
     systems.url = "github:nix-systems/default";
     flake-parts = {
@@ -33,8 +33,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # For wrapping programs with custom configuration without using Nix
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+    # For wrapping programs with custom configuration and exporting them as a package
+    # Allows you to configure user programs without relying on Home Manager specific modules
+    # This is amazing because then your config stuff is basically independent and will work anywhere since it's just a package
+    nix-wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 
     # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
     dms = {
@@ -69,12 +71,6 @@
 
     # Tool to customize the official Spotify client
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
-    # My personal Neovim configuration
-    nvdots = {
-      url = "github:Voxi0/nvdots";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # For setting up Minecraft servers
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";

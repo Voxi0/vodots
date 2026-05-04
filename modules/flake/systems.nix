@@ -10,10 +10,12 @@
       inherit system;
       config.allowUnfree = true;
       overlays = with inputs; [
-        nvdots.overlays.default
         nix-minecraft.overlay
       ];
     };
+
+    # Set the `pkgs` instance for all nix-wrapper modules or whatever
+    wrappers.pkgs = pkgs;
 
     # Formatter and basic dev environment for vodots
     formatter = pkgs.alejandra;
