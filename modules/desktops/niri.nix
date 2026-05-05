@@ -1,4 +1,8 @@
-{self, inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.modules = {
     # NixOS specific
     nixos.niri = {pkgs, ...}: let
@@ -96,10 +100,15 @@
 
   flake.wrappers = {
     # Niri Wayland compositor
-    voniri = {wlib, lib, pkgs, ...}: let
+    voniri = {
+      wlib,
+      lib,
+      pkgs,
+      ...
+    }: let
       niriConfigDir = ../../config/niri;
     in {
-      imports = [ wlib.wrapperModules.niri ];
+      imports = [wlib.wrapperModules.niri];
       "config.kdl".content = ''
         // General config - Environment variables and stuff
         ${builtins.readFile (niriConfigDir + "/config.kdl")}
@@ -122,7 +131,7 @@
 
     # Noctalia shell
     voctalia-shell = {wlib, ...}: {
-      imports = [ wlib.wrapperModules.noctalia-shell ];
+      imports = [wlib.wrapperModules.noctalia-shell];
       settings = (builtins.fromJSON (builtins.readFile ./noctalia.json)).settings;
     };
   };
