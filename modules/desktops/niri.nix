@@ -118,7 +118,7 @@
       '';
       settings = {
         input.keyboard = {
-          xkb.layout = "gb";
+          xkb.layout = "uk";
         };
 
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;

@@ -100,9 +100,6 @@ in {
 
           # Some apps and all only for this host
           packages = with pkgs; [
-            # Terminal emulator
-            kitty
-
             # Version control system
             git
             lazygit

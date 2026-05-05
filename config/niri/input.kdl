@@ -1,6 +1,13 @@
 input {
 	mod-key "Super"
-	keyboard { numlock; }
+	keyboard {
+		numlock;
+		xkb {
+			// Remap the caps lock key into escape key
+			// Very handy for Neovim
+			options "caps:escape";
+		}
+	}
 	touchpad {
 		tap
 		natural-scroll
@@ -10,9 +17,6 @@ input {
 binds {
 	// Basics
 	Mod+Tab hotkey-overlay-title="Open overview" repeat=false { open-overview; }
-	Mod+Return hotkey-overlay-title="Launch the terminal" repeat=false {
-		spawn-sh "env $TERMINAL";
-	}
 	Mod+D hotkey-overlay-title="Open application launcher" repeat=false {
 		spawn "dms" "ipc" "spotlight" "toggle";
 	}
