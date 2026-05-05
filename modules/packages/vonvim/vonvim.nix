@@ -1,4 +1,4 @@
-_: {
+{
   flake.wrappers.vonvim = {
     wlib,
     lib,

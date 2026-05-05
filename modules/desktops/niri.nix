@@ -5,7 +5,7 @@
   flake.modules = {
     # NixOS specific
     nixos.niri = {pkgs, ...}: let
-      system = pkgs.stdenv.hostPlatform.system;
+      inherit (pkgs.stdenv.hostPlatform) system;
       sddmTheme = pkgs.sddm-astronaut.override {
         embeddedTheme = "purple_leaves";
       };
@@ -87,68 +87,6 @@
         kdePackages.qtmultimedia # For playing videos, audio, etc
         kdePackages.qt5compat # Extra visual effects e.g. gaussian blur. MultiEffect is usually preferable
       ];
-    };
-  };
-
-  flake.wrappers = {
-    # Niri Wayland compositor
-    voniri = {
-      wlib,
-      lib,
-      pkgs,
-      ...
-    }: let
-      system = pkgs.stdenv.hostPlatform.system;
-      niriConfigDir = ../../config/niri;
-    in {
-      imports = [wlib.wrapperModules.niri];
-      extraPackages = [pkgs.xwayland-satellite];
-      "config.kdl".content = ''
-        // General config - Environment variables and stuff
-        ${builtins.readFile (niriConfigDir + "/config.kdl")}
-
-        // Keybindings
-        include "${niriConfigDir}/keybinds.kdl"
-
-        // Autostart
-        spawn-at-startup "${lib.getExe self.packages.${system}.voctalia-shell}"
-
-        // Input config
-        input {
-          mod-key "Super"
-          keyboard {
-            numlock;
-            xkb {
-              layout "gb"
-
-              // Remap the caps lock key into escape key
-              // Very handy for Neovim
-              options "caps:escape";
-            }
-          }
-          touchpad {
-            tap
-            natural-scroll
-          }
-        }
-
-        // Open the terminal emulator
-        binds {
-          Mod+Return hotkey-overlay-title="Launch the terminal emulator" repeat=false {
-            spawn "${lib.getExe self.packages.${system}.vokitty}";
-          }
-
-          Mod+D hotkey-overlay-title="Open the app launcher" repeat=false {
-            spawn "${lib.getExe self.packages.${system}.voctalia-shell}" "ipc" "call" "launcher" "toggle"
-          }
-        }
-      '';
-    };
-
-    # Noctalia shell
-    voctalia-shell = {wlib, ...}: {
-      imports = [wlib.wrapperModules.noctalia-shell];
-      settings = (builtins.fromJSON (builtins.readFile ./noctalia.json)).settings;
     };
   };
 }

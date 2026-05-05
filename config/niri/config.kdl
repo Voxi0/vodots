@@ -10,9 +10,6 @@ environment {
 // Looks/Appearance
 layout {
 	gaps 4
-	border {
-		width 2
-	}
 	background-color "transparent"
 }
 
