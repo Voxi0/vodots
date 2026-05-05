@@ -7,6 +7,13 @@ environment {
 	QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
 }
 
+// Disable hot corners
+gestures {
+	hot-corners {
+		off
+	}
+}
+
 // Looks/Appearance
 layout {
 	gaps 4
@@ -25,6 +32,15 @@ window-rule {
 layer-rule {
 	match namespace="^noctalia-overview*"
 	place-within-backdrop true
+}
+
+// Basic keybindings
+binds {
+	Mod+Tab hotkey-overlay-title="Open overview" repeat=false { open-overview; }
+	Mod+F hotkey-overlay-title="Toggle window maximize" repeat=false { maximize-window-to-edges; }
+	Mod+Shift+F hotkey-overlay-title="Toggle window fullscreen" repeat=false { fullscreen-window; }
+	Mod+Q hotkey-overlay-title="Close window" repeat=false { close-window; }
+	Mod+Shift+S hotkey-overlay-title="Take a screenshot" repeat=false { screenshot; }
 }
 
 debug {

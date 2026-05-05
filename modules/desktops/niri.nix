@@ -1,7 +1,4 @@
-{
-  self,
-  ...
-}: {
+{self, ...}: {
   flake.modules = {
     # NixOS specific
     nixos.niri = {pkgs, ...}: let
