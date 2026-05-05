@@ -107,18 +107,28 @@
         // General config - Environment variables and stuff
         ${builtins.readFile (niriConfigDir + "/config.kdl")}
 
-        // Keybindings and stuff
-        include "${niriConfigDir}/input.kdl"
+        // Keybindings
+        include "${niriConfigDir}/keybinds.kdl"
 
         // Autostart
         spawn-at-startup "${lib.getExe self.packages.${system}.voctalia-shell}"
 
-        // Keyboard layout
+        // Input config
         input {
+          mod-key "Super"
           keyboard {
+            numlock;
             xkb {
               layout "gb"
+
+              // Remap the caps lock key into escape key
+              // Very handy for Neovim
+              options "caps:escape";
             }
+          }
+          touchpad {
+            tap
+            natural-scroll
           }
         }
 

@@ -6,8 +6,8 @@
       "position": "left",
       "monitors": [],
       "density": "spacious",
-      "showOutline": false,
-      "showCapsule": true,
+      "showOutline": true,
+      "showCapsule": false,
       "capsuleOpacity": 1,
       "capsuleColorKey": "none",
       "widgetSpacing": 6,
@@ -29,6 +29,16 @@
       "widgets": {
         "left": [
           {
+            "colorizeDistroLogo": false,
+            "colorizeSystemIcon": "none",
+            "colorizeSystemText": "none",
+            "customIconPath": "",
+            "enableColorization": false,
+            "icon": "noctalia",
+            "id": "ControlCenter",
+            "useDistroLogo": false
+          },
+          {
             "colorizeSystemIcon": "none",
             "colorizeSystemText": "none",
             "customIconPath": "",
@@ -47,30 +57,6 @@
             "tooltipFormat": "HH:mm ddd, MMM dd",
             "useCustomFont": false
           },
-          {
-            "compactMode": false,
-            "hideMode": "hidden",
-            "hideWhenIdle": false,
-            "id": "MediaMini",
-            "maxWidth": 145,
-            "panelShowAlbumArt": true,
-            "scrollingMode": "hover",
-            "showAlbumArt": true,
-            "showArtistFirst": true,
-            "showProgressRing": true,
-            "showVisualizer": false,
-            "textColor": "none",
-            "useFixedWidth": false,
-            "visualizerType": "linear"
-          },
-          {
-            "colorName": "primary",
-            "hideWhenIdle": false,
-            "id": "AudioVisualizer",
-            "width": 200
-          }
-        ],
-        "center": [
           {
             "characterCount": 2,
             "colorizeIcons": false,
@@ -91,6 +77,14 @@
             "showBadge": true,
             "showLabelsOnlyWhenOccupied": true,
             "unfocusedIconsOpacity": 1
+          }
+        ],
+        "center": [
+          {
+            "colorName": "primary",
+            "hideWhenIdle": false,
+            "id": "AudioVisualizer",
+            "width": 200
           },
           {
             "iconColor": "none",
@@ -137,20 +131,6 @@
             "iconColor": "none",
             "id": "Brightness",
             "textColor": "none"
-          },
-          {
-            "iconColor": "none",
-            "id": "PowerProfile"
-          },
-          {
-            "colorizeDistroLogo": false,
-            "colorizeSystemIcon": "none",
-            "colorizeSystemText": "none",
-            "customIconPath": "",
-            "enableColorization": false,
-            "icon": "noctalia",
-            "id": "ControlCenter",
-            "useDistroLogo": false
           }
         ]
       },
@@ -166,7 +146,7 @@
       "screenOverrides": []
     },
     "general": {
-      "avatarImage": "/home/voxi0/.face",
+      "avatarImage": "/home/voxi0/Pictures/pfp.jpg",
       "dimmerOpacity": 0.2,
       "showScreenCorners": false,
       "forceBlackScreenCorners": false,
@@ -176,15 +156,15 @@
       "boxRadiusRatio": 1,
       "screenRadiusRatio": 1,
       "animationSpeed": 1,
-      "animationDisabled": false,
+      "animationDisabled": true,
       "compactLockScreen": false,
-      "lockScreenAnimations": false,
+      "lockScreenAnimations": true,
       "lockOnSuspend": true,
       "showSessionButtonsOnLockScreen": true,
       "showHibernateOnLockScreen": false,
-      "enableLockScreenMediaControls": false,
-      "enableShadows": true,
-      "enableBlurBehind": true,
+      "enableLockScreenMediaControls": true,
+      "enableShadows": false,
+      "enableBlurBehind": false,
       "shadowDirection": "bottom_right",
       "shadowOffsetX": 2,
       "shadowOffsetY": 3,
@@ -198,7 +178,7 @@
       "allowPasswordWithFprintd": false,
       "clockStyle": "custom",
       "clockFormat": "hh\\nmm",
-      "passwordChars": false,
+      "passwordChars": true,
       "lockScreenMonitors": [],
       "lockScreenBlur": 0,
       "lockScreenTint": 0,
@@ -305,7 +285,7 @@
       "transitionEdgeSmoothness": 0.05,
       "panelPosition": "follow_bar",
       "hideWallpaperFilenames": false,
-      "useOriginalImages": false,
+      "useOriginalImages": true,
       "overviewBlur": 0.4,
       "overviewTint": 0.6,
       "useWallhaven": false,
@@ -323,7 +303,7 @@
       "favorites": []
     },
     "appLauncher": {
-      "enableClipboardHistory": false,
+      "enableClipboardHistory": true,
       "autoPasteClipboard": false,
       "enableClipPreview": true,
       "clipboardWrapText": true,
@@ -334,20 +314,20 @@
       "position": "center",
       "pinnedApps": [],
       "sortByMostUsed": true,
-      "terminalCommand": "alacritty -e",
+      "terminalCommand": "kitty -e",
       "customLaunchPrefixEnabled": false,
       "customLaunchPrefix": "",
       "viewMode": "list",
       "showCategories": true,
-      "iconMode": "tabler",
+      "iconMode": "native",
       "showIconBackground": false,
       "enableSettingsSearch": true,
       "enableWindowsSearch": true,
       "enableSessionSearch": true,
       "ignoreMouseInput": false,
       "screenshotAnnotationTool": "",
-      "overviewLayer": false,
-      "density": "default"
+      "overviewLayer": true,
+      "density": "comfortable"
     },
     "controlCenter": {
       "position": "close_to_bar_button",
@@ -396,7 +376,7 @@
           "id": "audio-card"
         },
         {
-          "enabled": false,
+          "enabled": true,
           "id": "brightness-card"
         },
         {
@@ -437,7 +417,7 @@
       "disableDesktopWidgets": true
     },
     "dock": {
-      "enabled": true,
+      "enabled": false,
       "position": "bottom",
       "displayMode": "auto_hide",
       "dockType": "floating",
@@ -592,7 +572,7 @@
       "volumeStep": 5,
       "volumeOverdrive": false,
       "spectrumFrameRate": 60,
-      "visualizerType": "mirrored",
+      "visualizerType": "wave",
       "spectrumMirrored": true,
       "mprisBlacklist": [],
       "preferredPlayer": "",
@@ -680,21 +660,7 @@
       "monitorWidgets": [
         {
           "name": "DP-1",
-          "widgets": [
-            {
-              "clockColor": "none",
-              "clockStyle": "digital",
-              "customFont": "",
-              "format": "HH:mm\\nd MMMM yyyy",
-              "id": "Clock",
-              "roundedCorners": true,
-              "scale": 1.479930313491276,
-              "showBackground": true,
-              "useCustomFont": false,
-              "x": 100,
-              "y": 40
-            }
-          ]
+          "widgets": []
         }
       ]
     }
@@ -706,7 +672,7 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "DP-1": "/home/voxi0/Pictures/Wallpapers/hollow-knight.jpg"
+      "DP-1": "/home/voxi0/Pictures/Wallpapers/wallhaven_k8zlx1.jpg"
     },
     "desktopWidgetsEditMode": false,
     "display": {
@@ -727,7 +693,7 @@
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1777903058000
+      "lastSeenTs": 0
     },
     "changelogState": {
       "lastSeenVersion": "v4.7.6"
