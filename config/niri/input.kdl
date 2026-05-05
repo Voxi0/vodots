@@ -17,9 +17,7 @@ input {
 binds {
 	// Basics
 	Mod+Tab hotkey-overlay-title="Open overview" repeat=false { open-overview; }
-	Mod+D hotkey-overlay-title="Open application launcher" repeat=false {
-		spawn "dms" "ipc" "spotlight" "toggle";
-	}
+
 	Mod+N hotkey-overlay-title="Open notification centre" repeat=false {
 		spawn "dms" "ipc" "call" "notifications" "open";
 	}

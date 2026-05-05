@@ -1,17 +1,15 @@
 {
   self,
-  inputs,
   ...
 }: {
   flake.modules = {
     # NixOS specific
     nixos.niri = {pkgs, ...}: let
+      system = pkgs.stdenv.hostPlatform.system;
       sddmTheme = pkgs.sddm-astronaut.override {
         embeddedTheme = "purple_leaves";
       };
     in {
-      imports = [inputs.noctalia.nixosModules.default];
-
       # Base packages
       environment.systemPackages = [sddmTheme];
 
@@ -35,12 +33,6 @@
             };
           };
         };
-
-        # Desktop shell to transform your Wayland compositor to a fully blown desktop environment
-        noctalia-shell = {
-          enable = true;
-          package = self.packages.${pkgs.stdenv.hostPlatform.system}.voctalia-shell;
-        };
       };
 
       # XDG desktop portals allows apps to securely access resources outside it's sandbox
@@ -62,7 +54,7 @@
       # Scrolling Wayland compositor
       programs.niri = {
         enable = true;
-        package = self.packages.${pkgs.stdenv.hostPlatform.system}.voniri;
+        package = self.packages.${system}.voniri;
       };
     };
 
@@ -106,27 +98,41 @@
       pkgs,
       ...
     }: let
+      system = pkgs.stdenv.hostPlatform.system;
       niriConfigDir = ../../config/niri;
     in {
       imports = [wlib.wrapperModules.niri];
+      extraPackages = [pkgs.xwayland-satellite];
       "config.kdl".content = ''
         // General config - Environment variables and stuff
         ${builtins.readFile (niriConfigDir + "/config.kdl")}
 
         // Keybindings and stuff
         include "${niriConfigDir}/input.kdl"
+
+        // Autostart
+        spawn-at-startup "${lib.getExe self.packages.${system}.voctalia-shell}"
+
+        // Keyboard layout
+        input {
+          keyboard {
+            xkb {
+              layout "gb"
+            }
+          }
+        }
+
+        // Open the terminal emulator
+        binds {
+          Mod+Return hotkey-overlay-title="Launch the terminal emulator" repeat=false {
+            spawn "${lib.getExe pkgs.kitty}";
+          }
+
+          Mod+D hotkey-overlay-title="Open the app launcher" repeat=false {
+            spawn "${lib.getExe self.packages.${system}.voctalia-shell}" "ipc" "call" "launcher" "toggle"
+          }
+        }
       '';
-      settings = {
-        input.keyboard = {
-          xkb.layout = "uk";
-        };
-
-        xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
-
-        binds = {
-          "Mod+Return".spawn-sh = lib.getExe pkgs.kitty;
-        };
-      };
     };
 
     # Noctalia shell
