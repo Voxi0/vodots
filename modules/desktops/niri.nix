@@ -125,7 +125,7 @@
         // Open the terminal emulator
         binds {
           Mod+Return hotkey-overlay-title="Launch the terminal emulator" repeat=false {
-            spawn "${lib.getExe pkgs.kitty}";
+            spawn "${lib.getExe self.packages.${system}.vokitty}";
           }
 
           Mod+D hotkey-overlay-title="Open the app launcher" repeat=false {

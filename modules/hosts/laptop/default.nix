@@ -93,7 +93,6 @@ in {
         home = {
           # Environment variables to be set at login
           sessionVariables = {
-            TERMINAL = "kitty";
             EDITOR = "nvim";
             MANPAGER = "nvim +Man!";
           };
