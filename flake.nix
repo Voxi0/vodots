@@ -5,6 +5,7 @@
   # Dependencies
   inputs = {
     # Flake infrastructure
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     import-tree.url = "github:vic/import-tree";
     systems.url = "github:nix-systems/default";
     flake-parts = {
