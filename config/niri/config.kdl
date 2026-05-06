@@ -1,45 +1,45 @@
 // Environment variables
 environment {
-	XDG_CURRENT_DESKTOP "niri"
-	QT_QPA_PLATFORM "wayland"
-	ELECTRON_OZONE_PLATFORM_HINT "auto"
-	QT_QPA_PLATFORMTHEME "qt6ct"
-	QT_QPA_PLATFORMTHEME_QT6 "qt6ct"
+	XDG_CURRENT_DESKTOP "niri";
+	QT_QPA_PLATFORM "wayland";
+	ELECTRON_OZONE_PLATFORM_HINT "auto";
+	QT_QPA_PLATFORMTHEME "qt6ct";
+	QT_QPA_PLATFORMTHEME_QT6 "qt6ct";
 }
 
 // Disable hot corners
 gestures {
-	hot-corners {
-		off
-	}
+	hot-corners { off; }
 }
 
 // Looks/Appearance
 layout {
-	gaps 4
-	background-color "transparent"
+	gaps 8;
+	background-color "transparent";
+	focus-ring { off; }
+	border { off; }
 }
 
 window-rule {
 	// Rounded corners for a modern look.
-	geometry-corner-radius 20
+	geometry-corner-radius 20;
 
 	// Clips window contents to the rounded corner boundaries.
-	clip-to-geometry true
+	clip-to-geometry true;
 }
 
 // Floating Noctalia settings window
 window-rule {
-	match app-id="dev.noctalia.Noctalia.Settings"
-	open-floating true
+	match app-id="dev.noctalia.Noctalia.Settings";
+	open-floating true;
 	default-column-width { fixed 1080; }
 	default-window-height { fixed 920; }
 }
 
 // Set the overview wallpaper on the backdrop
 layer-rule {
-	match namespace="^noctalia-backdrop"
-	place-within-backdrop true
+	match namespace="^noctalia-backdrop";
+	place-within-backdrop true;
 }
 
 // Basic keybindings
@@ -53,5 +53,5 @@ binds {
 
 debug {
 	// Allows notification actions and window activation from Noctalia.
-	honor-xdg-activation-with-invalid-serial
+	honor-xdg-activation-with-invalid-serial;
 }
