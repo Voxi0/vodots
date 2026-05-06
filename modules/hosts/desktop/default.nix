@@ -93,33 +93,35 @@ in {
           };
 
           # Some apps and all only for this host
-          packages = with pkgs; [
-            # Version control system
-            git
-            lazygit
+          packages = with pkgs;
+            [
+              # Version control system
+              git
+              lazygit
 
-            # File explorer
-            thunar
-            tumbler # Required for thumbnails
+              # File explorer
+              thunar
+              tumbler # Required for thumbnails
 
-            # Media players
-            mpv # Videos
-            feishin # Audio
+              # Media players
+              mpv # Videos
+              feishin # Audio
 
-            # Note taking
-            obsidian
+              # Note taking
+              obsidian
 
-            # Just for Hackclub
-            slack
+              # Just for Hackclub
+              slack
 
-            # IRC client
-            halloy
+              # IRC client
+              halloy
 
-            # Minecraft launcher
-            (pkgs.prismlauncher.override {
-              jdks = [pkgs.graalvmPackages.graalvm-ce];
-            })
-          ];
+              # Minecraft launcher
+              (pkgs.prismlauncher.override {
+                jdks = [pkgs.graalvmPackages.graalvm-ce];
+              })
+            ]
+            ++ [self.packages.${pkgs.stdenv.hostPlatform.system}.voctalia-shell];
 
           # Move my wallpapers to installed system
           file."Pictures/Wallpapers" = {

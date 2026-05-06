@@ -2,11 +2,17 @@
   # Noctalia shell
   flake.wrappers.voctalia-shell = {
     wlib,
+    lib,
+    config,
     pkgs,
     ...
   }: {
     imports = [wlib.wrapperModules.noctalia-shell];
     package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    inherit (builtins.fromJSON (builtins.readFile ./noctalia.json)) settings;
+    outOfStoreConfig = "$HOME/.config/noctalia";
+    constructFiles.config = {
+      content = builtins.readFile ./noctalia.toml;
+      relPath = "${config.generatedConfigDirname}/config.toml";
+    };
   };
 }
