@@ -39,6 +39,12 @@
     # This is amazing because then your config stuff is basically independent and will work anywhere since it's just a package
     nix-wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 
+    # Desktop shell
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell/v5";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Firefox extensions/plugins
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
