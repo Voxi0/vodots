@@ -29,11 +29,17 @@
       # Boot
       boot = {
         kernelPackages = pkgs.linuxPackages_latest;
+        extraModulePackages = [config.boot.kernelPackages.ddcci-driver];
+        kernelModules = ["i2c-dev" "ddcci_backlight"];
         loader = {
           systemd-boot.enable = true;
           efi.canTouchEfiVariables = true;
         };
       };
+
+      # Required for DDCCI backlight driver to work
+      hardware.i2c.enable = true;
+      services.ddccontrol.enable = true;
 
       # Internationalisation properties
       i18n.defaultLocale = self.locale;
