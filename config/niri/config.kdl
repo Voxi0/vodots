@@ -1,4 +1,9 @@
-// Environment variables
+// Disable client side decorations e.g. window titlebars
+prefer-no-csd
+
+/////////////////////////////
+/// Environment variables ///
+/////////////////////////////
 environment {
 	XDG_CURRENT_DESKTOP "niri";
 	QT_QPA_PLATFORM "wayland";
@@ -7,12 +12,9 @@ environment {
 	QT_QPA_PLATFORMTHEME_QT6 "qt6ct";
 }
 
-// Disable hot corners
-gestures {
-	hot-corners { off; }
-}
-
-// Looks/Appearance
+////////////////////////
+/// Looks/Appearance ///
+////////////////////////
 layout {
 	gaps 8;
 	background-color "transparent";
@@ -20,15 +22,20 @@ layout {
 	border { off; }
 }
 
+// General window rules
 window-rule {
 	// Rounded corners for a modern look.
 	geometry-corner-radius 20;
 
 	// Clips window contents to the rounded corner boundaries.
 	clip-to-geometry true;
+
+	// Make windows open maximized and focused by default
+	open-maximized-to-edges true;
+	open-focused true;
 }
 
-// Floating Noctalia settings window
+// Make Noctalia settings window floating
 window-rule {
 	match app-id="dev.noctalia.Noctalia.Settings";
 	open-floating true;
@@ -42,7 +49,9 @@ layer-rule {
 	place-within-backdrop true;
 }
 
-// Basic keybindings
+/////////////////////////
+/// Input/Keybindings ///
+/////////////////////////
 binds {
 	Mod+Tab hotkey-overlay-title="Open overview" repeat=false { open-overview; }
 	Mod+F hotkey-overlay-title="Toggle window maximize" repeat=false { maximize-window-to-edges; }
@@ -51,6 +60,14 @@ binds {
 	Mod+Shift+S hotkey-overlay-title="Take a screenshot" repeat=false { screenshot; }
 }
 
+// Disable hot corners
+gestures {
+	hot-corners { off; }
+}
+
+/////////////
+/// Debug ///
+/////////////
 debug {
 	// Allows notification actions and window activation from Noctalia.
 	honor-xdg-activation-with-invalid-serial;
