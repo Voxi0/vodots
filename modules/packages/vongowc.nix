@@ -1,3 +1,6 @@
 {
-  flake.wrappers = {};
+  flake.wrappers.vongowc = {
+    autostart_sh = '''';
+    configFile.path = "";
+  };
 }
