@@ -1,5 +1,10 @@
 {self, ...}: {
-  flake.wrappers.vongowc = {wlib, lib, pkgs, ...}: let
+  flake.wrappers.vongowc = {
+    wlib,
+    lib,
+    pkgs,
+    ...
+  }: let
     system = pkgs.stdenv.hostPlatform.system;
     voctaliaShell = lib.getExe self.packages.${system}.voctalia-shell;
   in {
