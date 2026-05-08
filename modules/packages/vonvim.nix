@@ -24,7 +24,7 @@
       settings = {
         # Lua config directory
         # Can be an impure path so it won't be managed by Nix allowing normal reload for quick edits
-        config_directory = ./.;
+        config_directory = ../../config/nvim;
 
         # Uncomment this to allow installing multiple Neovim derivations without path collisions
         # dont_link = true;

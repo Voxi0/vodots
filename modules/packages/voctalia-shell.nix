@@ -11,7 +11,7 @@
     package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
     outOfStoreConfig = "$HOME/.config/noctalia";
     constructFiles.config = {
-      content = builtins.readFile ./noctalia.toml;
+      content = builtins.readFile ../../config/noctalia.toml;
       relPath = "${config.generatedConfigDirname}/config.toml";
     };
   };
