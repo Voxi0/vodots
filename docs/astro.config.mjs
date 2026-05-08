@@ -11,19 +11,29 @@ export default defineConfig({
 			social: [{ icon: "github", label: "GitHub", href: "https://github.com/Voxi0/vodots" }],
 			plugins: [
 				starlightThemeBlack({
+					footerText: "",
 					navLinks: [{
 						label: "docs",
 						link: "/getting-started",
 					}],
-					footerText: ""
-				})
+				}),
 			],
 			sidebar: [
 				{
 					label: "Getting Started",
-					autogenerate: { directory: "getting-started" },
 					collapsed: false,
+					items: [
+						{ autogenerate: { directory: "getting-started" } },
+					],
 				},
+
+				{
+					label: "Packages",
+					collapsed: true,
+					items: [
+						{ autogenerate: {directory: "packages" } },
+					],
+				}
 			],
 		}),
 	],
