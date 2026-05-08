@@ -2,19 +2,11 @@ root = true
 
 [*]
 indent_style = tab
+indent_size = 4
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = false
 
-[Makefile]
-indent_size = 4
-
 [*.nix]
 indent_style = space
 indent_size = 2
-
-[*.mjs]
-indent_size = 4
-
-[*.kdl]
-indent_size = 4
