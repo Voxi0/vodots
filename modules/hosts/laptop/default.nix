@@ -3,6 +3,7 @@
   modules = with self.modules.nixos; [
     # Base
     general
+    lanzaboote
     openTabletDriver
     niri
     fish
