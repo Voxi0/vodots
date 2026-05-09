@@ -43,6 +43,7 @@
                   useGlobalPkgs = true;
                   useUserPackages = false;
                   backupFileExtension = "bak";
+                  overwriteBackup = true;
                   users.${self.username}.imports = [self.modules.homeManager.${hostname}] ++ hmModules;
                 };
               }

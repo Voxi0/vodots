@@ -1,6 +1,10 @@
 {inputs, ...}: {
   flake.modules.nixos = {
-    lanzaboote = {lib, pkgs, ...}: {
+    lanzaboote = {
+      lib,
+      pkgs,
+      ...
+    }: {
       imports = [inputs.lanzaboote.nixosModules.lanzaboote];
 
       # Secure boot key manager
