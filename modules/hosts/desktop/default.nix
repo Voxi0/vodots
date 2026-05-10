@@ -10,6 +10,7 @@
 
     # Services
     fwupd
+    power-profiles-daemon
     audio
     tailscale
     ssh
@@ -19,6 +20,9 @@
     gaming
     steam
     roblox
+
+    # Virtualisation
+    virt-manager
   ];
   hmModules = with self.modules.homeManager; [
     # Base
