@@ -8,11 +8,8 @@
     imports = [inputs.nixcord.homeModules.nixcord];
     programs.nixcord = {
       enable = true;
-      vesktop.enable = true;
-      discord = {
-        enable = false;
-        openASAR.enable = true;
-      };
+      discord.enable = false;
+      equibop.enable = true;
 
       # Styling and plugins
       config = {
@@ -30,7 +27,6 @@
           messageLogger.enable = true;
           relationshipNotifier.enable = true;
           alwaysTrust.enable = true;
-          PinDMs.enable = true;
           CustomRPC.enable = true;
           BlurNSFW.enable = true;
           spotifyCrack.enable = true;
