@@ -4,7 +4,7 @@
   ...
 }: {
   flake.modules.nixos = {
-    impermanence = {lib, ...}: {
+    impermanence = {
       imports = [inputs.preservation.nixosModules.default];
 
       # `systemd-machine-id-commit.service` will fail but it isn't relevant in this setup for a persistent machine-id so just disable it

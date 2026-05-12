@@ -2,7 +2,6 @@
   # Noctalia shell
   flake.wrappers.voctalia-shell = {
     wlib,
-    lib,
     config,
     pkgs,
     ...

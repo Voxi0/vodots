@@ -19,7 +19,7 @@
         package = pkgs.lixPackageSets.stable.lix;
         optimise.automatic = true;
         overlays = [
-          (final: prev: {
+          (_: prev: {
             inherit
               (prev.lixPackageSets.stable)
               nixpkgs-review
