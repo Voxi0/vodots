@@ -9,8 +9,20 @@
     _module.args.pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      overlays = with inputs; [
-        nix-minecraft.overlay
+      overlays = [
+        # A nice module that allows one to quickly and easily set up multiple Minecraft servers
+        inputs.nix-minecraft.overlay
+
+        # Lix - A better fork of Nix
+        (_: prev: {
+          inherit
+            (prev.lixPackageSets.stable)
+            nixpkgs-review
+            nix-eval-jobs
+            nix-fast-build
+            colmena
+            ;
+        })
       ];
     };
 

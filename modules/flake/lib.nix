@@ -19,9 +19,6 @@
             inputs.disko.nixosModules.disko
             ../hosts/${hostname}/_disko.nix
 
-            # Determinate Systems Nix
-            inputs.determinate.nixosModules.default
-
             # Host configuration
             self.modules.nixos.${hostname}
             {

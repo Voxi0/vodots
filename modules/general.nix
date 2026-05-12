@@ -18,17 +18,6 @@
       nix = {
         package = pkgs.lixPackageSets.stable.lix;
         optimise.automatic = true;
-        overlays = [
-          (_: prev: {
-            inherit
-              (prev.lixPackageSets.stable)
-              nixpkgs-review
-              nix-eval-jobs
-              nix-fast-build
-              colmena
-              ;
-          })
-        ];
         settings = {
           trusted-users = ["root" "${self.username}"];
           experimental-features = ["nix-command" "flakes"];
