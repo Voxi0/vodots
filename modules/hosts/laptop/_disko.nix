@@ -1,19 +1,39 @@
 let
-  # System disk where the OS lives
-  primaryDisk = "/dev/sda";
+  systemDrive = "/dev/sda";
 in {
-  disko.devices.disk = {
-    # Primary/System disk
-    primary = {
-      device = primaryDisk;
+  # Ensure system doesn't boot before "/nix" is mounted
+  fileSystems."/nix".neededForBoot = true;
+
+  # Disk layout
+  disko.devices = {
+    # Store the entire root directory on RAM
+    # So everything gets wiped on every reboot/poweroff whatever
+    nodev."/" = {
+      fsType = "tmpfs";
+      mountOptions = [
+        # Maximum amount of RAM the root directory can use
+        "size=25%"
+        "mode=755"
+      ];
+    };
+
+    # Main/primary disk
+    disk.main = {
+      device = systemDrive;
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
-          # Boot partition
+          boot = {
+            name = "boot";
+            size = "1M";
+            type = "EF02";
+          };
+
           esp = {
-            type = "EF00";
+            name = "ESP";
             size = "1G";
+            type = "EF00";
             content = {
               type = "filesystem";
               format = "vfat";
@@ -21,13 +41,22 @@ in {
             };
           };
 
-          # Root partition
           root = {
+            name = "root";
             size = "100%";
             content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/";
+              type = "btrfs";
+              extraArgs = ["-f"];
+              subvolumes = {
+                "/nix" = {
+                  mountOptions = ["subvol=nix" "noatime"];
+                  mountpoint = "/nix";
+                };
+                "/persistent" = {
+                  mountOptions = ["subvol=persist" "noatime"];
+                  mountpoint = "/persistent";
+                };
+              };
             };
           };
         };

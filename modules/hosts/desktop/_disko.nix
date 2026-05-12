@@ -2,9 +2,18 @@ let
   # System disk where the OS lives
   primaryDisk = "/dev/sda";
 in {
-  disko.devices.disk = {
+  disko.devices = {
+    # RAM filesystem to mount the root
+    nodev."/" = {
+      fsType = "tmpfs";
+      mountOptions = [
+        "size=2G"
+        "mode=755"
+      ];
+    };
+
     # Primary/System disk
-    primary = {
+    disk.primary = {
       device = primaryDisk;
       type = "disk";
       content = {
@@ -18,6 +27,7 @@ in {
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
+              mountOptions = ["umask=0077"];
             };
           };
 
@@ -25,9 +35,18 @@ in {
           root = {
             size = "100%";
             content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/";
+              type = "btrfs";
+              extraArgs = [ "-f" ]; # Force overwrite
+              subvolumes = {
+                "/persist" = {
+                  mountpoint = "/persist";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
+                "/nix" = {
+                  mountpoint = "/nix";
+                  mountOptions = ["compress=zstd" "noatime"];
+                };
+              };
             };
           };
         };
