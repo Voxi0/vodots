@@ -1,46 +1,57 @@
-{inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.modules.nixos = {
     impermanence = {lib, ...}: {
-      imports = [inputs.impermanence.nixosModules.impermanence];
+      imports = [inputs.preservation.nixosModules.default];
 
-      # Revert the drive to a blank state on every reboot
-      boot.initrd.postDeviceCommands = lib.mkAfter ''
-        zfs rollback -r zroot/root@blank
-      '';
+      # `systemd-machine-id-commit.service` will fail but it isn't relevant in this setup for a persistent machine-id so just disable it
+      systemd.suppressedSystemUnits = ["systemd-machine-id-commit.service"];
 
       # Set up impermanence
-      environment.persistence."/persistent" = {
-        enable = true;  # NB: Defaults to true, not needed
-        hideMounts = true;
-        directories = [
-          "/var/log"
-          "/var/lib/bluetooth"
-          "/var/lib/nixos"
-          "/var/lib/systemd/coredump"
-          "/etc/NetworkManager/system-connections"
-          { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
-        ];
-        files = [
-          "/etc/machine-id"
-          { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
-        ];
-        users.bird = {
-          directories = [
-            "Downloads"
-            "Music"
-            "Pictures"
-            "Documents"
-            "Videos"
-            "VirtualBox VMs"
-            { directory = ".gnupg"; mode = "0700"; }
-            { directory = ".ssh"; mode = "0700"; }
-            { directory = ".nixops"; mode = "0700"; }
-            { directory = ".local/share/keyrings"; mode = "0700"; }
-            ".local/share/direnv"
-          ];
+      preservation = {
+        enable = true;
+        preserveAt."/persist" = {
+          # Preserve system files/folders
           files = [
-            ".screenrc"
+            {
+              file = "/etc/machine-id";
+              inInitrd = true;
+            }
           ];
+          directories = [
+            {
+              directory = "/var/lib/nixos";
+              inInitrd = true;
+            }
+            "/var/lib/bluetooth"
+            "/var/lib/power-profiles-daemon"
+          ];
+
+          # Preserve user files/folders
+          users.${self.username} = {
+            files = [
+              ".gitconfig"
+              ".wakatime.cfg"
+              ".steampath"
+              ".steampid"
+            ];
+            directories = [
+              "Desktop"
+              "Pictures"
+              "Documents"
+              "Downloads"
+              "Music"
+              "Videos"
+
+              ".local"
+              ".steam"
+              ".var/app"
+              ".wakatime"
+            ];
+          };
         };
       };
     };

@@ -23,13 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence = {
-      url = "github:nix-community/impermanence";
-      inputs = {
-        nixpkgs.follows = "";
-        home-manager.follows = "";
-      };
-    };
+    preservation.url = "github:nix-community/preservation";
 
     # Secure Boot & Measured Boot for NixOS
     lanzaboote = {
