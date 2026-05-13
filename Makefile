@@ -28,7 +28,10 @@ install: format gen-hardware-conf
 	@echo "Ensure 'modules/flake/flake.nix' sets your desired system username, keyboard layout and such"
 	@echo ""
 	@read -p "Press enter to proceed..."
-	sudo nixos-install --flake ./#$(hostname)
+	sudo nixos-install \
+		--flake ./#$(hostname) \
+		--option extra-substituters "https://noctalia.cachix.org" \
+		--option extra-trusted-public-keys "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
 	sudo nixos-enter
 	@echo -e "${GREEN}Vodots is installed! You can now reboot your system"
 	@echo -e "${GREEN}The default user password is 'nixos' and set the timezone with 'timedatectl set-timezone' after booting"
