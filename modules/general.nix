@@ -49,6 +49,7 @@
       networking = {
         nftables.enable = true;
         firewall.enable = true;
+        dhcpcd.enable = false;
         networkmanager = {
           enable = true;
           wifi.backend = "iwd";

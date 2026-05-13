@@ -22,6 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Impermanence
     preservation.url = "github:nix-community/preservation";
 
     # Secure Boot & Measured Boot for NixOS
