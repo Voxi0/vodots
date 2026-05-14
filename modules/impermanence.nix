@@ -64,6 +64,10 @@
 
               # Theming
               ".gtkrc-2.0"
+
+              # Git configuration
+              # We can't persist '.gitconfig' because of how 'git config' works so this is a workaround
+              ".config/git/config"
             ];
             directories = [
               # User home XDG directories
@@ -80,10 +84,6 @@
               ".config/gtk-3.0/"
               ".config/gtk-4.0/"
               ".config/xsettingsd/"
-
-              # Git configuration
-              # We can't persist '.gitconfig' because of the way 'git config' works so this is a workaround
-              ".config/git"
 
               # Steam
               ".steam/"

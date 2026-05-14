@@ -1,5 +1,6 @@
 let
   systemDrive = "/dev/sda";
+  mountOptions = ["noatime" "compress=zstd" "discard=async"];
 in {
   # Ensure system doesn't boot before "/nix" is mounted
   fileSystems."/nix".neededForBoot = true;
@@ -49,11 +50,11 @@ in {
               extraArgs = ["-f"];
               subvolumes = {
                 "/nix" = {
-                  mountOptions = ["subvol=nix" "noatime"];
+                  inherit mountOptions;
                   mountpoint = "/nix";
                 };
                 "/persistent" = {
-                  mountOptions = ["subvol=persist" "noatime"];
+                  inherit mountOptions;
                   mountpoint = "/persistent";
                 };
               };

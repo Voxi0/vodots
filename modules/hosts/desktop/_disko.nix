@@ -1,6 +1,6 @@
 let
   systemDrive = "/dev/sda";
-  mountOptions = ["ssd" "noatime" "compress=zstd" "discard=async" "space_cache=v2"];
+  mountOptions = ["noatime" "compress=zstd" "discard=async"];
 in {
   # Ensure system doesn't boot before "/nix" is mounted
   fileSystems."/nix".neededForBoot = true;
