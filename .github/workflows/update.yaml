@@ -22,6 +22,7 @@ jobs:
       - name: Run `nix flake update`
         run: nix flake update
 
+      # Commit and push the changes duh
       - name: Commit and Push changes
         run: |
           git config --global user.name "Github"
