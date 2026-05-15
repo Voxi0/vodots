@@ -33,6 +33,8 @@
 
             # Saved bluetooth and internet connections
             "/var/lib/bluetooth/"
+            "/var/lib/iwd/"
+            "/var/lib/NetworkManager/"
             "/etc/NetworkManager/system-connections/"
 
              # Current power profile state and all
