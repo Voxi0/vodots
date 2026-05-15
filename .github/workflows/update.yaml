@@ -1,0 +1,31 @@
+name: "Update Nix Flake"
+
+permissions:
+  contents: write
+
+# When to run the workflow
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+  # Manual trigger
+  workflow_dispatch:
+
+# What the workflow does
+jobs:
+  updateFlake:
+    runs-on: ubuntu-latest
+    steps:
+      # Fetch the repo and update the flake
+      - uses: actions/checkout@v6
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Run `nix flake update`
+        run: nix flake update
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "Github"
+          git config --global user.email "action@github.com"
+          git add flake.lock
+          git commit -m "(GITHUB) chore: updated flake"
+          git push origin main
