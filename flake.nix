@@ -1,6 +1,18 @@
 {
   # Import all Nix modules
-  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (let
+    lib = inputs.nixpkgs.lib;
+
+    # Include only Nix files not starting with "_"
+    filteredFileset = lib.fileset.fileFilter
+      (file: file.hasExt "nix" && !(lib.hasPrefix "_" file.name))
+      ./modules;
+
+    # List of filepaths
+    modulePaths = lib.fileset.toList filteredFileset;
+  in {
+    imports = modulePaths;
+  });
 
   # Dependencies
   inputs = {
