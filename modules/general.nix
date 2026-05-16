@@ -76,6 +76,25 @@
         };
       };
 
+      # Use doas instead of sudo
+      security = {
+        sudo.enable = false;
+        doas = {
+          enable = true;
+          extraRules = [
+            {
+              users = ["${self.username}"];
+
+              # Retain environment variables when running commands
+              keepEnv = true;
+
+              # Only require password authentication once
+              persist = true;
+            }
+          ];
+        };
+      };
+
       # The first version of NixOS that was installed on this particular machine
       # It's used to maintain compatibility with app data (e.g. databases) created on older NixOS versions
       # This shouldn't be changed after the initial install for any reason even when NixOS is updated

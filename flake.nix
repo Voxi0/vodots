@@ -17,7 +17,6 @@
   # Dependencies
   inputs = {
     # Flake infrastructure
-    import-tree.url = "github:vic/import-tree";
     systems.url = "github:nix-systems/default";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
