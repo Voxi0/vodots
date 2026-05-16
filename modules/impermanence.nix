@@ -81,6 +81,10 @@
               # SSH keys and all duh
               ".ssh/"
 
+              # Noctalia and it's generated color palettes and such
+              ".cache/noctalia/"
+              ".cache/wal/"
+
               # Theming
               ".icons/"
               ".config/gtk-3.0/"
@@ -98,9 +102,8 @@
               ".floorp/"
               ".mozilla/"
 
-              # Noctalia and it's generated color palettes and such
-              ".cache/noctalia/"
-              ".cache/wal/"
+              # Discord
+              ".config/equibop"
             ];
           };
         };
