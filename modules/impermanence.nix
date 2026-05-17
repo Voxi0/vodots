@@ -66,6 +66,8 @@
 
               # Theming
               ".gtkrc-2.0"
+              ".config/gtk-3.0/settings.ini"
+              ".icons/default/index.theme"
 
               # Git configuration
               # We can't persist '.gitconfig' because of how 'git config' works so this is a workaround
@@ -86,10 +88,8 @@
               ".cache/wal/"
 
               # Theming
-              ".icons/"
-              ".config/gtk-3.0/"
               ".config/gtk-4.0/"
-              ".config/xsettingsd/"
+              ".config/xsettingsd/xsettingsd.conf"
 
               # Steam
               ".steam/"
@@ -103,7 +103,7 @@
               ".mozilla/"
 
               # Discord
-              ".config/equibop"
+              ".config/equibop/"
             ];
           };
         };

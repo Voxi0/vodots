@@ -8,12 +8,11 @@
         groups.libvirtd.members = [self.username];
         users.${self.username}.extraGroups = ["libvirtd"];
       };
+
+      programs.virt-manager.enable = true;
       virtualisation = {
         libvirtd.enable = true;
         spiceUSBRedirection.enable = true;
-      };
-      programs.virt-manager = {
-        enable = true;
       };
 
       # Create a virtualisation connection for virt-manager
@@ -28,7 +27,8 @@
       };
     };
 
-    # Recommended to avoid because it requires compiling from source
+    # I Recommended avoiding this because it requires compiling from source
+    # This is due to some licensing issues
     virtualbox = {
       users.extraGroups.vboxusers.members = [self.username];
       virtualisation.virtualbox = {
