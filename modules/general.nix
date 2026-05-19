@@ -29,8 +29,8 @@
 
       # Boot
       boot = {
-        kernelPackages = pkgs.linuxPackages_latest;
-        extraModulePackages = [config.boot.kernelPackages.ddcci-driver];
+        kernelPackages = pkgs.linuxPackages_zen;
+        extraModulePackages = with config.boot.kernelPackages; [ddcci-driver];
         kernelModules = ["i2c-dev" "ddcci_backlight"];
         loader = {
           systemd-boot.enable = true;

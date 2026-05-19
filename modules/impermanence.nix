@@ -68,10 +68,7 @@
               ".gtkrc-2.0"
               ".config/gtk-3.0/settings.ini"
               ".icons/default/index.theme"
-
-              # Git configuration
-              # We can't persist '.gitconfig' because of how 'git config' works so this is a workaround
-              ".config/git/config"
+              ".config/xsettingsd/xsettingsd.conf"
             ];
             directories = [
               # User home XDG directories
@@ -89,7 +86,6 @@
 
               # Theming
               ".config/gtk-4.0/"
-              ".config/xsettingsd/xsettingsd.conf"
 
               # Steam
               ".steam/"
