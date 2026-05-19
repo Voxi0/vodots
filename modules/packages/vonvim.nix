@@ -3,6 +3,7 @@
     wlib,
     lib,
     config,
+    options,
     pkgs,
     ...
   }: {
@@ -19,6 +20,17 @@
 
     # Configuration
     config = {
+      # This submodule modifies both levels of your specs
+      runtimePkgs = config.specCollect (acc: v: acc ++ (v.runtimePkgs or [])) [];
+      specMods = {
+        options.runtimePkgs = options.runtimePkgs // {
+          description = ''
+            Spec field to put packages on the PATH
+            If the spec is disabled, this value won't be included in the resulting Neovim derivation
+          '';
+        };
+      };
+
       # package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
       package = pkgs.neovim-unwrapped;
       settings = {
@@ -64,7 +76,7 @@
         general = {
           lazy = true;
           after = ["ui"];
-          extraPackages = with pkgs; [
+          runtimePkgs = with pkgs; [
             # For finding files - Modern replacement for `find`
             fd
 
@@ -94,7 +106,7 @@
         qualityOfLife = {
           lazy = true;
           after = ["general"];
-          extraPackages = with pkgs; [
+          runtimePkgs = with pkgs; [
             # For `snacks.images`
             ghostscript # To render PDF files
             tectonic # To render LaTeX math expressions
@@ -122,19 +134,6 @@
             # Auto-close and auto-rename HTML tags using Treesitter
             nvim-ts-autotag
           ];
-        };
-      };
-
-      # This submodule modifies both levels of your specs
-      extraPackages = config.specCollect (acc: v: acc ++ (v.extraPackages or [])) [];
-      specMods = _: {
-        # Change/Set defaults for the specs
-        options = {
-          extraPackages = lib.mkOption {
-            type = lib.types.listOf wlib.types.stringable;
-            default = [];
-            description = "An `extraPackages` spec field to put packages to suffix to the PATH";
-          };
         };
       };
     };

@@ -28,8 +28,11 @@
             # Users and group state
             "/var/lib/nixos/"
 
+            # Secure boot keys
+            "/var/lib/sbctl/"
+
             # Timesync data and backlight levels
-            "/var/lib/systemd"
+            "/var/lib/systemd/"
 
             # Saved bluetooth and internet connections
             "/var/lib/bluetooth/"
@@ -38,7 +41,7 @@
             "/etc/NetworkManager/system-connections/"
 
              # Current power profile state and all
-            "/var/lib/power-profiles-daemon"
+            "/var/lib/power-profiles-daemon/"
 
             # SSH host keys
             "/etc/ssh"

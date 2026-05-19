@@ -10,7 +10,7 @@
     niriConfigDir = ../../config/niri;
   in {
     imports = [wlib.wrapperModules.niri];
-    extraPackages = [pkgs.xwayland-satellite];
+    runtimePkgs = [pkgs.xwayland-satellite];
     "config.kdl".content = let
       voctalia-shell = lib.getExe self.packages.${system}.voctalia-shell;
     in ''

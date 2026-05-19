@@ -10,7 +10,7 @@
       # Install my personal Neovim configuration with some customizations or whatever
       packages = [
         (self.packages.${pkgs.stdenv.hostPlatform.system}.vonvim.wrap ({pkgs, ...}: {
-          extraPackages = with pkgs; [
+          runtimePkgs = with pkgs; [
             # Language server + Formatter
             clang-tools # C/C++
 
