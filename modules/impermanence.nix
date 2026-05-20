@@ -88,6 +88,7 @@
               ".cache/wal/"
 
               # Theming
+              ".config/dconf/"
               ".config/gtk-4.0/"
 
               # Steam
