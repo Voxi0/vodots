@@ -57,17 +57,6 @@ in {
           font = "Lat2-Terminus16";
         };
 
-        boot.kernelPackages = lib.mkForce (pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_7_0.override {
-          argsOverride = rec {
-            version = "7.0.3";
-            modDirVersion = version;
-            src = pkgs.fetchurl {
-              url = "https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-${version}.tar.xz";
-              hash = "sha256-C+2tv1eIaT3eu8yRPIk/Gpc0mved3ecUTCqAtAGVnxw=";
-            };
-          };
-        }));
-
         # Security
         security = {
           rtkit.enable = true;

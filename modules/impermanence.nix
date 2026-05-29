@@ -23,6 +23,9 @@
               file = "/etc/machine-id";
               inInitrd = true;
             }
+
+            # Timezone information
+            "/etc/localtime"
           ];
           directories = [
             # Users and group state
