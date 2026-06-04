@@ -3,12 +3,19 @@
     # The de-facto for virtual machines. It's very fast and reliable and all
     # If you have experience with VirtualBox, VMware Workstation, or Parallels Desktop, this is what you're looking for on Linux and NixOS
     # For the best performance ensure that your host UEFI settings have Vt-x and Vt-d (Intel) or AMD-V and AMD-Vi (AMD) enabled
-    virt-manager = {
+    virt-manager = {pkgs, ...}: {
       users = {
         groups.libvirtd.members = [self.username];
         users.${self.username}.extraGroups = ["libvirtd"];
       };
 
+      # Required for DNS and DCHP functionality within the default libvirt network
+      environment.systemPackages = [pkgs.dnsmasq];
+
+      # Allow the virtual network bridge through the firewall
+      networking.firewall.trustedInterfaces = ["virbr0"];
+
+      # Virt-manager
       programs.virt-manager.enable = true;
       virtualisation = {
         libvirtd.enable = true;
