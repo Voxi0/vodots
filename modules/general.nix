@@ -40,7 +40,6 @@
 
       # Required for DDCCI backlight driver to work
       hardware.i2c.enable = true;
-      services.ddccontrol.enable = true;
 
       # Internationalisation properties
       i18n.defaultLocale = self.locale;
@@ -61,6 +60,15 @@
         isNormalUser = true;
         initialPassword = "nixos";
         extraGroups = ["networkmanager" "wheel" "input" "cdrom" "kvm"];
+      };
+
+      # Services
+      services = {
+        # Required for DDCCI backlight control - For controlling external monitor brightness
+        ddccontrol.enable = true;
+
+        # Power management
+        upower.enable = true;
       };
 
       # Programs
