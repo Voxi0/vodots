@@ -27,18 +27,18 @@
           messageLogger.enable = true;
           relationshipNotifier.enable = true;
           alwaysTrust.enable = true;
-          CustomRPC.enable = true;
-          BlurNSFW.enable = true;
+          customRpc.enable = true;
+          blurNsfw.enable = true;
           spotifyCrack.enable = true;
           youtubeAdblock.enable = true;
-          ClearURLs.enable = true;
+          clearUrls.enable = true;
           customIdle = {
             enable = true;
             idleTimeout = 0.0;
           };
 
           # LastFM - Music scrobbler
-          LastFMRichPresence = {
+          lastFmRichPresence = {
             enable = true;
             shareUsername = true;
             statusName = "moozic";

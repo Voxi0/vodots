@@ -49,7 +49,7 @@ in {
     nixosConfigurations.${hostname} = self.lib.mkNixosHost {inherit hostname modules hmModules;};
     modules = {
       # NixOS specific
-      nixos.${hostname} = {lib, pkgs, ...}: {
+      nixos.${hostname} = {pkgs, ...}: {
         # Boot
         console = {
           earlySetup = true;

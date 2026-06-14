@@ -85,7 +85,7 @@
     }: let
       modpack = pkgs.fetchPackwizModpack {
         url = "https://tangled.org/voxi0.tngl.sh/meinpack/raw/main/pack.toml";
-        packHash = "sha256-Bjrr1e3RBdtnN6K1gcby/C/jSBI+I/g67vXPIiU4pZ8=";
+        packHash = "sha256-Fptm9YvEok20vap5FtX181O9fCmLVyBWD82tXTJoSRo=";
       };
 
       # Figure out the Minecraft, Fabric and server version
