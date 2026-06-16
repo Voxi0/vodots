@@ -73,10 +73,10 @@
     };
 
     # Ungoogled chromium browser
-    helium = {
-      url = "github:schembriaiden/helium-browser-nix-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # helium = {
+    #   url = "github:schembriaiden/helium-browser-nix-flake";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # Popular Firefox based browser
     zen-browser = {
