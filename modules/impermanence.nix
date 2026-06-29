@@ -4,11 +4,14 @@
   ...
 }: {
   flake.modules.nixos = {
-    impermanence = {
+    impermanence = {lib, ...}: {
       imports = [inputs.preservation.nixosModules.default];
 
       # `systemd-machine-id-commit.service` will fail but it isn't relevant in this setup for a persistent machine-id so just disable it
-      systemd.suppressedSystemUnits = ["systemd-machine-id-commit.service"];
+      systemd = {
+        suppressedSystemUnits = ["systemd-machine-id-commit.service"];
+        tmpfiles.settings.preservation."/persistent/home/${self.username}".d.mode = lib.mkForce "700";
+      };
 
       # Clean temporary files on boot duh
       boot.tmp.cleanOnBoot = true;
@@ -23,9 +26,6 @@
               file = "/etc/machine-id";
               inInitrd = true;
             }
-
-            # Timezone information
-            "/etc/localtime"
           ];
           directories = [
             # Users and group state
@@ -47,7 +47,7 @@
             "/var/lib/power-profiles-daemon/"
 
             # SSH host keys
-            "/etc/ssh"
+            "/etc/ssh/"
 
             # Logs obviously
             "/var/log/"
@@ -90,12 +90,19 @@
               ".cache/noctalia/"
               ".cache/wal/"
 
+              # Spotify
+              ".cache/spotify/"
+
               # Theming
               ".config/dconf/"
               ".config/gtk-4.0/"
 
+              # OBS Studio
+              ".config/obs-studio/"
+
               # Steam
-              ".steam/"
+              { directory = ".steam/root"; how = "symlink"; }
+              { directory = ".steam/steam"; how = "symlink"; }
 
               # Flatpak applications and a whole lotta other stuff
               ".var/"
