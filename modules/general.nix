@@ -29,7 +29,7 @@
 
       # Boot
       boot = {
-        kernelPackages = pkgs.linuxPackages_zen;
+        kernelPackages = pkgs.linuxPackages_latest;
         extraModulePackages = with config.boot.kernelPackages; [ddcci-driver];
         kernelModules = ["i2c-dev" "ddcci_backlight"];
         loader = {

@@ -4,7 +4,6 @@
     # Base
     general
     impermanence
-    lanzaboote
     openTabletDriver
     niri
     fish
