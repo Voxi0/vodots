@@ -46,14 +46,17 @@
              # Current power profile state and all
             "/var/lib/power-profiles-daemon/"
 
-            # SSH host keys
-            "/etc/ssh/"
+            # Tailscale
+            "/var/lib/tailscale/"
 
             # Logs obviously
             "/var/log/"
 
             # Flatpak applications
             "/var/lib/flatpak/"
+
+            # SSH host keys
+            "/etc/ssh/"
 
             # Used extensively by many programs and all
             # So we persist it to ensure our tmpfs doesn't get filled up
