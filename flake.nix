@@ -61,10 +61,7 @@
     nix-wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 
     # Desktop shell
-    noctalia = {
-      url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    noctalia.url = "github:noctalia-dev/noctalia";
 
     # Firefox extensions/plugins
     firefox-addons = {
