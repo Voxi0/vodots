@@ -6,6 +6,7 @@ for key, value in pairs({
   cmdheight = 0, -- Make sure the command line is not visible at all
   showmode = false, -- Disable this since we're using Lualine instead anyways
   showcmd = false, -- Don't show command line when not being used
+  cursorline = true, -- Highlight current row
 
   -- Lines to keep above/below the cursor and columns left/right of the cursor
   scrolloff = 8,

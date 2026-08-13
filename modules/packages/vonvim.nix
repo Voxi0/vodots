@@ -38,11 +38,13 @@
 
           # Syntax highlighting and code folding
           # Treesitter and query files should be available on startup to avoid issues
-          (nvim-treesitter.withPlugins (p:
-            with p; [
-              nix
-              lua
-            ]))
+          (nvim-treesitter.withPlugins (
+            p:
+              with p; [
+                nix
+                lua
+              ]
+          ))
         ];
       };
 
@@ -91,7 +93,7 @@
         lazy = true;
         after = ["core"];
         data = with pkgs.vimPlugins; [
-          catppuccin-nvim # Theme/Colorscheme
+          neovim-ayu # Theme/Colorscheme
           lualine-nvim # Fast and configurable statusline
           tiny-cmdline-nvim # Prettier floating command line
           blink-indent # Indentation guides

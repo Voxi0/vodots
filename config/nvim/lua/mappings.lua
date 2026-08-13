@@ -28,11 +28,15 @@ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = tru
 -- Convenience
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
+-- LSP
 -- Toggle virtual text for diagnostics
 map("n", "<leader>lx", function()
   local state = vim.diagnostic.config().virtual_text
   vim.diagnostic.config({ virtual_text = not state })
 end, { desc = "Toggle LSP virtual text" })
+
+-- Format
+map("n", "<leader>mp", vim.lsp.buf.format, { desc = "Format buffer using LSP" })
 
 -- Buffers
 map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Goto next buffer" })

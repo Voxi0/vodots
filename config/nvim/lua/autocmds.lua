@@ -3,9 +3,7 @@ local createAutocmd = vim.api.nvim_create_autocmd
 -- Autostart Treesitter for syntax highlighting if current buffer is valid language or whatever
 createAutocmd("FileType", {
   callback = function(args)
-    if pcall(vim.treesitter.start, args.buf) then
-      vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-    end
+    pcall(vim.treesitter.start, args.buf)
   end,
 })
 
@@ -20,11 +18,13 @@ createAutocmd("FileType", {
 createAutocmd("InsertEnter", {
   callback = function()
     vim.opt.relativenumber = false
+    vim.opt.cursorline = false
   end,
 })
 createAutocmd("InsertLeave", {
   callback = function()
     vim.opt.relativenumber = true
+    vim.opt.cursorline = true
   end,
 })
 

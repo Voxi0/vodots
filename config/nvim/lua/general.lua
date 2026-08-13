@@ -1,9 +1,6 @@
 -- Experimental Lua module loader using bytecode caching or whatever
 vim.loader.enable()
 
--- Use system clipboard
-vim.opt.clipboard:append("unnamedplus")
-
 -- Use a `.editorconfig` file to figure out how indentation stuff if possible
 vim.g.editorconfig = true
 
@@ -24,11 +21,13 @@ for key, value in pairs({
   relativenumber = true,
 
   -- Indentation
+  expandtab = true, -- Spaces instead of tabs
   shiftwidth = 4, -- Number of spaces to use for each step of autoindent
   tabstop = 4, -- Number of spaces in a tab
-  softtabstop = 4,
-  autoindent = true,
-  smartindent = false,
+  softtabstop = 4, -- Controls how `<Tab>` and `<BS>` behave in Insert mode
+  autoindent = true, -- Copies the current line’s indentation when you start a new line.
+  smartindent = true,
+  cindent = false,
 
   -- Code folding
   foldenable = true,
@@ -54,8 +53,10 @@ for key, value in pairs({
   autowrite = false,
 
   -- Misc
+  clipboard = "unnamedplus", -- Use system clipboard
   spell = true, -- Spellchecking
   mouse = "a", -- Enable full mouse support
+  updatetime = 250, -- How long Neovim waits during activity before certain events fire
 }) do
   vim.opt[key] = value
 end
