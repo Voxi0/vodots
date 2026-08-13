@@ -23,28 +23,12 @@ end
 return {
   -- Theme/Colorscheme
   {
-    "catppuccin-nvim",
+    "neovim-ayu",
     lazy = false,
     priority = 1000,
-    colorscheme = "catppuccin",
     after = function()
-      require("catppuccin").setup({
-        flavour = "mocha",
-        color_overrides = {
-          mocha = {
-            base = "#101010",
-            mantle = "#010101",
-            crust = "#020202",
-          },
-        },
-        custom_highlights = function(colors)
-          return {
-            WinSeparator = { fg = colors.flamingo },
-            SnacksPickerBorder = { fg = colors.red },
-          }
-        end,
-      })
-      vim.cmd.colorscheme("catppuccin")
+      require("ayu").setup({})
+      vim.cmd("colorscheme ayu-dark")
     end,
   },
 

@@ -12,11 +12,17 @@ return {
     "oil.nvim",
     lazy = false,
     keys = {
-      { mode = "n", desc = "Open file explorer", "<leader>e", function() require("oil").open_float() end },
+      {
+        mode = "n",
+        desc = "Open file explorer",
+        "<leader>e",
+        function()
+          require("oil").open_float()
+        end,
+      },
     },
     after = function()
       require("oil").setup({
-        win_options = { cursorcolumn = true },
         view_options = { show_hidden = true },
         keymaps = {
           ["q"] = "actions.close",
