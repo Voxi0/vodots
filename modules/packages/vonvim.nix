@@ -1,140 +1,120 @@
-{
+{inputs, ...}: {
+  # Export custom Neovim configuration as a package
   flake.wrappers.vonvim = {
     wlib,
-    lib,
     config,
-    options,
     pkgs,
     ...
   }: {
     imports = [wlib.wrapperModules.neovim];
-    # Module options
-    options.settings = {
-      # Tell Lua which top-level specs are enabled
-      cats = lib.mkOption {
-        readOnly = true;
-        type = lib.types.attrsOf lib.types.bool;
-        default = builtins.mapAttrs (_: v: v.enable) config.specs;
+    settings.config_directory = ../../config/nvim;
+
+    # Runtime dependencies
+    runtimePkgs = with pkgs; [
+      inotify-tools # Faster/Better file watcher backend
+      ripgrep # Recursively search directories for a regex pattern while respecting your `.gitignore`
+      fd # Quickly find entries in your filesystem
+      fzf # Command line fuzzy finder required for `fzf-lua`
+      ghostscript # Required for rendering PDF files
+      tectonic # Required for rendering LaTeX math expressions
+      mermaid-cli # Required for rendering Mermaid diagrams
+    ];
+
+    # Plugins
+    specs = {
+      # Lazy loading library to manage plugins
+      plugin-manager.data = pkgs.vimPlugins.lze;
+
+      ###############################
+      ### Non-Lazy Loaded Plugins ###
+      ###############################
+      # Just dependencies for other plugins here mainly
+      startup = {
+        after = ["plugin-manager"];
+        data = with pkgs.vimPlugins; [
+          # Dependencies for other plugins
+          nvim-web-devicons # Icons
+          promise-async # Dependency for `nvim-ufo`
+
+          # Syntax highlighting and code folding
+          # Treesitter and query files should be available on startup to avoid issues
+          (nvim-treesitter.withPlugins (p:
+            with p; [
+              nix
+              lua
+            ]))
+        ];
       };
-    };
 
-    # Configuration
-    config = {
-      # This submodule modifies both levels of your specs
-      runtimePkgs = config.specCollect (acc: v: acc ++ (v.runtimePkgs or [])) [];
-      specMods = {
-        options.runtimePkgs = options.runtimePkgs // {
-          description = ''
-            Spec field to put packages on the PATH
-            If the spec is disabled, this value won't be included in the resulting Neovim derivation
-          '';
-        };
-      };
-
-      # package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
-      package = pkgs.neovim-unwrapped;
-      settings = {
-        # Lua config directory
-        # Can be an impure path so it won't be managed by Nix allowing normal reload for quick edits
-        config_directory = ../../config/nvim;
-
-        # Uncomment this to allow installing multiple Neovim derivations without path collisions
-        # dont_link = true;
-
-        # Also ensure these don't share values
-        # binName = "nvim";
-        # settings.aliases = [ ];
-      };
-
-      # Plugins
-      specs = {
-        # Automatically loaded on startup by Neovim (No lazy-loading)
-        # Don't mess with this. There's literally no reason to.
-        plugin-manager.data = pkgs.vimPlugins.lze;
-
-        # Lazy-loaded plugins
-        ui = {
-          lazy = true;
-          after = ["startup"];
-          data = with pkgs.vimPlugins; [
-            # Colorscheme/Theme
-            catppuccin-nvim
-
-            # Icon pack
-            mini-icons
-
-            # Statusline
-            lualine-nvim
-
-            # Completely replaces the UI for messages, cmdline and the popupmenu
-            noice-nvim
-
-            # Dashboard, file picker, indent guides, LazyGit, better statuscolumn, smooth-scrolling and image rendering
-            snacks-nvim
-          ];
-        };
-        general = {
-          lazy = true;
-          after = ["ui"];
-          runtimePkgs = with pkgs; [
-            # For finding files - Modern replacement for `find`
-            fd
-
-            # For finding files containing specific text
-            ripgrep
-          ];
-          data = with pkgs.vimPlugins; [
-            # Syntax highlighting + code structure, LSP and autocompletion
-            nvim-treesitter.withAllGrammars
-            nvim-treesitter-textobjects
+      ########################
+      ### Core Necessities ###
+      ########################
+      core = {
+        lazy = true;
+        after = ["startup"];
+        data = with pkgs.vimPlugins;
+          [
+            # Pre-written LSP configurations
             nvim-lspconfig
-            blink-cmp
 
-            # Shows available keymaps as you type
-            which-key-nvim
-
-            # File explorer
-            fyler-nvim
-
-            # Git integration
-            gitsigns-nvim
-
-            # Discord rich presence
-            cord-nvim
-          ];
-        };
-        qualityOfLife = {
-          lazy = true;
-          after = ["general"];
-          runtimePkgs = with pkgs; [
-            # For `snacks.images`
-            ghostscript # To render PDF files
-            tectonic # To render LaTeX math expressions
-            mermaid-cli # To render Mermaid diagrams
-          ];
-          data = with pkgs.vimPlugins; [
-            # Code folding
-            nvim-ufo
-
-            # Autopairs characters e.g. `()`
-            nvim-autopairs
-
-            # Manipulate pairs of characters e.g. replacing an autopair with a motion
-            mini-surround
-
-            # More `a` and `i` text objects to improve motions
-            mini-ai
-
-            # Session management
-            mini-sessions
-
-            # Live preview Markdown and many other files in the browser
-            live-preview-nvim
-
-            # Auto-close and auto-rename HTML tags using Treesitter
+            # More code-aware Vim motions and all
+            nvim-treesitter-textobjects
             nvim-ts-autotag
+
+            # Quality of life plugins
+            which-key-nvim # Show available keymaps as you type
+            oil-nvim # File explorer
+            fzf-lua # Fast fuzzy finder using `fzf` binary
+            snacks-nvim # Collection of plugins e.g. picker and image support
+            nvim-autopairs # Automatically manage character pairs
+            mini-surround # Manipulate character pairs
+            nvim-ufo # Code folding
+            mini-ai # More textobjects for nicer Vim motions
+            nvim-colorizer-lua # Color highlighter - Highlights color codes in your code
+            markdown-preview-nvim # Markdown preview
+          ]
+          ++ [
+            # Autocompletion
+            inputs.blink-cmp-nvim.packages.${pkgs.stdenv.hostPlatform.system}.default
           ];
-        };
+      };
+
+      ##########
+      ### UI ###
+      ##########
+      # For animated splashscreen header thingy on the dashboard `snacks.dashboard`
+      milli-nvim = {
+        before = ["core"]; # Because `snacks.nvim` requires this plugin
+        data = config.nvim-lib.mkPlugin "milli.nvim" inputs.milli-nvim;
+      };
+      ui = {
+        lazy = true;
+        after = ["core"];
+        data = with pkgs.vimPlugins; [
+          catppuccin-nvim # Theme/Colorscheme
+          lualine-nvim # Fast and configurable statusline
+          tiny-cmdline-nvim # Prettier floating command line
+          blink-indent # Indentation guides
+          visual-whitespace-nvim # Visualize whitespace
+          gitsigns-nvim # Git integration
+        ];
+      };
+
+      #####################
+      ### Miscellaneous ###
+      #####################
+      # Nice to have but not necessarily useful
+      cord-nvim = {
+        after = ["startup"];
+        data = config.nvim-lib.mkPlugin "cord.nvim" inputs.cord-nvim;
+      };
+      misc = {
+        lazy = true;
+        after = ["ui"];
+        data = with pkgs.vimPlugins; [
+          # Markdown preview
+          peek-nvim
+        ];
       };
     };
   };

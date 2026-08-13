@@ -1,17 +1,10 @@
-require("ui")
 require("general")
+require("autocmds")
 require("mappings")
 require("lze").load({
-	{ import = "plugins.ui" },
-
-	-- Code-aware features, LSP and autocompletion
-	{ import = "plugins.core" },
-
-	-- Quality of life plugins
-	{ import = "plugins.useful" },
-	{ import = "plugins.mini" },
-	{ import = "plugins.snacks" },
-
-	-- Miscellaneous
-	{ import = "plugins.misc" },
+  { import = "plugins.core" },
+  { import = "plugins.ui" },
+  { import = "plugins.useful" },
+  { import = "plugins.snacks" },
+  { import = "plugins.misc" },
 })
