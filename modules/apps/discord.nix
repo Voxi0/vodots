@@ -38,7 +38,7 @@
           };
 
           # LastFM - Music scrobbler
-          LastFMRichPresence = {
+          musicRichPresence = {
             enable = true;
             shareUsername = true;
             statusName = "moozic";

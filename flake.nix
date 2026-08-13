@@ -89,5 +89,16 @@
 
     # For setting up Minecraft servers
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
+    # Custom Neovim plugins
+    blink-cmp-nvim.url = "github:saghen/blink.cmp";
+    cord-nvim = {
+      url = "github:vyfor/cord.nvim";
+      flake = false;
+    };
+    milli-nvim = {
+      url = "github:Amansingh-afk/milli.nvim";
+      flake = false;
+    };
   };
 }

@@ -19,10 +19,10 @@
         "version": 0,
         "video_memory": 0
       },
-      "pnp": true,
-      "pnp_id": 2389070,
+      "pnp": false,
+      "pnp_id": 0,
       "lba_support": false,
-      "low_memory_size": 649216,
+      "low_memory_size": 654336,
       "smbios_version": 768
     },
     "bluetooth": [
@@ -1044,7 +1044,6 @@
         "fpu_exception": false,
         "cpuid_level": 22,
         "write_protect": false,
-        "tlb_size": 32521,
         "clflush_size": 64,
         "cache_alignment": 64,
         "address_sizes": {
@@ -1238,7 +1237,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 7.0.0 xhci-hcd",
+          "name": "Linux 7.1.4 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1248,11 +1247,11 @@
         },
         "revision": {
           "hex": "0000",
-          "name": "7.00",
+          "name": "7.01",
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 7.0.0 xhci-hcd xHCI Host Controller",
+        "model": "Linux 7.1.4 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb1/1-0:1.0",
         "sysfs_bus_id": "1-0:1.0",
         "resources": [
@@ -1300,7 +1299,7 @@
         "driver_modules": [
           "usbcore"
         ],
-        "module_alias": "usb:v1D6Bp0002d0700dc09dsc00dp01ic09isc00ip00in00"
+        "module_alias": "usb:v1D6Bp0002d0701dc09dsc00dp01ic09isc00ip00in00"
       },
       {
         "index": 33,
@@ -1325,7 +1324,7 @@
         },
         "vendor": {
           "hex": "1d6b",
-          "name": "Linux 7.0.0 xhci-hcd",
+          "name": "Linux 7.1.4 xhci-hcd",
           "value": 7531
         },
         "device": {
@@ -1335,11 +1334,11 @@
         },
         "revision": {
           "hex": "0000",
-          "name": "7.00",
+          "name": "7.01",
           "value": 0
         },
         "serial": "0000:00:14.0",
-        "model": "Linux 7.0.0 xhci-hcd xHCI Host Controller",
+        "model": "Linux 7.1.4 xhci-hcd xHCI Host Controller",
         "sysfs_id": "/devices/pci0000:00/0000:00:14.0/usb2/2-0:1.0",
         "sysfs_bus_id": "2-0:1.0",
         "detail": {
@@ -1377,7 +1376,7 @@
         "driver_modules": [
           "usbcore"
         ],
-        "module_alias": "usb:v1D6Bp0003d0700dc09dsc00dp03ic09isc00ip00in00"
+        "module_alias": "usb:v1D6Bp0003d0701dc09dsc00dp03ic09isc00ip00in00"
       }
     ],
     "memory": [
@@ -1513,7 +1512,7 @@
         },
         "sysfs_id": "/devices/platform/i8042/serio1/input/input7",
         "unix_device_names": [
-          "/dev/input/event11",
+          "/dev/input/event6",
           "/dev/input/ + handler"
         ]
       }
@@ -2420,7 +2419,7 @@
         "sysfs_bus_id": "0000:00:14.0",
         "detail": {
           "function": 0,
-          "command": 1026,
+          "command": 1030,
           "header_type": 0,
           "secondary_bus": 0,
           "prog_if": 48
