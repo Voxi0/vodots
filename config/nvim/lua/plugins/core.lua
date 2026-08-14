@@ -19,6 +19,13 @@ return {
           },
         },
       })
+      vim.lsp.config("astro", {
+        init_options = {
+          typescript = {
+            tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
+          },
+        },
+      })
 
       -- Enable LSPs
       vim.lsp.enable({ "lua_ls", "nil_ls" })
