@@ -5,64 +5,77 @@
 }: {
   flake.modules.nixos = let
     navidromeMusicFolder = "/music";
+    postgresqlDataDir = "/var/lib/postgresql";
+    immichDataDir = "/var/lib/immich";
+    minecraftServersDataDir = "/var/lib/minecraft-servers";
   in {
-    # Tailscale - Private mesh VPN that makes it easy to connect your devices together
-    tailscale = {
-      networking.firewall.trustedInterfaces = ["tailscale0"];
-      services.tailscale.enable = true;
-    };
-
-    # Server dashboard
-    glance = {
-      services.glance = {
+    tailscale = {config, ...}: {
+      services.tailscale = {
         enable = true;
-        settings.server.host = "0.0.0.0";
       };
+
+      networking.firewall = {
+        # Always allow traffic from your Tailscale network
+        trustedInterfaces = [config.services.tailscale.interfaceName];
+
+        # Allow the Tailscale UDP port through the firewall
+        allowedUDPPorts = [config.services.tailscale.port];
+      };
+
+      # Force `tailscaled` to use `nftables` which is critical for clean nftables-only systems
+      # This avoids the `iptables-compat` translation layer issues
+      systemd.services.tailscaled.serviceConfig.Environment = [
+        "TS_DEBUG_FIREWALL_MODE=nftables"
+      ];
+
+      # Prevent `systemd` from waiting for network online
+      # Optional but recommended for faster boot with VPNs
+      systemd.network.wait-online.enable = false;
+      boot.initrd.systemd.network.wait-online.enable = false;
     };
 
-    # Intrusion prevention software framework that protects servers from brute-force attacks by monitoring log files for malicious patterns
+    # Intrusion prevention software to protect servers from brute-force attacks by monitoring log files for malicious patterns
     # For example, multiple failed login attempts
-    # It works by updating firewall rules (using iptables or firewalld) to temporarily or permanently ban suspicious IP addresses
+    # It works by updating firewall rules to temporarily or permanently ban suspicious IP addresses
     fail2ban = {
       services.fail2ban = {
         enable = true;
         maxretry = 3;
         ignoreIP = [
-          # All devices in your tailnet (Tailscale network)
+          # All personal devices in the tailnet (Tailscale network)
           "100.64.0.0/10"
         ];
       };
     };
 
-    # Self-hosted photo and video management solution - Best self-hosted alternative to something like Google Photos
+    # Self-hosted alternative to Google Photos for photo and video management
     immich = {
       config,
       pkgs,
       ...
     }: {
-      # Required for Immich to be able to display videos and stuff
+      # Required for Immich to be able to display videos and such
       users.users.immich.extraGroups = ["video" "render"];
 
       services = {
-        # Immich uses Postgresql for the database - Stores user data, album data, etc.
+        # Database - Stores user data, album data, etc.
         postgresql = {
           package = pkgs.postgresql_18;
           extensions = ps: with ps; [vectorchord pgvector];
-          dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
+          dataDir = "${postgresqlDataDir}/${config.services.postgresql.package.psqlSchema}";
         };
-
         immich = {
           enable = true;
-          openFirewall = true;
+          openFirewall = false;
           host = "0.0.0.0";
           port = 2283;
           accelerationDevices = null;
-          mediaLocation = "/var/lib/immich";
+          mediaLocation = immichDataDir;
         };
       };
     };
 
-    # Music streaming service - Selfhosting music is cool no?
+    # Music streaming service
     navidrome = {
       services.navidrome = {
         enable = true;
@@ -76,8 +89,7 @@
       };
     };
 
-    # Minecraft server of course, uses a Packwiz modpack for well, mods duh
-    # It's really convenient to use Packwiz so please look into that
+    # Fabric Minecraft server
     minecraft-server = {
       lib,
       pkgs,
@@ -93,13 +105,11 @@
       fabricVersion = modpack.manifest.versions.fabric;
       serverVersion = lib.replaceStrings ["."] ["_"] "fabric-${mcVersion}";
     in {
-      imports = [inputs.nix-minecraft.nixosModules.minecraft-servers];
-
-      # Minecraft servers
+      imports = [inputs.nix-minecraft.nixosModule.minecraft-servers];
       services.minecraft-servers = {
         enable = true;
         eula = true;
-        dataDir = "/var/lib/minecraft-servers";
+        dataDir = minecraftServersDataDir;
         servers.default = {
           enable = true;
           autoStart = false;
@@ -113,7 +123,7 @@
             -Djava.net.preferIPv4Stack=true
           '';
           serverProperties = {
-            motd = "${self.username}'s Minecraft server";
+            motd = "${self.username}'s Minecraft servoooor";
 
             # Gameplay
             gamemode = "survival";
@@ -146,7 +156,7 @@
             (inputs.nix-minecraft.lib.collectFilesAt modpack "config")
             // {};
 
-          # Players configuration
+          # Operators
           operators.MiniVoxi = {
             uuid = "9c49e463-ae94-49c4-a311-9553cb5ed29c";
             level = 4;

@@ -1,89 +1,74 @@
 {self, ...}: {
-  flake.modules = {
-    # NixOS specific
-    nixos.niri = {pkgs, ...}: let
-      inherit (pkgs.stdenv.hostPlatform) system;
-      sddmTheme = pkgs.sddm-astronaut.override {
-        embeddedTheme = "purple_leaves";
-      };
-    in {
-      # Base packages
-      environment.systemPackages = [sddmTheme];
+  # NixOS specific
+  flake.modules.nixos.niri = {pkgs, ...}: let
+    sddmTheme = pkgs.sddm-astronaut.override {embeddedTheme = "purple_leaves";};
+  in {
+    # Install SDDM theme
+    environment.systemPackages = [sddmTheme];
 
-      # Useful services
-      services = {
-        # For automounting drives and all
-        udisks2.enable = true;
+    # Services
+    services = {
+      # For automounting removable drives
+      udisks2.enable = true;
 
-        # Allows changing system behavior based on user-selected power profiles
-        power-profiles-daemon.enable = true;
+      # Allows changing system behaviour based on user-selected power profiles
+      power-profiles-daemon.enable = true;
 
-        # Display manager / Login screen
-        displayManager.sddm = {
-          enable = true;
-          wayland.enable = true;
-          extraPackages = [sddmTheme];
-          theme = "sddm-astronaut-theme";
-          settings = {
-            Theme = {
-              Current = "sddm-astronaut-theme";
-            };
-          };
+      # Display manager / Login screen
+      displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+        extraPackages = [sddmTheme];
+        theme = "sddm-astronaut-theme";
+        settings = {
+          Theme = {Current = "sddm-astronaut-theme";};
         };
-      };
-
-      # XDG desktop portals allows apps to securely access resources outside it's sandbox
-      # Required for screencasting, file pickers and other important stuff to work
-      xdg.portal = {
-        enable = true;
-        extraPortals = with pkgs; [
-          # Implements most of the basic functionality
-          xdg-desktop-portal-gtk
-
-          # Required for screencasting support
-          xdg-desktop-portal-gnome
-
-          # Implements the secret portal which is required for some apps to work
-          gnome-keyring
-        ];
-      };
-
-      # Scrolling Wayland compositor
-      programs.niri = {
-        enable = true;
-        package = self.packages.${system}.voniri;
       };
     };
 
-    # Home Manager specific
-    homeManager.niri = {pkgs, ...}: {
-      # Frontend for udisks2 which allows you to manage removable drives easily
-      services.udiskie.enable = true;
+    # XDG desktop portal
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk # Implements most of the basic functionality
+        xdg-desktop-portal-gnome # Required for screencasting support
+        gnome-keyring # Implements the secret portal required by some apps
+      ];
+    };
 
-      # Base packages
-      home.packages = with pkgs; [
-        ############
-        ### BASE ###
-        ############
+    # Niri - A scrollable tiling Wayland compositor
+    programs.niri = {
+      enable = true;
+      package = self.packages.${pkgs.stdenv.hostPlatform.system}.voniri;
+    };
+  };
+
+  # Home Manager specific
+  flake.modules.homeManager.niri = {pkgs, ...}: {
+    services = {
+      # Frontend for Udisks2 to manage removable drives easily
+      udiskie.enable = true;
+    };
+
+    # Base packages
+    home.packages = with pkgs;
+      [
         wl-clipboard
 
-        ###############
-        ### THEMING ###
-        ###############
+        # Theming
         matugen
         pywalfox-native
         adw-gtk3
         bibata-cursors
         papirus-icon-theme
-
-        ###########
-        ### QT6 ###
-        ###########
-        kdePackages.qtsvg # For loading SVG images (bundled with most packages)
-        kdePackages.qtimageformats # For WEBP images as well as some less common ones
-        kdePackages.qtmultimedia # For playing videos, audio, etc
-        kdePackages.qt5compat # Extra visual effects e.g. gaussian blur. MultiEffect is usually preferable
-      ];
-    };
+      ]
+      ++
+      # QT6 - Mainly required for SDDM theme
+      (with kdePackages; [
+        qtsvg # For loading SVG images (bundled with most packages)
+        qtimageformats # For WEBP images as well as some less common ones
+        qtmultimedia # For playing videos, audio, etc
+        qt5compat # Extra visual effects e.g. gaussian blur. MultiEffect is usually preferable
+      ]);
   };
 }

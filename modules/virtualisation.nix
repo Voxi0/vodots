@@ -34,8 +34,7 @@
       };
     };
 
-    # I Recommended avoiding this because it requires compiling from source
-    # This is due to some licensing issues
+    # I Recommended avoiding this because it requires compiling from source due to some licensing issues
     virtualbox = {
       users.extraGroups.vboxusers.members = [self.username];
       virtualisation.virtualbox = {

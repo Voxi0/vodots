@@ -26,7 +26,7 @@ for key, value in pairs({
   tabstop = 4, -- Number of spaces in a tab
   softtabstop = 4, -- Controls how `<Tab>` and `<BS>` behave in Insert mode
   autoindent = true, -- Copies the current line’s indentation when you start a new line.
-  smartindent = true,
+  smartindent = false,
   cindent = false,
 
   -- Code folding

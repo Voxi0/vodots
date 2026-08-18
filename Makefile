@@ -1,4 +1,4 @@
-hostname ?= $(error Please set a hostname like so -> make <install/format/gen-hardware-conf> hostname=<name of a folder in './modules/hosts/'>)
+hostname ?= $(error Please specify a hostname like -> make <install/format/gen-hardware-conf> hostname=<name of a folder in './modules/hosts/'>)
 experimentalFeatures := --extra-experimental-features "nix-command flakes"
 
 # Colors
@@ -11,6 +11,14 @@ NC=\033[0m
 
 # Default target
 all: help
+
+# Help screen
+.PHONY: help
+help:
+	@echo -e "${CYAN}Available commands:"
+	@echo -e "\t${NC}make install hostname=<name of a folder in './modules/hosts/'>"
+	@echo -e "\t${NC}make format hostname=<name of a folder in './modules/hosts/'>"
+	@echo -e "\t${NC}make gen-hardware-conf hostname=<name of a folder in './modules/hosts/'>"
 
 # Check if the current distribution is NixOS
 .PHONY: checkNixOS
@@ -25,7 +33,7 @@ checkNixOS:
 # Install NixOS and 'vodots'
 .PHONY: install
 install: format gen-hardware-conf
-	@echo "Ensure 'modules/flake/flake.nix' sets your desired system username, keyboard layout and such"
+	@echo "Ensure 'modules/flake.nix' has your desired system username, keyboard layout and such set"
 	@echo ""
 	@read -p "Press enter to proceed..."
 	sudo nixos-install \
@@ -36,18 +44,10 @@ install: format gen-hardware-conf
 	@echo -e "${GREEN}Vodots is installed! You can now reboot your system"
 	@echo -e "${GREEN}The default user password is 'nixos' and set the timezone with 'timedatectl set-timezone' after booting"
 
-# Help screen
-.PHONY: help
-help:
-	@echo -e "${CYAN}Available commands:"
-	@echo -e "\t${NC}make install hostname=<name of a folder in './modules/hosts/'>"
-	@echo -e "\t${NC}make format hostname=<name of a folder in './modules/hosts/'>"
-	@echo -e "\t${NC}make gen-hardware-conf hostname=<name of a folder in './modules/hosts/'>"
-
 # Format the disk declaratively using Disko
 .PHONY: format
 format:
-	@echo -e "${CYAN}Ensure that 'disko.nix' exists with the desired disk layout and that 'primaryDisk' is set to the drive to install NixOS on before continuing"
+	@echo -e "${CYAN}Ensure that 'modules/hosts/<hostname>/_disko.nix' exists with the desired disk layout and that 'primaryDisk' is set to the drive to install NixOS on before continuing"
 	@echo -e "${RED}WARNING! ALL DATA ON THE DRIVE 'primaryDisk' WILL BE ERASED."
 	@echo ""
 	@read -p "Press enter to proceed..."

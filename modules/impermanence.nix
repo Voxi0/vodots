@@ -7,14 +7,14 @@
     impermanence = {lib, ...}: {
       imports = [inputs.preservation.nixosModules.default];
 
+      # Clean temporary files on boot duh
+      boot.tmp.cleanOnBoot = true;
+
       # `systemd-machine-id-commit.service` will fail but it isn't relevant in this setup for a persistent machine-id so just disable it
       systemd = {
         suppressedSystemUnits = ["systemd-machine-id-commit.service"];
         tmpfiles.settings.preservation."/persistent/home/${self.username}".d.mode = lib.mkForce "700";
       };
-
-      # Clean temporary files on boot duh
-      boot.tmp.cleanOnBoot = true;
 
       # Set up impermanence
       preservation = {
@@ -43,7 +43,7 @@
             "/var/lib/NetworkManager/"
             "/etc/NetworkManager/system-connections/"
 
-             # Current power profile state and all
+            # Current power profile state and all
             "/var/lib/power-profiles-daemon/"
 
             # Tailscale
@@ -81,7 +81,13 @@
             ];
             directories = [
               # User home XDG directories
-              "Desktop/" "Documents/" "Pictures/" "Downloads/" "Music/" "Videos/"
+              "Desktop/"
+              "Documents/"
+              "Pictures/"
+              "Downloads/"
+              "Music/"
+              "Videos/"
+              "Games/"
 
               # Steam games and other application state etc
               ".local/"
@@ -103,9 +109,15 @@
               # OBS Studio
               ".config/obs-studio/"
 
-              # Steam
-              { directory = ".steam/root"; how = "symlink"; }
-              { directory = ".steam/steam"; how = "symlink"; }
+              # Games
+              {
+                directory = ".steam/root/";
+                how = "symlink";
+              }
+              {
+                directory = ".steam/steam/";
+                how = "symlink";
+              }
 
               # Flatpak applications and a whole lotta other stuff
               ".var/"
@@ -117,6 +129,7 @@
 
               # Discord
               ".config/equibop/"
+              ".config/goofcord/"
             ];
           };
         };

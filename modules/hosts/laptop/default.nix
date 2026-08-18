@@ -1,7 +1,6 @@
 {self, ...}: let
   hostname = "laptop";
-  modules = with self.modules.nixos; [
-    # Base
+  nixosModules = with self.modules.nixos; [
     general
     impermanence
     openTabletDriver
@@ -11,7 +10,7 @@
     # Services
     fwupd
     power-profiles-daemon
-    audio
+    pipewire
     tailscale
     ssh
     yubikey
@@ -25,9 +24,7 @@
     virt-manager
   ];
   hmModules = with self.modules.homeManager; [
-    # Base
     general
-    easyeffects
     niri
 
     # Apps
@@ -37,104 +34,62 @@
     fastfetch
     yazi
     floorp
-    helium
-    vscode
-    spotify
     discord
     obs-studio
   ];
 in {
   flake = {
-    nixosConfigurations.${hostname} = self.lib.mkNixosHost {inherit hostname modules hmModules;};
-    modules = {
-      # NixOS specific
-      nixos.${hostname} = {pkgs, ...}: {
-        # Boot
-        console = {
-          earlySetup = true;
-          useXkbConfig = true;
-          font = "Lat2-Terminus16";
+    # Create a NixOS configuration/host
+    nixosConfigurations.${hostname} = self.lib.mkNixosHost {inherit hostname nixosModules hmModules;};
+
+    # Extra host specific configuration
+    modules.nixos.${hostname} = {pkgs, ...}: {
+      # Disk burner
+      programs.k3b.enable = true;
+
+      # Extra fonts
+      fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono iosevka];
+    };
+
+    modules.homeManager.${hostname} = {pkgs, ...}: {
+      home = {
+        # Move my wallpapers to system
+        file."Pictures/Wallpapers" = {
+          source = ../../../wallpapers;
+          recursive = true;
         };
 
-        # Security
-        security = {
-          rtkit.enable = true;
-          polkit = {
-            enable = true;
+        # Extra apps for this host
+        packages = with pkgs;
+          [
+            # Version control system
+            git
+            lazygit
 
-            # Some extra stuff to allow unprivileged users to reboot/poweroff
-            extraConfig = ''
-              polkit.addRule(function (action, subject) {
-                if (
-                  subject.isInGroup("users") &&
-                  [
-                    "org.freedesktop.login1.reboot",
-                    "org.freedesktop.login1.reboot-multiple-sessions",
-                    "org.freedesktop.login1.power-off",
-                    "org.freedesktop.login1.power-off-multiple-sessions",
-                  ].indexOf(action.id) !== -1
-                ) {
-                  return polkit.Result.YES;
-                }
-              });
-            '';
-          };
-        };
+            # File explorer
+            thunar
+            tumbler # Required for thumbnails
 
-        # Fonts
-        fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono iosevka];
+            # Media players
+            mpv # Videos
+            feishin # Audio
 
-        # Disk burner
-        programs.k3b.enable = true;
-      };
+            # Note taking
+            obsidian
 
-      # Home Manager specific
-      homeManager.${hostname} = {pkgs, ...}: {
-        # Some extra apps/games for me
-        home = {
-          # Environment variables to be set at login
-          sessionVariables = {
-            EDITOR = "nvim";
-            MANPAGER = "nvim +Man!";
-          };
+            # Just for Hackclub
+            slack
 
-          # Some apps and all only for this host
-          packages = with pkgs;
-            [
-              # Version control system
-              git
-              lazygit
+            # IRC client
+            halloy
+          ]
+          ++ (with self.packages.${pkgs.stdenv.hostPlatform.system}; [
+            # Spotify
+            vspotify
 
-              # File explorer
-              thunar
-              tumbler # Required for thumbnails
-
-              # Media players
-              mpv # Videos
-              feishin # Audio
-
-              # Note taking
-              obsidian
-
-              # Just for Hackclub
-              slack
-
-              # IRC client
-              halloy
-
-              # Minecraft launcher
-              (pkgs.prismlauncher.override {
-                jdks = [pkgs.graalvmPackages.graalvm-ce];
-              })
-            ]
-            ++ [self.packages.${pkgs.stdenv.hostPlatform.system}.voctalia-shell];
-
-          # Move my wallpapers to installed system
-          file."Pictures/Wallpapers" = {
-            source = ../../../wallpapers;
-            recursive = true;
-          };
-        };
+            # Noctalia shell
+            voctalia-shell
+          ]);
       };
     };
   };

@@ -1,6 +1,6 @@
 {
+  # For screen recording and such
   flake.modules.homeManager.obs-studio = {pkgs, ...}: {
-    # For screen recording and such
     programs.obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [

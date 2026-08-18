@@ -1,47 +1,44 @@
 let
-  systemDrive = "/dev/sda";
+  systemDisk = "/dev/sda";
   mountOptions = ["noatime" "compress=zstd" "discard=async"];
 in {
-  # Ensure system doesn't boot before "/nix" is mounted
+  # Ensure "/nix" exists during boot since it's required to make sure the system is ready
   fileSystems."/nix".neededForBoot = true;
 
   # Disk layout
   disko.devices = {
-    # Store the entire root directory on RAM
-    # So everything gets wiped on every reboot/poweroff whatever
+    # Ephemeral root partition wiped whenever the device is powered off or reboots
     nodev."/" = {
       fsType = "tmpfs";
-      mountOptions = [
-        # Maximum amount of RAM the root directory can use
-        "size=25%"
-        "mode=755"
-      ];
+      mountOptions = ["size=25%" "mode=755"];
     };
 
-    # Main/primary disk
-    disk.main = {
-      device = systemDrive;
+    # Primary system disk
+    disk.primary = {
+      device = systemDisk;
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
+          # For legacy BIOS systems
           boot = {
-            name = "boot";
             size = "1M";
             type = "EF02";
           };
 
-          esp = {
-            name = "ESP";
-            size = "1G";
+          # EFI/Boot partiton required for UEFI
+          ESP = {
             type = "EF00";
+            size = "1G";
             content = {
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
+              mountOptions = ["umask=0077"];
             };
           };
 
+          # Persistent partition
           root = {
             name = "root";
             size = "100%";
@@ -49,10 +46,13 @@ in {
               type = "btrfs";
               extraArgs = ["-f"];
               subvolumes = {
+                # Required for system to boot
                 "/nix" = {
                   inherit mountOptions;
                   mountpoint = "/nix";
                 };
+
+                # Stuff the user wants persistent
                 "/persistent" = {
                   inherit mountOptions;
                   mountpoint = "/persistent";

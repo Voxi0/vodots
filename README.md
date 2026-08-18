@@ -8,8 +8,8 @@
 
 </div>
 
-My personal [NixOS][1] configuration using the popular Dendritic Nix design pattern redesigned and
-rewritten from scratch using everything I learned from previous iterations of my configuration and
+My personal [NixOS][1] configuration using modern practices and such e.g. the increasingly popular Dendritic Nix design pattern.
+Vodots has been redesigned and rewritten from scratch multiple times using everything I learned from previous iterations of my configuration and
 reading through several other configuration repos to discover cool new things and such.
 
 <div align="center">

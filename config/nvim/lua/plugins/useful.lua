@@ -191,7 +191,7 @@ return {
   -- Manipulate character pairs
   {
     "mini.surround",
-    event = "BufReadPost",
+    event = "BufEnter",
     after = function()
       require("mini.surround").setup()
     end,
@@ -201,7 +201,7 @@ return {
   {
     "nvim-ufo",
     on_plugin = "promise-async",
-    event = "BufReadPost",
+    event = "BufEnter",
     keys = {
       {
         mode = "n",

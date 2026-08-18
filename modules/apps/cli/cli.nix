@@ -1,15 +1,14 @@
 {
-  flake.modules.nixos.cli = _: {
-    programs = {
-      # Modern `cd` replacement
-      zoxide.enable = true;
-    };
+  # NixOS specific
+  flake.modules.nixos.cli = {
+    # Modern `cd` replacement
+    programs.zoxide.enable = true;
   };
 
-  # Useful CLI utils
+  # Home Manager specific
   flake.modules.homeManager.cli = {pkgs, ...}: {
     home = {
-      packages = with pkgs; [unzip wget nurl tldr cava];
+      packages = with pkgs; [unzip wget curl nurl tealdeer cava];
       shellAliases = {
         "l" = "eza -alh";
         "ls" = "eza";
@@ -17,6 +16,7 @@
         "lla" = "eza -lla";
       };
     };
+
     programs = {
       # Modern `cd` and `ls` replacement
       zoxide.enable = true;
@@ -27,11 +27,6 @@
 
       # Use your preferred shell in all Nix shells
       nix-your-shell.enable = true;
-
-      direnv = {
-        enable = true;
-        nix-direnv.enable = true;
-      };
 
       # Shell prompt
       starship = {

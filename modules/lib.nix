@@ -1,37 +1,36 @@
 {
   self,
   inputs,
-  withSystem,
   ...
 }: {
+  # Common functions
   flake.lib = {
     # Create a new NixOS configuration/host
     mkNixosHost = {
       hostname,
-      modules ? [],
+      nixosModules ? [],
       hmModules ? [],
     }:
       inputs.nixpkgs.lib.nixosSystem {
         modules =
-          # NixOS modules
           [
-            # Disko for managing disk layouts and stuff
+            # Disko
             inputs.disko.nixosModules.disko
-            ../hosts/${hostname}/_disko.nix
+            ./hosts/${hostname}/_disko.nix
 
-            # Host configuration
+            # Host specific configuration
             self.modules.nixos.${hostname}
             {
-              # Hardware configuration
-              hardware.facter.reportPath = ../hosts/${hostname}/facter.json;
-
-              # Set system hostname
+              # Hardware report and system hostname
+              hardware.facter.reportPath = ./hosts/${hostname}/facter.json;
               networking.hostName = hostname;
             }
           ]
-          ++ modules
-          # Import/Include/Use Home Manager only if atleast one Home Manager module is being used
+          ++
+          # Extra NixOS modules the host wanted to use
+          nixosModules
           ++ (
+            # Import Home Manager and the specified modules if any Home Manager modules are provided
             if hmModules != []
             then [
               inputs.home-manager.nixosModules.home-manager
@@ -41,23 +40,14 @@
                   useUserPackages = false;
                   backupFileExtension = "bak";
                   overwriteBackup = true;
+
+                  # Host specific Home Manager configuration and any specified modules
                   users.${self.username}.imports = [self.modules.homeManager.${hostname}] ++ hmModules;
                 };
               }
             ]
             else []
           );
-      };
-
-    # Create a new Home Manager config
-    mkHmConfig = {
-      hostname,
-      modules ? [],
-    }:
-      inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = withSystem "x86_64-linux" ({pkgs, ...}: pkgs);
-        modules = [self.modules.homeManager.${hostname}] ++ modules;
-        backupFileExtension = "bak";
       };
   };
 }
