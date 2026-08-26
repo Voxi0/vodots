@@ -60,6 +60,13 @@ in {
         open = false;
       };
 
+      # Swap
+      zramSwap = {
+        enable = true;
+        algorithm = "zstd";
+        memoryPercent = 50;
+      };
+
       # Disk burner
       programs.k3b.enable = true;
 
