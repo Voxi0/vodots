@@ -21,20 +21,18 @@ in {
         type = "gpt";
         partitions = {
           # EFI/Boot partiton required for UEFI
-          ESP = {
+          esp = {
             type = "EF00";
             size = "1G";
             content = {
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = ["umask=0077"];
             };
           };
 
           # Persistent partition
-          root = {
-            name = "root";
+          btrfs = {
             size = "100%";
             content = {
               type = "btrfs";

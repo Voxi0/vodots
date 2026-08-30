@@ -62,33 +62,20 @@ in {
         # Extra apps for this host
         packages = with pkgs;
           [
-            # Version control system
-            git
-            lazygit
-
-            # File explorer
-            thunar
-            tumbler # Required for thumbnails
-
-            # Media players
-            mpv # Videos
-            feishin # Audio
-
-            # Note taking
-            obsidian
-
-            # Just for Hackclub
-            slack
-
-            # IRC client
-            halloy
+            git # Version Control System (VCS)
+            lazygit # Awesome TUI for Git
+            thunar # File explorer
+            tumbler # Required by Thunar for thumbnails
+            mpv # Video player
+            feishin # Audio player
+            obsidian # Note taking
+            slack # Just for Hackclub
+            halloy # IRC client
+            ferdium # Keep all communication services or whatever in one place
+            # celeste # File synchronization client that works with any cloud provider
           ]
           ++ (with self.packages.${pkgs.stdenv.hostPlatform.system}; [
-            # Spotify
-            vspotify
-
-            # Noctalia shell
-            voctalia-shell
+            voctalia-shell # Noctalia desktop shell
           ]);
       };
     };

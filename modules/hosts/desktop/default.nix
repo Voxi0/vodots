@@ -51,10 +51,6 @@ in {
       ...
     }: {
       # NVidia specific stuff
-      hardware.graphics = {
-        enable = true;
-        enable32Bit = true;
-      };
       boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
       services.xserver.videoDrivers = ["nvidia"];
       hardware.nvidia = {
@@ -74,9 +70,6 @@ in {
         memoryPercent = 50;
       };
 
-      # Disk burner
-      programs.k3b.enable = true;
-
       # Extra fonts
       fonts.packages = with pkgs.nerd-fonts; [
         jetbrains-mono
@@ -95,26 +88,17 @@ in {
         # Extra apps for this host
         packages = with pkgs;
           [
-            # Version control system
-            git
-            lazygit
-
-            # File explorer
-            thunar
-            tumbler # Required for thumbnails
-
-            # Media players
-            mpv # Videos
-            feishin # Audio
-
-            # Note taking
-            obsidian
-
-            # Just for Hackclub
-            slack
-
-            # IRC client
-            halloy
+            git # Version Control System (VCS)
+            lazygit # Awesome TUI for Git
+            thunar # File explorer
+            tumbler # Required by Thunar for thumbnails
+            mpv # Video player
+            feishin # Audio player
+            obsidian # Note taking
+            slack # Just for Hackclub
+            halloy # IRC client
+            ferdium # Keep all communication services or whatever in one place
+            # celeste # File synchronization client that works with any cloud provider
 
             # Minecraft
             (pkgs.prismlauncher.override {
@@ -122,11 +106,8 @@ in {
             })
           ]
           ++ (with self.packages.${pkgs.stdenv.hostPlatform.system}; [
-            # Spotify
-            vspotify
-
-            # Noctalia shell
-            voctalia-shell
+            vspotify # Spotify with Spicetify
+            voctalia-shell # Noctalia desktop shell
           ]);
       };
     };

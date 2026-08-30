@@ -14,7 +14,7 @@ in {
     };
 
     # Primary system disk
-    disk.primary = {
+    disk.main = {
       device = systemDisk;
       type = "disk";
       content = {
@@ -40,7 +40,6 @@ in {
 
           # Persistent partition
           root = {
-            name = "root";
             size = "100%";
             content = {
               type = "btrfs";
