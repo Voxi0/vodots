@@ -1,5 +1,10 @@
-// Disable client side decorations e.g. window titlebars
+// Prefer no client side decorations e.g. window titlebars
 prefer-no-csd
+
+// Don't show the hotkey help at niri startup
+hotkey-overlay {
+  skip-at-startup
+}
 
 /////////////////////////////
 /// Environment variables ///

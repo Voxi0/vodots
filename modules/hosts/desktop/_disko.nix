@@ -1,5 +1,5 @@
 let
-  systemDisk = "/dev/sda";
+  systemDisk = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S2RANX0H637158A";
   mountOptions = ["noatime" "compress=zstd" "discard=async"];
 in {
   # Ensure "/nix" exists during boot since it's required to make sure the system is ready

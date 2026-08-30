@@ -51,10 +51,17 @@ in {
       ...
     }: {
       # NVidia specific stuff
+      hardware.graphics = {
+        enable = true;
+        enable32Bit = true;
+      };
+      boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
       services.xserver.videoDrivers = ["nvidia"];
       hardware.nvidia = {
         # Wayland requires kernel mode setting (KMS) to be enabled (Highly Recommended)
         modesetting.enable = true;
+        powerManagement.enable = true;
+        nvidiaSettings = true;
 
         # Use proprietary drivers since they usually offer better performance
         open = false;
