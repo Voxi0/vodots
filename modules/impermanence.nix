@@ -78,6 +78,9 @@
               ".config/gtk-3.0/settings.ini"
               ".icons/default/index.theme"
               ".config/xsettingsd/xsettingsd.conf"
+
+              # UZDoom settings
+              ".config/uzdoom/uzdoom.ini"
             ];
             directories = [
               # User home XDG directories

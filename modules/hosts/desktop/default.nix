@@ -56,7 +56,10 @@ in {
       hardware.nvidia = {
         # Wayland requires kernel mode setting (KMS) to be enabled (Highly Recommended)
         modesetting.enable = true;
-        powerManagement.enable = true;
+        powerManagement = {
+          enable = true;
+          finegrained = false;
+        };
         nvidiaSettings = true;
 
         # Use proprietary drivers since they usually offer better performance
@@ -100,6 +103,9 @@ in {
             gajim # XMPP client
             ferdium # Keep all communication services or whatever in one place
             # celeste # File synchronization client that works with any cloud provider
+
+            # DOOM
+            uzdoom
 
             # Minecraft
             (pkgs.prismlauncher.override {
