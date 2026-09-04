@@ -106,6 +106,10 @@
               ".config/dconf/"
               ".config/gtk-4.0/"
 
+              # Halloy IRC client and Gajim XMPP client
+              ".config/halloy/"
+              ".config/gajim/"
+
               # OBS Studio
               ".config/obs-studio/"
 

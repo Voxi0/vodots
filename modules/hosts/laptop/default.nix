@@ -71,6 +71,7 @@ in {
             obsidian # Note taking
             slack # Just for Hackclub
             halloy # IRC client
+            gajim # XMPP client
             ferdium # Keep all communication services or whatever in one place
             # celeste # File synchronization client that works with any cloud provider
           ]
