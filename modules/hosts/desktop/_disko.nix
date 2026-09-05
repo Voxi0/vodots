@@ -21,7 +21,7 @@ in {
         type = "gpt";
         partitions = {
           # EFI/Boot partiton required for UEFI
-          esp = {
+          ESP = {
             type = "EF00";
             size = "1G";
             content = {
@@ -32,7 +32,7 @@ in {
           };
 
           # Persistent partition
-          btrfs = {
+          root = {
             size = "100%";
             content = {
               type = "btrfs";
