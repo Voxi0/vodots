@@ -1,73 +1,66 @@
 {
-  # Dependencies
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:denful/import-tree";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Wrap applications and such with configuration
-    wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
-
-    # Weekly updated nix-index database for NixOS unstable
-    # `nix-index` is a tool to quickly locate the package providing a certain file in `nixpkgs`
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
+    # Nix User Repository (NUR)
+    nur = {
+      url = "github:nix-community/nur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Manage disk layouts
+    # Declarative management of non-volatile system state
+    preservation.url = "github:nix-community/preservation";
+
+    # Declarative disk layouts in Nix
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Impermanence
-    preservation.url = "github:nix-community/preservation";
-
-    # Manages user specific stuff
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    # Modules to wrap packages with configuration directly
+    wrappers = {
+      url = "github:nix-community/nix-wrapper-modules";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Desktop shell
-    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+    # Home Manager - Manages user-level stuff e.g. dotfiles
+    home-manager.url = "github:nix-community/home-manager";
 
-    # Firefox extensions
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    # Mango Wayland compositor
+    mangowm = {
+      url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Discord
+    # Declaratively manage Discord
     nixcord.url = "github:4evy/nixcord";
 
-    # Spotify
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
-    # For hosting Minecraft servers
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-
-    # Custom Neovim plugins
+    ######################
+    ### NEOVIM PLUGINS ###
+    ######################
+    # Autocompletion
     blink-cmp-nvim.url = "github:saghen/blink.cmp";
+
+    # Discord rich presence (RPC)
     cord-nvim = {
       url = "github:vyfor/cord.nvim";
       flake = false;
     };
+
+    # Convert GIFs into ASCII stuff to display as a banner in Neovim's dashboard
     milli-nvim = {
       url = "github:Amansingh-afk/milli.nvim";
       flake = false;
     };
   };
 
-  # Import all Nix modules
+  # Import all Nix modules except ones that start with an "_"
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} (let
-      # Alias
-      lib = inputs.nixpkgs.lib;
+      # Alias for `inputs.nixpkgs.lib`
+      inherit (inputs.nixpkgs) lib;
 
       # Find all Nix files in `modules` that don't start with an underscore
       files = lib.fileset.fileFilter (file: file.hasExt "nix" && !(lib.hasPrefix "_" file.name)) ./modules;

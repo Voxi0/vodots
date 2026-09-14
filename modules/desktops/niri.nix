@@ -1,39 +1,13 @@
-{self, ...}: {
+{
+  self,
+  ...
+}: {
   # NixOS specific
-  flake.modules.nixos.niri = {pkgs, ...}: let
-    sddmTheme = pkgs.sddm-astronaut.override {embeddedTheme = "purple_leaves";};
-  in {
-    # Install SDDM theme
-    environment.systemPackages = [sddmTheme];
-
-    # Services
+  flake.modules.nixos.niri = {pkgs, ...}: {
     services = {
-      # For automounting removable drives
+      # Daemon, tools and libraries to access and manage storage devices
+      # Used by `udiskie` for automounting removable drives and such
       udisks2.enable = true;
-
-      # Allows changing system behaviour based on user-selected power profiles
-      power-profiles-daemon.enable = true;
-
-      # Display manager / Login screen
-      displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
-        extraPackages = [sddmTheme];
-        theme = "sddm-astronaut-theme";
-        settings = {
-          Theme = {Current = "sddm-astronaut-theme";};
-        };
-      };
-    };
-
-    # XDG desktop portal
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk # Implements most of the basic functionality
-        xdg-desktop-portal-gnome # Required for screencasting support
-        gnome-keyring # Implements the secret portal required by some apps
-      ];
     };
 
     # Niri - A scrollable tiling Wayland compositor
@@ -41,34 +15,55 @@
       enable = true;
       package = self.packages.${pkgs.stdenv.hostPlatform.system}.voniri;
     };
+
+    # Import Home Manager specific module
+    home-manager.users.${self.username}.imports = [self.modules.homeManager.niri];
   };
 
   # Home Manager specific
   flake.modules.homeManager.niri = {pkgs, ...}: {
     services = {
-      # Frontend for Udisks2 to manage removable drives easily
-      udiskie.enable = true;
+      udiskie.enable = true; # Automounter for removable media using `udisks2`
+      mpris-proxy.enable = true; # Bluetooth headset buttons to control media player
+      awww.enable = true; # Efficient animated wallpaper daemon
+      blueman-applet.enable = true; # Bluetooth manager applet
+      gnome-keyring.enable = true; # For storing passwords/secrets
     };
 
-    # Base packages
+    # Desktop portal - Handles a lot of stuff for your desktop e.g. file pickers, screensharing, etc.
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk # Implements most of the basic functionality
+        xdg-desktop-portal-gnome # Required for screencasting support
+      ];
+      config.common = {
+        default = ["gtk"];
+        "org.freedesktop.impl.portal.Inhibit" = ["none"];
+        "org.freedesktop.impl.portal.Screenshot" = ["gnome"];
+        "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+      };
+    };
+
+    # Packages
     home.packages = with pkgs;
       [
-        wl-clipboard
+        # Base
+        noctalia # Desktop shell
+        wl-clipboard # Clipboard manager
+        pavucontrol # Audio/Volume control
 
         # Theming
-        matugen
         pywalfox-native
-        adw-gtk3
+        matugen
+        nwg-look # Theme settings setter or whatever
+        qt6.qtwayland # QT Wayland support
+        adw-gtk3 # GTK theme
         bibata-cursors
         papirus-icon-theme
+
+        evtest
       ]
-      ++
-      # QT6 - Mainly required for SDDM theme
-      (with kdePackages; [
-        qtsvg # For loading SVG images (bundled with most packages)
-        qtimageformats # For WEBP images as well as some less common ones
-        qtmultimedia # For playing videos, audio, etc
-        qt5compat # Extra visual effects e.g. gaussian blur. MultiEffect is usually preferable
-      ]);
+      ++ [self.packages.${pkgs.stdenv.hostPlatform.system}.vokitty];
   };
 }

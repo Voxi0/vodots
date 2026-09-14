@@ -16,7 +16,7 @@
 
     # Configuration
     "config.kdl".content = let
-      voctaliaShell = lib.getExe self.packages.${system}.voctalia-shell;
+      voctaliaShell = lib.getExe pkgs.noctalia;
     in ''
       // General config - Super basic stuff e.g. environment variables
       include "${niriConfigDir}/config.kdl";
@@ -48,7 +48,7 @@
       binds {
         // Launch the terminal
         Mod+Return hotkey-overlay-title="Launch the terminal emulator" repeat=false {
-          spawn "${lib.getExe self.packages.${system}.vokitty}";
+          spawn "kitty";
         }
 
         // Open the application launcher

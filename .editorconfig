@@ -1,4 +1,4 @@
 root = true
 
-[*]
+[*{.nix,.lock}]
 indent_size = 2

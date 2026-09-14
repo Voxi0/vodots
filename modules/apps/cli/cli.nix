@@ -1,32 +1,21 @@
 {
-  # NixOS specific
-  flake.modules.nixos.cli = {
-    # Modern `cd` replacement
-    programs.zoxide.enable = true;
-  };
-
-  # Home Manager specific
   flake.modules.homeManager.cli = {pkgs, ...}: {
-    home = {
-      packages = with pkgs; [unzip wget curl nurl tealdeer cava];
-      shellAliases = {
-        "l" = "eza -alh";
-        "ls" = "eza";
-        "la" = "eza -a";
-        "lla" = "eza -lla";
-      };
-    };
+    home.packages = with pkgs; [
+      unzip wget curl nurl
+    ];
 
     programs = {
-      # Modern `cd` and `ls` replacement
+      # Nix helper
+      nh.enable = true;
+
+      # Modern `cd`, `cat` and `ls` replacement
       zoxide.enable = true;
+      bat.enable = true;
       eza = {
         enable = true;
-        extraOptions = ["--icons=always"];
+        icons = "auto";
+        git = true;
       };
-
-      # Use your preferred shell in all Nix shells
-      nix-your-shell.enable = true;
 
       # Shell prompt
       starship = {
@@ -38,6 +27,12 @@
 
         # Don't put a newline before the prompt
         settings.add_newline = false;
+      };
+
+      # Use your current shell in a Nix shell
+      nix-your-shell = {
+        enable = true;
+        nix-output-monitor.enable = true; # Pipe `nix build` output through NOM to get additional info while building
       };
     };
   };

@@ -1,5 +1,4 @@
 {inputs, ...}: {
-  # Export custom Neovim configuration as a package
   flake.wrappers.vonvim = {
     wlib,
     config,

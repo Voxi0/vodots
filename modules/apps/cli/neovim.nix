@@ -1,15 +1,7 @@
 {self, ...}: {
   flake.modules.homeManager.neovim = {pkgs, ...}: {
     home = {
-      shellAliases.nv = "nvim";
-
-      # Environment variables to be set at login
-      sessionVariables = {
-        EDITOR = "nvim";
-        MANPAGER = "nvim +Man!";
-      };
-
-      # My custom Neovim configuration with some additional stuff
+      shellAliases."nv" = "nvim";
       packages = [
         (self.packages.${pkgs.stdenv.hostPlatform.system}.vonvim.wrap ({pkgs, ...}: {
           runtimePkgs = with pkgs; [
@@ -24,7 +16,7 @@
             data = [pkgs.vimPlugins.vim-wakatime];
             config = ''
               -- Enable whatever LSPs I want
-              vim.lsp.enable({ "lua_ls", "nil_ls", "clangd", "zls", "astro" })
+              vim.lsp.enable({ "lua_ls", "nil_ls", "clangd", "rust_analyzer", "astro" })
 
               -- Load and configure plugins
               require("lze").load({

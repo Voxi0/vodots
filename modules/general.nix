@@ -1,6 +1,5 @@
 {
   self,
-  inputs,
   withSystem,
   ...
 }: {
@@ -10,19 +9,23 @@
     pkgs,
     ...
   }: {
-    # Use the configured `pkgs` instance from `perSystem`
+    # Set `nixpkgs` instance
     nixpkgs.pkgs = withSystem config.nixpkgs.hostPlatform.system ({pkgs, ...}: pkgs);
 
-    # Nix
-    nix = {
-      optimise.automatic = true;
-      settings = {
-        trusted-users = ["root" "${self.username}"];
-        experimental-features = ["nix-command" "flakes"];
-        auto-optimise-store = true;
-        extra-substituters = ["https://noctalia.cachix.org"];
-        extra-trusted-public-keys = ["noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="];
-      };
+    # Nix settings
+    nix.settings = {
+      trusted-users = ["root" "${self.username}"];
+      experimental-features = ["nix-command" "flakes"];
+      auto-optimise-store = true;
+      extra-substituters = ["https://noctalia.cachix.org"];
+      extra-trusted-public-keys = ["noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="];
+    };
+
+    # Hardware
+    hardware = {
+      enableAllFirmware = true;
+      enableAllHardware = true;
+      system76.enableAll = true;
     };
 
     # Boot
@@ -34,129 +37,58 @@
       };
     };
 
-    # Internationalisation properties
-    i18n.defaultLocale = self.locale;
-
     # Networking
     networking = {
-      nftables.enable = true;
       firewall.enable = true;
-      dhcpcd.enable = false;
+      nftables.enable = true;
       networkmanager = {
         enable = true;
         wifi.backend = "iwd";
       };
     };
 
-    # User
+    # Timezone, locale and Xserver keyboard layout
+    time.timeZone = self.timezone;
+    i18n.defaultLocale = self.locale;
+    services.xserver.xkb.layout = self.kbLayout;
+
+    # Users
     users.users.${self.username} = {
       isNormalUser = true;
       initialPassword = "nixos";
-      extraGroups = ["networkmanager" "wheel" "input" "cdrom" "kvm"];
+      extraGroups = ["wheel" "networkmanager" "cdrom"];
     };
 
-    # Security
-    security.polkit = {
-      enable = true;
+    # Firmware update manager
+    services.fwupd.enable = true;
 
-      # Some extra stuff to allow unprivileged users to reboot/poweroff
-      extraConfig = ''
-        polkit.addRule(function (action, subject) {
-          if (
-            subject.isInGroup("users") &&
-            [
-              "org.freedesktop.login1.reboot",
-              "org.freedesktop.login1.reboot-multiple-sessions",
-              "org.freedesktop.login1.power-off",
-              "org.freedesktop.login1.power-off-multiple-sessions",
-            ].indexOf(action.id) !== -1
-          ) {
-            return polkit.Result.YES;
-          }
-        });
-      '';
-    };
-
-    # Services
-    services = {
-      # Power management
-      upower.enable = true;
-    };
-
-    # Programs
-    programs = {
-      # Nix CLI helper
-      nh.enable = true;
-
-      # SUID wrapper
-      mtr.enable = true;
-      gnupg.agent = {
-        enable = true;
-        enableSSHSupport = true;
-      };
-    };
-
-    # Use doas instead of sudo
-    security = {
-      sudo.enable = false;
-      doas = {
-        enable = true;
-        extraRules = [
-          {
-            users = ["${self.username}"];
-
-            # Retain environment variables when running commands
-            keepEnv = true;
-
-            # Only require password authentication once
-            persist = true;
-          }
-        ];
-      };
-    };
-
-    # The first version of NixOS that was installed on this particular machine
+    # State version
     system.stateVersion = self.stateVersion;
   };
 
   # Home Manager specific
   flake.modules.homeManager.general = {
-    imports = [inputs.nix-index-database.homeModules.default];
-
-    # User information
     home = {
+      # User information
       inherit (self) username stateVersion;
       homeDirectory = "/home/${self.username}";
       keyboard.layout = self.kbLayout;
-    };
 
-    # Programs
-    programs = {
-      # Let Home Manager install and manage itself
-      home-manager.enable = true;
-
-      # Replace ccommand-not-found with nix-index for shell
-      command-not-found.enable = false;
-      nix-index.enable = true;
-
-      # Lets you add a `,` before any command to automatically install required packages for the command to work
-      # It's just a far more convenient version of plain old `nix-shell`
-      nix-index-database.comma.enable = true;
-    };
-
-    # Automatically create XDG user directories
-    xdg = {
-      enable = true;
-      userDirs = {
-        enable = true;
-        createDirectories = true;
+      # Move my wallpapers to system
+      file."Pictures/Wallpapers" = {
+        source = ../wallpapers;
+        recursive = true;
       };
+
+      # Globally enable shell integration for all supported shells
+      shell.enableShellIntegration = true;
     };
 
-    # Support for Linux distros other than NixOS
-    targets.genericLinux = {
-      enable = true;
-      nixGL.vulkan.enable = true;
-    };
+    # Allow Home Manager to install and manage itself
+    programs.home-manager.enable = true;
+
+    # Enable and use user XDG directories
+    home.preferXdgDirectories = true;
+    xdg.userDirs.enable = true;
   };
 }

@@ -1,32 +1,26 @@
 let
-  systemDisk = "/dev/sda";
-  mountOptions = ["noatime" "compress=zstd" "discard=async"];
+  systemDisk = "/dev/disk/by-id/ata-CT240BX500SSD1_2026E403825E";
+  mountOptions = ["noatime" "compress=zstd"];
 in {
-  # Ensure "/nix" exists during boot since it's required to make sure the system is ready
+  # Ensure "/nix" is available during boot
   fileSystems."/nix".neededForBoot = true;
 
-  # Disk layout
+  # Disko
   disko.devices = {
-    # Ephemeral root partition wiped whenever the device is powered off or reboots
+    # Ephemeral root partition on RAM wiped during every reboot/poweroff
     nodev."/" = {
       fsType = "tmpfs";
       mountOptions = ["size=25%" "mode=755"];
     };
 
-    # Primary system disk
-    disk.main = {
+    # System disk
+    disk.primary = {
       device = systemDisk;
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
-          # For legacy BIOS systems
-          boot = {
-            size = "1M";
-            type = "EF02";
-          };
-
-          # EFI/Boot partiton required for UEFI
+          # EFI system partition for UEFI systems
           ESP = {
             type = "EF00";
             size = "1G";
@@ -34,27 +28,26 @@ in {
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = ["umask=0077"];
             };
           };
 
-          # Persistent partition
-          root = {
+          # BTRFS partition
+          btrfs = {
             size = "100%";
             content = {
               type = "btrfs";
               extraArgs = ["-f"];
               subvolumes = {
-                # Required for system to boot
+                # Persisting "/nix" is mandatory
                 "/nix" = {
-                  inherit mountOptions;
                   mountpoint = "/nix";
+                  inherit mountOptions;
                 };
 
-                # Stuff the user wants persistent
+                # Persistent subvolume to store our persistent files/folders in
                 "/persistent" = {
-                  inherit mountOptions;
                   mountpoint = "/persistent";
+                  inherit mountOptions;
                 };
               };
             };

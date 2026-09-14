@@ -1,0 +1,223 @@
+config_version = 14
+
+[audio]
+enable_sounds = true
+
+[backdrop]
+blur_intensity = 0.069999998435378075
+enabled = true
+
+[bar.default]
+center = [ "cat", "clock" ]
+end = [ "tray", "notifications", "network", "bluetooth", "volume", "brightness", "battery", "session" ]
+margin_ends = 10
+start = [ "control-center", "wallhaven", "workspaces" ]
+
+[desktop_widgets]
+schema_version = 2
+widget_order = [ "desktop-widget-0000000000000001", "desktop-widget-0000000000000002", "desktop-widget-0000000000000003" ]
+
+    [desktop_widgets.grid]
+    cell_size = 8
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 120.0
+    box_width = 328.0
+    cx = 859.0
+    cy = 704.0
+    output = "eDP-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        bands = 32
+        show_when_idle = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000002]
+    box_height = 120.0
+    box_width = 328.0
+    cx = 1193.0
+    cy = 704.0
+    output = "eDP-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "media_player"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000003]
+    box_height = 136.0
+    box_width = 152.0
+    cx = 83.0
+    cy = 696.0
+    output = "eDP-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "weather"
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 683.0
+    cy = 586.0
+    output = "eDP-1"
+    placement_height = 768.0
+    placement_width = 1366.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[plugins]
+enabled = [ "0lucasmatheus/awwwall", "noctalia/bongocat", "noctalia/wallhaven", "ashur-d/wallpaper-widget" ]
+
+[shell]
+font_family = "Iosevka NFM"
+niri_overview_type_to_launch_enabled = true
+password_style = "random"
+polkit_agent = true
+screen_time_enabled = true
+
+    [shell.screenshot]
+    confirm_region = true
+
+    [[shell.session.actions]]
+    action = "lock"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "1"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "logout"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "2"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "lock_and_suspend"
+    countdown_seconds = 0.0
+    enabled = false
+    shortcut = "3"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "reboot"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "4"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "5"
+    variant = "destructive"
+
+[theme]
+pure_black_dark = true
+source = "wallpaper"
+wallpaper_scheme = "vibrant"
+
+    [theme.templates]
+    builtin_ids = [ "gtk3", "gtk4", "kcolorscheme", "niri", "qt" ]
+    community_ids = [ "pywalfox" ]
+
+[wallpaper]
+directory = "/home/voxi0/Pictures/Wallpapers"
+enabled = false
+
+    [wallpaper.default]
+    path = "/home/voxi0/Pictures/Wallpapers/wallhaven-yq5ejd.png"
+
+    [wallpaper.last]
+    path = "/home/voxi0/Pictures/Wallpapers/wallhaven-yq5ejd.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/voxi0/Pictures/Wallpapers/wallhaven-yq5ejd.png"
+
+[widget.battery]
+show_label = false
+
+[widget.brightness]
+show_label = false
+
+[widget.cat]
+enable_scroll = false
+type = "noctalia/bongocat:cat"
+
+[widget.network]
+show_label = false
+
+[widget.tray]
+drawer = true
+
+[widget.volume]
+show_label = false
+
+[widget.wallhaven]
+type = "noctalia/wallhaven:wallhaven"
+
+[widget.workspaces]
+hide_when_empty = true
+show_labels = false

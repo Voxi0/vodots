@@ -1,0 +1,8 @@
+{
+  "Applications": [
+    "/etc/profiles/per-user/voxi0/share/applications/org.gajim.Gajim.desktop",
+    "/etc/profiles/per-user/voxi0/share/applications/obsidian.desktop",
+    "/etc/profiles/per-user/voxi0/share/applications/goofcord.desktop",
+    "/etc/profiles/per-user/voxi0/share/applications/firefox.desktop"
+  ]
+}
