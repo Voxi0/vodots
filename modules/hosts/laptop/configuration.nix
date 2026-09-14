@@ -7,6 +7,8 @@
     # mangowm
     niri
     bluetooth
+    yubikey
+    openTabletDriver
   ];
   hmModules = with self.modules.homeManager; [
     cli

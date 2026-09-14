@@ -52,6 +52,8 @@
         noctalia # Desktop shell
         wl-clipboard # Clipboard manager
         pavucontrol # Audio/Volume control
+        xfce.thunar # File manager
+        yazi # TUI file manager
 
         # Theming
         pywalfox-native

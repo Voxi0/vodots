@@ -4,8 +4,11 @@
     preservation
     nvidia-graphics
     fish
-    mangowm
+    # mangowm
+    niri
     bluetooth
+    yubikey
+    openTabletDriver
   ];
   hmModules = with self.modules.homeManager; [
     cli
@@ -50,6 +53,12 @@ in {
         # We need the SDDM theme installed or else it won't work for some reason
         sddmTheme
       ];
+
+      # Compressed block device on RAM used as a swap device
+      zramSwap = {
+        enable = true;
+        algorithm = "zstd";
+      };
 
       # Fonts
       fonts.packages = with pkgs.nerd-fonts; [iosevka];
