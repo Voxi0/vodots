@@ -18,6 +18,9 @@
       # Settings and plugins
       config = {
         useQuickCss = true;
+        themeLinks = ["https://refact0r.github.io/system24/build/system24.css"];
+
+        # Plugins
         plugins = {
           ##########
           ### UI ###
