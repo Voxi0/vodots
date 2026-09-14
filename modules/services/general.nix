@@ -30,5 +30,14 @@
         };
       };
     };
+
+    # Yubikey - Security key
+    yubikey = {
+      services.yubikey-agent.enable = true;
+      programs = {
+        yubikey-manager.enable = true;
+        yubikey-touch-detector.enable = true;
+      };
+    };
   };
 }

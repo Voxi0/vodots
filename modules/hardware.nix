@@ -1,6 +1,7 @@
 {
   # NixOS specific
   flake.modules.nixos = {
+    # Intel support
     intel-graphics = {pkgs, ...}: {
       environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
       hardware = {
@@ -13,6 +14,8 @@
         };
       };
     };
+
+    # Nvidia support
     nvidia-graphics = {
       # Saves and restores GPU memory during system suspend and hibernation
       boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
@@ -32,6 +35,15 @@
             finegrained = false;
           };
         };
+      };
+    };
+
+    # Graphics/Drawing tablet support
+    openTabletDriver = {
+      boot.kernelModules = ["uinput"];
+      hardware = {
+        uinput.enable = true;
+        opentabletdriver.enable = true;
       };
     };
   };
