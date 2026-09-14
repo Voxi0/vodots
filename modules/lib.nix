@@ -18,10 +18,9 @@
             self.modules.nixos.${hostname}
             self.modules.nixos.general
             ./hosts/${hostname}/_disko.nix
-            ./hosts/${hostname}/_hardware-configuration.nix
             {
-              # System hostname
               networking.hostName = hostname;
+              hardware.facter.reportPath = ./hosts/${hostname}/facter.json;
             }
           ]
           ++ nixosModules
