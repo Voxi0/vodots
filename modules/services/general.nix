@@ -1,4 +1,4 @@
-{
+{inputs, ...}: {
   flake.modules.nixos = {
     # Pipewire audio server
     pipewire = {
@@ -29,6 +29,12 @@
           };
         };
       };
+    };
+
+    # Flatpaks
+    flatpak = {
+      imports = [inputs.nix-flatpak.nixosModules.nix-flatpak];
+      services.flatpak.enable = true;
     };
 
     # Yubikey - Security key

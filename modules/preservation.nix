@@ -60,12 +60,13 @@
             # User SSH keys
             ".ssh/"
 
-            # Zoxide database
-            ".local/share/zoxide/"
+            
+            ".local/share/zoxide/" # Zoxide database
+            ".local/state/noctalia/" # Noctalia
+            ".local/state/wireplumber"
+            ".local/share/flatpak/" # User specific configuration for flatpaks
 
             # Config files for apps and all that aren't managed by Home Manager
-            ".local/state/noctalia/"
-            ".local/state/wireplumber"
             ".config/gajim/"
             ".config/halloy/"
             ".config/lazygit/"

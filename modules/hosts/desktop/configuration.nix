@@ -12,6 +12,7 @@
     openTabletDriver
     gaming
     steam
+    roblox
   ];
   hmModules = with self.modules.homeManager; [
     cli
