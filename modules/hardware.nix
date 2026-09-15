@@ -38,6 +38,16 @@
       };
     };
 
+    # AMD support
+    amd-graphics = {
+      hardware.graphics = {
+        enable = true;
+      };
+
+      # Allows you to overclock, undervolt, set fans curves of AMD GPUs
+      services.lact.enable = true;
+    };
+
     # Graphics/Drawing tablet support
     openTabletDriver = {
       boot.kernelModules = ["uinput"];
