@@ -1,4 +1,4 @@
-{self, ...}: {
+{
   # A scrollable tiling Wayland compositor
   flake.wrappers.voniri = {
     wlib,
@@ -6,7 +6,6 @@
     pkgs,
     ...
   }: let
-    inherit (pkgs.stdenv.hostPlatform) system;
     niriConfigDir = ../../config/niri;
   in {
     imports = [wlib.wrapperModules.niri];
