@@ -3,6 +3,7 @@
   nixosModules = with self.modules.nixos; [
     preservation
     nvidia-graphics
+    pipewire
     fish
     # mangowm
     niri
@@ -20,6 +21,7 @@
     firefox
     discord
     lutris
+    obs-studio
   ];
 in {
   flake = {

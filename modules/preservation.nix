@@ -56,6 +56,7 @@
             "Downloads/"
             "Documents/"
             "Pictures/"
+            "Music/"
             "Videos/"
             "Games/"
 
