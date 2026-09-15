@@ -4,11 +4,18 @@
 }: {
   # NixOS specific
   flake.modules.nixos.niri = {pkgs, ...}: {
-    services = {
-      # Daemon, tools and libraries to access and manage storage devices
-      # Used by `udiskie` for automounting removable drives and such
-      udisks2.enable = true;
+    # Noctalia shell binary cachix
+    nix.settings = {
+      extra-substituters = ["https://noctalia.cachix.org"];
+      extra-trusted-public-keys = ["noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="];
     };
+
+    # Daemon, tools and libraries to access and manage storage devices
+    # Used by `udiskie` for automounting removable drives and such
+    services.udisks2.enable = true;
+
+    # Provides an organized way for non-privileged processes to communicate with privileged ones
+    security.polkit.enable = true;
 
     # Niri - A scrollable tiling Wayland compositor
     programs.niri = {
