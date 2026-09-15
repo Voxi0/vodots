@@ -90,5 +90,11 @@
     # Enable and use user XDG directories
     home.preferXdgDirectories = true;
     xdg.userDirs.enable = true;
+
+    # Settings that makes Home Manager work better on GNU/Linux distributions other than NixOS
+    targets.genericLinux = {
+      enable = true;
+      gpu.enable = true;
+    };
   };
 }

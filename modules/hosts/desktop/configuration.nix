@@ -9,6 +9,8 @@
     bluetooth
     yubikey
     openTabletDriver
+    gaming
+    steam
   ];
   hmModules = with self.modules.homeManager; [
     cli
@@ -17,6 +19,7 @@
     github
     firefox
     discord
+    lutris
   ];
 in {
   flake = {

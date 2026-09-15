@@ -1,4 +1,4 @@
-{self, ...}: {
+{
   # NixOS specific
   flake.modules.nixos = {
     gaming = {
