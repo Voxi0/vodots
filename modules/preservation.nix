@@ -46,9 +46,6 @@
             # Theming
             ".gtkrc-2.0"
             ".icons/default/index.theme"
-
-            # Zoxide database
-            ".local/share/zoxide/db.zo"
           ];
           directories = [
             # User home directories
@@ -62,6 +59,9 @@
 
             # User SSH keys
             ".ssh/"
+
+            # Zoxide database
+            ".local/share/zoxide/"
 
             # Config files for apps and all that aren't managed by Home Manager
             ".local/state/noctalia/"
