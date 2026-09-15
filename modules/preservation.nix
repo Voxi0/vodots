@@ -57,6 +57,7 @@
             "Documents/"
             "Pictures/"
             "Videos/"
+            "Games/"
 
             # User SSH keys
             ".ssh/"
