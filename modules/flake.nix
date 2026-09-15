@@ -6,15 +6,6 @@
     home-manager.flakeModules.home-manager
   ];
 
-  flake = {
-    username = "voxi0";
-    kbLayout = "gb";
-    timezone = "Europe/London";
-    locale = "en_GB.UTF-8";
-    lastFmUsername = "voxi0";
-    stateVersion = "26.05";
-  };
-
   systems = inputs.nixpkgs.lib.platforms.all;
   perSystem = {
     system,

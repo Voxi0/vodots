@@ -67,5 +67,15 @@
     in {
       # Convert the set of files into a list so we can import all the Nix modules
       imports = lib.fileset.toList files;
+
+      # Global variables
+      flake = {
+        username = "voxi0";
+        kbLayout = "gb";
+        timezone = "Europe/London";
+        locale = "en_GB.UTF-8";
+        lastFmUsername = "voxi0";
+        stateVersion = "26.05";
+      };
     });
 }
