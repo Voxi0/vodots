@@ -30,9 +30,10 @@
           # Users and group state
           {
             directory = "/var/lib/nixos";
-            inInitrd = true;
+            # inInitrd = true;
           }
 
+          "/var/lib/systemd/" # Timesync data and backlight levels
           "/var/lib/fwupd/" # Firwmare update manager
           "/var/lib/systemd/" # Timesync data and backlight levels
           "/var/lib/tailscale/" # Tailscale
@@ -54,6 +55,9 @@
             ".config/xsettingsd/xsettingsd.conf"
             ".config/gtk-3.0/settings.ini"
             ".icons/default/index.theme"
+
+            # UZDoom settings
+            ".config/uzdoom/uzdoom.ini"
           ];
           directories = [
             # User home directories
@@ -65,33 +69,34 @@
             "Videos/"
             "Games/"
 
-            # User SSH keys
-            ".ssh/"
-            
-            ".local/share/zoxide/" # Zoxide database
-            ".local/state/noctalia/" # Noctalia
-            ".local/state/wireplumber"
-            ".local/share/flatpak/" # User specific configuration for flatpaks
+            ".ssh/" # User SSH keys
+            ".var/" # Flatpak applications and a whole lotta other stuff
+            ".local/" # Application state and such etc
+            # ".local/share/zoxide/" # Zoxide database
+            # ".local/state/noctalia/" # Noctalia
+            # ".local/state/wireplumber"
+            # ".local/share/flatpak/" # User specific configuration for flatpaks
 
-            # Config files for apps and all that aren't managed by Home Manager
+            # Theming
+            ".config/nwg-look/"
+            ".config/dconf/"
+            ".config/gtk-4.0/"
+
+            # Applications that aren't managed by Home Manager
             ".config/gajim/"
             ".config/halloy/"
             ".config/lazygit/"
             ".config/feishin/"
-            ".config/goofcord/"
-            ".config/git/"
-            ".config/gh/"
-            ".config/gtk-4.0/"
-            ".config/nwg-look/"
-            ".config/uzdoom/"
             ".config/obs-studio/"
             ".config/obsidian/"
+            ".config/legcord/"
+            ".config/git/"
+            ".config/gh/"
 
-            ".var/" # Flatpak applications and a whole lotta other stuff
-            ".cache/mozilla/"
-            ".mozilla/" # Firefox
+            # Cache
             ".cache/spotify/" # So we don't have to log back into Spotify everytime
-            ".cache/mesa_shader_cache/" # Shader cache
+
+            ".mozilla/" # Firefox
 
             # Games
             {

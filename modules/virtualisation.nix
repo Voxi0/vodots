@@ -3,7 +3,7 @@
     # A daemon that manages virtual machines
     libvirtd = {
       virtualisation.libvirtd.enable = true;
-      users.users.${self.username}.extraGroups = ["libvirtd"];
+      users.users.${self.username}.extraGroups = ["kvm" "libvirtd"];
     };
 
     # GUI application for managing local and remote virtual machines through libvirt

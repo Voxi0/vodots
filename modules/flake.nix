@@ -22,6 +22,9 @@
       ];
     };
 
+    # Provide the configured `pkgs` instance to `nix-wrapper-modules`
+    wrappers.pkgs = pkgs;
+
     # Development tools for vodots
     formatter = pkgs.alejandra;
     devShells.default = pkgs.mkShellNoCC {

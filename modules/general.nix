@@ -54,7 +54,7 @@
     users.users.${self.username} = {
       isNormalUser = true;
       initialPassword = "nixos";
-      extraGroups = ["wheel" "networkmanager" "cdrom"];
+      extraGroups = ["wheel" "networkmanager"];
     };
 
     # Firmware update manager

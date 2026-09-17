@@ -14,7 +14,6 @@
         modules =
           [
             inputs.disko.nixosModules.disko
-            inputs.preservation.nixosModules.default
 
             self.modules.nixos.${hostname}
             self.modules.nixos.general
