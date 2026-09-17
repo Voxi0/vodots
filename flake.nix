@@ -1,4 +1,27 @@
 {
+  # Import all Nix modules except ones that start with an "_"
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} (let
+      # Alias for `inputs.nixpkgs.lib`
+      inherit (inputs.nixpkgs) lib;
+
+      # Find all Nix files in `modules` that don't start with an underscore
+      files = lib.fileset.fileFilter (file: file.hasExt "nix" && !(lib.hasPrefix "_" file.name)) ./modules;
+    in {
+      # Convert the set of files into a list so we can import all the Nix modules
+      imports = lib.fileset.toList files;
+
+      # Global variables
+      flake = {
+        username = "voxi0";
+        kbLayout = "gb";
+        timezone = "Europe/London";
+        locale = "en_GB.UTF-8";
+        lastFmUsername = "voxi0";
+        stateVersion = "26.05";
+      };
+    });
+
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:denful/import-tree";
@@ -56,27 +79,4 @@
       flake = false;
     };
   };
-
-  # Import all Nix modules except ones that start with an "_"
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} (let
-      # Alias for `inputs.nixpkgs.lib`
-      inherit (inputs.nixpkgs) lib;
-
-      # Find all Nix files in `modules` that don't start with an underscore
-      files = lib.fileset.fileFilter (file: file.hasExt "nix" && !(lib.hasPrefix "_" file.name)) ./modules;
-    in {
-      # Convert the set of files into a list so we can import all the Nix modules
-      imports = lib.fileset.toList files;
-
-      # Global variables
-      flake = {
-        username = "voxi0";
-        kbLayout = "gb";
-        timezone = "Europe/London";
-        locale = "en_GB.UTF-8";
-        lastFmUsername = "voxi0";
-        stateVersion = "26.05";
-      };
-    });
 }
