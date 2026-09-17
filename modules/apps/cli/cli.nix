@@ -1,7 +1,10 @@
 {
   flake.modules.homeManager.cli = {pkgs, ...}: {
     home.packages = with pkgs; [
-      unzip wget curl nurl
+      unzip # For extracting zip files
+      wget # CLI tool to download files using HTTP/HTTPS/FTP/FTPS protocols
+      curl # Can be used instead of `wget` as well but `curl` is more for making web requests
+      nurl
     ];
 
     programs = {

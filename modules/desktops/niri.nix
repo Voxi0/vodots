@@ -1,7 +1,4 @@
-{
-  self,
-  ...
-}: {
+{self, ...}: {
   # NixOS specific
   flake.modules.nixos.niri = {pkgs, ...}: {
     # Noctalia shell binary cachix
@@ -59,7 +56,8 @@
         noctalia # Desktop shell
         wl-clipboard # Clipboard manager
         pavucontrol # Audio/Volume control
-        tumbler thunar # File manager
+        tumbler # Required by Thunar to show thumbnail images
+        thunar # File manager
         yazi # TUI file manager
         mpv # Media player
 

@@ -46,16 +46,18 @@ in {
       networking.networkmanager.wifi.powersave = true;
 
       # System-wide installed packages
-      environment.systemPackages = with pkgs.qt6; [
-        # QT6
-        qtbase
-        qtsvg
-        qtvirtualkeyboard
-        qtmultimedia
-      ] ++ [
-        # We need the SDDM theme installed or else it won't work for some reason
-        sddmTheme
-      ];
+      environment.systemPackages = with pkgs.qt6;
+        [
+          # QT6
+          qtbase
+          qtsvg
+          qtvirtualkeyboard
+          qtmultimedia
+        ]
+        ++ [
+          # We need the SDDM theme installed or else it won't work for some reason
+          sddmTheme
+        ];
 
       # Fonts
       fonts.packages = with pkgs.nerd-fonts; [iosevka];

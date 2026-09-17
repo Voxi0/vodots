@@ -49,16 +49,18 @@ in {
       };
 
       # System-wide installed packages
-      environment.systemPackages = with pkgs.qt6; [
-        # QT6
-        qtbase
-        qtsvg
-        qtvirtualkeyboard
-        qtmultimedia
-      ] ++ [
-        # We need the SDDM theme installed or else it won't work for some reason
-        sddmTheme
-      ];
+      environment.systemPackages = with pkgs.qt6;
+        [
+          # QT6
+          qtbase
+          qtsvg
+          qtvirtualkeyboard
+          qtmultimedia
+        ]
+        ++ [
+          # We need the SDDM theme installed or else it won't work for some reason
+          sddmTheme
+        ];
 
       # Compressed block device on RAM used as a swap device
       zramSwap = {

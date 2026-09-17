@@ -4,7 +4,7 @@
     boot.tmp.cleanOnBoot = true;
 
     # `systemd-machine-id-commit.service` would fail but it isn't relevant in this setup for a persistent machine-id so we disable it
-    systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
+    systemd.suppressedSystemUnits = ["systemd-machine-id-commit.service"];
 
     # Define what files and folders to keep persistent on drive
     preservation = {
@@ -26,7 +26,10 @@
           }
 
           # Users and group state
-          { directory = "/var/lib/nixos"; inInitrd = true; }
+          {
+            directory = "/var/lib/nixos";
+            inInitrd = true;
+          }
 
           "/var/lib/fwupd/" # Firwmare update manager
           "/var/lib/systemd/" # Timesync data and backlight levels
@@ -60,7 +63,6 @@
             # User SSH keys
             ".ssh/"
 
-            
             ".local/share/zoxide/" # Zoxide database
             ".local/state/noctalia/" # Noctalia
             ".local/state/wireplumber"
