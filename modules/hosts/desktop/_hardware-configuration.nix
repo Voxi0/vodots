@@ -1,14 +1,13 @@
-{
-  lib,
-  config,
-  modulesPath,
-  ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+{ config, lib, pkgs, modulesPath, ... }: {
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
-    kernelModules = ["kvm-intel"];
-    extraModulePackages = [];
+    extraModulePackages = [ ];
+    kernelModules = [ "kvm-intel" ];
+    initrd = {
+      availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
+      kernelModules = [ ];
+    };
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
