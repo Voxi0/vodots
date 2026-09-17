@@ -1,5 +1,7 @@
-{
-  flake.modules.nixos.preservation = {
+{self, inputs, ...}: {
+  flake.modules.nixos.preservation = {lib, ...}: {
+    imports = [inputs.preservation.nixosModules.default];
+
     # Clean temporary files on boot to get rid of clutter
     boot.tmp.cleanOnBoot = true;
 
@@ -38,16 +40,19 @@
 
           # Saved bluetooth and internet connections
           "/var/lib/bluetooth/"
+          "/var/lib/iwd/"
           "/etc/NetworkManager/system-connections/"
         ];
 
-        users.voxi0 = {
+        users.${self.username} = {
           files = [
             # Wakatime for Hackclub
             ".wakatime.cfg"
 
-            # Theming
+            # Currently set theme and icon settings
             ".gtkrc-2.0"
+            ".config/xsettingsd/xsettingsd.conf"
+            ".config/gtk-3.0/settings.ini"
             ".icons/default/index.theme"
           ];
           directories = [
@@ -62,7 +67,7 @@
 
             # User SSH keys
             ".ssh/"
-
+            
             ".local/share/zoxide/" # Zoxide database
             ".local/state/noctalia/" # Noctalia
             ".local/state/wireplumber"
@@ -76,15 +81,14 @@
             ".config/goofcord/"
             ".config/git/"
             ".config/gh/"
-            ".config/gtk-3.0/"
             ".config/gtk-4.0/"
             ".config/nwg-look/"
             ".config/uzdoom/"
-            ".config/xsettingsd/"
             ".config/obs-studio/"
             ".config/obsidian/"
 
             ".var/" # Flatpak applications and a whole lotta other stuff
+            ".cache/mozilla/"
             ".mozilla/" # Firefox
             ".cache/spotify/" # So we don't have to log back into Spotify everytime
             ".cache/mesa_shader_cache/" # Shader cache
