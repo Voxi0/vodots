@@ -10,9 +10,9 @@
 
       # Client
       discord.enable = false;
-      goofcord = {
+      legcord = {
         enable = true;
-        clientMod = "equicord";
+        equicord.enable = true;
       };
 
       # Settings and plugins
