@@ -19,7 +19,7 @@
     neovim
     git
     github
-    firefox
+    floorp
     discord
     lutris
     obs-studio
@@ -79,6 +79,14 @@ in {
         ferdium # Keep a bunch of different communication services in one place
         feishin # Audio player
         uzdoom # DOOM
+
+        # Minecraft
+        (pkgs.prismlauncher.override {
+          jdks = with pkgs; [
+            jdk25
+            graalvmPackages.graalvm-ce
+          ];
+        })
 
         # Halloy (IRC) and Gajim (XMPP) client
         halloy

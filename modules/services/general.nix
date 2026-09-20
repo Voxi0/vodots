@@ -37,7 +37,7 @@
       users.users.${self.username}.extraGroups = [ "flatpak" ];
       services.flatpak = {
         enable = true;
-        update.onActivation = true;
+        uninstallUnmanaged = false;
       };
     };
 

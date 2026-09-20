@@ -96,7 +96,9 @@
             # Cache
             ".cache/spotify/" # So we don't have to log back into Spotify everytime
 
-            ".mozilla/" # Firefox
+            # Floorp
+            # ".mozilla/"
+            ".floorp/"
 
             # Games
             {

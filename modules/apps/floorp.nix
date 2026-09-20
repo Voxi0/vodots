@@ -1,6 +1,6 @@
 {
-  flake.modules.homeManager.firefox = {pkgs, ...}: {
-    programs.firefox = {
+  flake.modules.homeManager.floorp = {pkgs, ...}: {
+    programs.floorp = {
       enable = true;
 
       # Policies
