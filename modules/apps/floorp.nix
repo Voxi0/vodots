@@ -1,5 +1,8 @@
 {
-  flake.modules.homeManager.floorp = {pkgs, ...}: {
+  flake.modules.homeManager.floorp = {pkgs, ...}: let
+    defaultProfileName = "vodots";
+  in {
+    home.file.".floorp/${defaultProfileName}/search.json.mozlz4".force = true;
     programs.floorp = {
       enable = true;
 
@@ -18,7 +21,7 @@
       };
 
       # Default profile - Config, extensions and all
-      profiles.vodots = {
+      profiles."${defaultProfileName}" = {
         # Use Betterfox
         extraConfig = let
           userJs = pkgs.fetchFromGitHub {
