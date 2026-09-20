@@ -2,6 +2,7 @@
   hostname = "desktop";
   nixosModules = with self.modules.nixos; [
     preservation
+    # intel-graphics
     nvidia-graphics
     pipewire
     fish

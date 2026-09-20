@@ -1,8 +1,8 @@
 {
-  flake.modules.homeManager.floorp = {pkgs, ...}: let
+  flake.modules.homeManager.floorp = {lib, pkgs, ...}: let
     defaultProfileName = "vodots";
   in {
-    home.file.".floorp/${defaultProfileName}/search.json.mozlz4".force = true;
+    home.file.".floorp/${defaultProfileName}/search.json.mozlz4".force = lib.mkForce true;
     programs.floorp = {
       enable = true;
 

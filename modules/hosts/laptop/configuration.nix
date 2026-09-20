@@ -3,20 +3,27 @@
   nixosModules = with self.modules.nixos; [
     preservation
     intel-graphics
+    # nvidia-graphics
+    pipewire
     fish
     # mangowm
     niri
     bluetooth
     yubikey
     openTabletDriver
+    # gaming
+    # steam
+    # roblox
   ];
   hmModules = with self.modules.homeManager; [
     cli
     neovim
     git
     github
-    firefox
+    floorp
     discord
+    # lutris
+    # obs-studio
   ];
 in {
   flake = {

@@ -97,7 +97,7 @@
             ".cache/spotify/" # So we don't have to log back into Spotify everytime
 
             # Floorp
-            # ".mozilla/"
+            ".mozilla/" # Required mainly for Pywalfox to keep working flawlessly
             ".floorp/"
 
             # Games
