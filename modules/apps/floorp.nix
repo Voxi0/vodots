@@ -46,12 +46,10 @@
         # Extensions
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin # Efficient Ad-Blocker
-          auto-tab-discard # Increase browser speed and reduce memory load when multiple tabs are open
           disconnect # Block thousands or so of hidden trackers making pages load upto 44% faster
-          stylus # User-style manager to easily redesign websites
-          gesturefy # Mouse gestures for faster navigation
-          darkreader # Dark mode for websites
           youtube-nonstop # Disable the "Video paused. Continue watching?" confirmation dialogue on YouTube
+          stylus # User-style manager to easily redesign websites
+          darkreader # Dark mode for websites
         ];
       };
     };
