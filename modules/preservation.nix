@@ -30,7 +30,7 @@
           # Users and group state
           {
             directory = "/var/lib/nixos";
-            # inInitrd = true;
+            inInitrd = true;
           }
 
           "/var/lib/systemd/" # Timesync data and backlight levels

@@ -21,7 +21,7 @@
     roblox = {
       # Ensure flatpaks are enabled and set up properly with `nix-flatpak` before attempting to install Sober
       imports = [self.modules.nixos.flatpak];
-      services.flatpak.packages = ["com.vinegarhq.Sober"];
+      services.flatpak.packages = ["org.vinegarhq.Sober"];
     };
   };
 
