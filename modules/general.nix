@@ -9,21 +9,37 @@
     pkgs,
     ...
   }: {
-    # Set `nixpkgs` instance
-    nixpkgs.pkgs = withSystem config.nixpkgs.hostPlatform.system ({pkgs, ...}: pkgs);
+    # Configure `nixpkgs` instance
+    nixpkgs = {
+      pkgs = withSystem config.nixpkgs.hostPlatform.system ({pkgs, ...}: pkgs);
 
-    # Nix settings
-    nix.settings = {
-      trusted-users = ["root" "${self.username}"];
-      experimental-features = ["nix-command" "flakes"];
-      auto-optimise-store = true;
+      # An overlay to rewire other tools that depend on Nix to use Lix instead
+      overlays = [ (final: prev: {
+        inherit (prev.lixPackageSets.stable)
+          nixpkgs-review
+          nix-eval-jobs
+          nix-fast-build
+          colmena;
+      }) ];
+    };
+
+    # Nix
+    nix = {
+      # Use Lix instead of Nix
+      package = pkgs.lixPackageSets.stable.lix;
+
+      # Some extra handy settings
+      settings = {
+        trusted-users = ["root" "${self.username}"];
+        experimental-features = ["nix-command" "flakes"];
+        auto-optimise-store = true;
+      };
     };
 
     # Hardware
     hardware = {
       enableAllFirmware = true;
       enableAllHardware = true;
-      system76.enableAll = true;
     };
 
     # Boot
