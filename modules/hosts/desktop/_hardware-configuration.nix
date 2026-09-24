@@ -1,12 +1,17 @@
-{ config, lib, pkgs, modulesPath, ... }: {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+{
+  config,
+  lib,
+  modulesPath,
+  ...
+}: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot = {
-    extraModulePackages = [ ];
-    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [];
+    kernelModules = ["kvm-intel"];
     initrd = {
-      availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
-      kernelModules = [ ];
+      availableKernelModules = ["xhci_pci" "ahci" "usbhid" "sd_mod"];
+      kernelModules = [];
     };
   };
 

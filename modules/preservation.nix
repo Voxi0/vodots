@@ -1,5 +1,9 @@
-{self, inputs, ...}: {
-  flake.modules.nixos.preservation = {lib, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
+  flake.modules.nixos.preservation = {
     imports = [inputs.preservation.nixosModules.default];
 
     # Clean temporary files on boot to get rid of clutter

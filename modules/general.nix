@@ -14,13 +14,17 @@
       pkgs = withSystem config.nixpkgs.hostPlatform.system ({pkgs, ...}: pkgs);
 
       # An overlay to rewire other tools that depend on Nix to use Lix instead
-      overlays = [ (final: prev: {
-        inherit (prev.lixPackageSets.stable)
-          nixpkgs-review
-          nix-eval-jobs
-          nix-fast-build
-          colmena;
-      }) ];
+      overlays = [
+        (_: prev: {
+          inherit
+            (prev.lixPackageSets.stable)
+            nixpkgs-review
+            nix-eval-jobs
+            nix-fast-build
+            colmena
+            ;
+        })
+      ];
     };
 
     # Nix

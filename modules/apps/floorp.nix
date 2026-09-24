@@ -1,5 +1,9 @@
 {
-  flake.modules.homeManager.floorp = {lib, pkgs, ...}: let
+  flake.modules.homeManager.floorp = {
+    lib,
+    pkgs,
+    ...
+  }: let
     defaultProfileName = "vodots";
   in {
     home.file.".floorp/${defaultProfileName}/search.json.mozlz4".force = lib.mkForce true;
