@@ -18,8 +18,6 @@
   hmModules = with self.modules.homeManager; [
     cli
     neovim
-    git
-    github
     floorp
     discord
     lutris
@@ -76,6 +74,14 @@ in {
     # Home Manager specific
     modules.homeManager.${hostname} = {pkgs, ...}: {
       home.packages = with pkgs; [
+        # Git
+        git
+        lazygit # TUI for Github
+
+        # For working with Github directly from the CLI
+        gh
+        gh-dash # TUI for gh
+
         obsidian # Note taking
         ferdium # Keep a bunch of different communication services in one place
         feishin # Audio player
