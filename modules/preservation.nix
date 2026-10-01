@@ -96,6 +96,7 @@
             ".config/legcord/"
             ".config/git/"
             ".config/gh/"
+            ".config/Ferdium/"
 
             # Cache
             ".cache/spotify/" # So we don't have to log back into Spotify everytime
