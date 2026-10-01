@@ -28,19 +28,18 @@ in {
     nixosConfigurations.${hostname} = self.lib.mkNixosHost {inherit hostname nixosModules hmModules;};
 
     # NixOS specific
-    modules.nixos.${hostname} = {pkgs, ...}: let
-      sddmTheme = pkgs.sddm-astronaut.override {embeddedTheme = "pixel_sakura";};
-    in {
+    modules.nixos.${hostname} = {pkgs, ...}: {
       services = {
         # Display/Login manager
-        displayManager.sddm = {
+        displayManager.noctalia-greeter = {
           enable = true;
-          wayland.enable = true;
-          theme = "sddm-astronaut-theme";
-          settings.Theme.Current = "sddm-astronaut-theme";
-          extraPackages = [
-            pkgs.kdePackages.qtmultimedia # Required for video backgrounds/audio
-          ];
+          settings = {
+            keyboard = {
+              layout = self.kbLayout;
+              options = "caps_lock:escape";
+              numlock = true;
+            };
+          };
         };
 
         # Mesh VPN
@@ -49,20 +48,6 @@ in {
 
       # Power-saving stuff
       networking.networkmanager.wifi.powersave = true;
-
-      # System-wide installed packages
-      environment.systemPackages = with pkgs.qt6;
-        [
-          # QT6
-          qtbase
-          qtsvg
-          qtvirtualkeyboard
-          qtmultimedia
-        ]
-        ++ [
-          # We need the SDDM theme installed or else it won't work for some reason
-          sddmTheme
-        ];
 
       # Fonts
       fonts.packages = with pkgs.nerd-fonts; [iosevka];
