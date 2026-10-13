@@ -29,6 +29,10 @@ in {
 
     # NixOS specific
     modules.nixos.${hostname} = {pkgs, ...}: {
+      # Power management daemon
+      hardware.system76.power-daemon.enable = true;
+
+      # Services
       services = {
         # Display/Login manager
         displayManager.noctalia-greeter = {
