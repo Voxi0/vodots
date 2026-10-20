@@ -6,6 +6,7 @@
   }: let
     defaultProfileName = "vodots";
   in {
+    # So Home Manager doesn't fail to activate because this file already exists
     home.file.".floorp/${defaultProfileName}/search.json.mozlz4".force = lib.mkForce true;
     programs.floorp = {
       enable = true;
@@ -35,6 +36,9 @@
             hash = "sha256-mIP/WcXUcGrJsWCJzR4zqPOmt0BbbpTZVaN/MbIwBbw=";
           };
         in "${userJs}/Fastfox.js}";
+
+        # User CSS
+        userContent = '''';
 
         # Extra settings
         settings = {
