@@ -2,8 +2,10 @@
   hostname = "server";
   nixosModules = with self.modules.nixos; [
     tailscale
+    glance
     immich
     navidrome
+    couchDb
     fail2ban
   ];
 in {

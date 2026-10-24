@@ -16,11 +16,14 @@
     glance = {
       services.glance = {
         enable = true;
-        settings.server.host = "0.0.0.0";
+        settings.server = {
+          host = "0.0.0.0";
+          port = 8080;
+        };
       };
     };
 
-    # Intrusion prevention software framework that protects servers from brute-force attacks by monitoring log files for malicious patterns
+    # Intrusion prevention software framework to protect servers from brute-force attacks by monitoring log files for malicious patterns
     # For example, multiple failed login attempts
     # It works by updating firewall rules (using iptables or firewalld) to temporarily or permanently ban suspicious IP addresses
     fail2ban = {
@@ -72,6 +75,45 @@
           Address = "0.0.0.0";
           MusicFolder = navidromeMusicFolder;
           EnableSharing = true;
+        };
+      };
+    };
+
+    # Used to self-host Obsidian's live-sync feature because I can't be bothered to pay
+    couchDb = {
+      services.couchdb = {
+        enable = true;
+        bindAddress = "0.0.0.0";
+        port = 5984;
+        adminUser = "${self.username}";
+        adminPass = "nixos";
+        extraConfig = {
+          couchdb = {
+            single_node = true;
+            max_document_size = 50000000;
+          };
+
+          httpd = {
+            WWW-Authenticate = ''Basic realm="couchdb"'';
+            enable_cors = true;
+          };
+
+          chttpd = {
+            require_valid_user = true;
+            max_http_request_size = 4294967296;
+            enable_cors = true;
+          };
+
+          chttpd_auth = {
+            require_valid_user = true;
+          };
+
+          cors = {
+            origins = "app://obsidian.md,capacitor://localhost,http://localhost";
+            credentials = true;
+            headers = "accept, authorization, content-type, origin, referer, x-csrf-token";
+            methods = "GET, PUT, POST, HEAD, DELETE";
+          };
         };
       };
     };
